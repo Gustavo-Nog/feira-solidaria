@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 import feiraLogo from '../assets/logo-feira.jpg'; // certifique-se do caminho correto
 
 function Login() {
@@ -79,13 +80,9 @@ function Login() {
                 <Link to="/redefinir-senha">Esqueci a senha</Link>
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-warning w-100"
-                disabled={loading}
-              >
-                {loading ? 'Entrando...' : 'Entrar'}
-              </button>
+              <Button type="submit" loading={loading}>
+                Entrar
+              </Button>
             </form>
           </div>
         </div>
