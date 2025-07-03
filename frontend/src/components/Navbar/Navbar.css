@@ -1,0 +1,85 @@
+/* Contêiner principal da barra de navegação */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-link-item {
+  text-decoration: none;
+  color: #2A6441; /* Verde do protótipo */
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  background-color: #FEF3B4; /* Amarelo claro do protótipo */
+  border-radius: 20px;
+  transition: transform 0.2s;
+}
+
+.nav-link-item:hover {
+  transform: scale(1.05);
+}
+
+/* Seção do Perfil (Direita) */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Círculo que contém a foto ou o ícone padrão */
+.profile-icon {
+  width: 45px;
+  height: 45px;
+  background-color: #f0f0f0; /* Fundo cinza caso a imagem não carregue */
+  border: 2px solid #2A6441;
+  border-radius: 50%;
+  
+  /* Adicionado para centralizar o ícone e conter a imagem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+
+/* Estilo para a foto do usuário quando logado */
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Evita que a imagem fique distorcida */
+}
+
+/* Estilo para o ícone cinza padrão (quando não logado) */
+.default-user-icon {
+  color: #cccccc; /* Tom de cinza para o ícone */
+  width: 100%;
+  height: 100%;
+}
+
+/* Links de "Cadastrar" e "Logar" */
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.9rem;
+}
+
+.profile-actions a {
+  text-decoration: none;
+  color: #2A6441;
+  font-weight: 500;
+  line-height: 1.2; /* Melhora o alinhamento */
+}
+
+/* A barrinha "/" entre os links, atualmente desativada */
+.profile-actions span {
+  display: none; 
+}
