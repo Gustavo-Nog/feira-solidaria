@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import feiraLogo from '../../assets/logo-feira.jpg';
 import './Login.css';
 
@@ -69,7 +69,7 @@ function Login() {
               <Link to="/redefinir-senha" className="text-warning">Esqueci a senha</Link>
             </div>
 
-            <Button type="submit" loading={loading}>
+            <Button type="submit" loading={loading} size="large">
               Entrar
             </Button>
           </form>
