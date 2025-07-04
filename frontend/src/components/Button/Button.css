@@ -1,0 +1,19 @@
+.custom-button {
+  font-size: 2rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #ffca2ccc;
+}
+
+.custom-button.small {
+  font-size: 0.875rem;
+  padding: 6px 12px;
+}
+
+.custom-button.large {
+  font-size: 1.25rem;
+  padding: 14px 28px;
+}
