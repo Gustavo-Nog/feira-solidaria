@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Button from "../../components/Button";
+import Button from "../../components/Button/Button";
 import feiraLogo from '../../assets/logo-feira.jpg';
 import './Cadastro.css';
 
@@ -30,57 +30,59 @@ function Cadastro() {
             </p>
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="nomeUsuario">Nome de Usuário</label>
-                <input
-                  id="nomeUsuario"
-                  type="text"
-                  value={nomeUsuario}
-                  onChange={(e) => setNomeUsuario(e.target.value)}
-                  required
-                  placeholder="Digite seu nome de usuário"
-                />
-              </div>
+              <div className="form-fields">
+                <div className="form-group">
+                  <label htmlFor="nomeUsuario">Nome de Usuário</label>
+                  <input
+                    id="nomeUsuario"
+                    type="text"
+                    value={nomeUsuario}
+                    onChange={(e) => setNomeUsuario(e.target.value)}
+                    required
+                    placeholder="Digite seu nome de usuário"
+                  />
+                </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Digite seu email"
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Digite seu email"
+                  />
+                </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Senha</label>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Digite sua senha"
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="password">Senha</label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Digite sua senha"
+                  />
+                </div>
 
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirme a senha</label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  placeholder="Confirme sua senha"
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="confirmPassword">Confirme a senha</label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    placeholder="Confirme sua senha"
+                  />
+                </div>
 
-              <Button type="submit" loading={loading}>
-                Cadastrar
-              </Button>
+                <Button type="submit" loading={loading} size="large">
+                  Cadastrar
+                </Button>
+              </div>
             </form>
           </div>
         </div>
