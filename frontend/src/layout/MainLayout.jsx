@@ -8,7 +8,7 @@ function MainLayout() {
       <Navbar />
       <main>
         {/* Outlet renderiza a rota filha, no nosso caso, a Home */}
-        <Outlet /> 
+        <Outlet />
       </main>
       <Footer />
     </>
