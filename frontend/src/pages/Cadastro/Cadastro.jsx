@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import Button from "../../components/Button/Button";
+import GoogleLoginButton from '../../components/GoogleLoginButton';
 import feiraLogo from '../../assets/logo-feira.jpg';
+
 import './Cadastro.css';
 
 function Cadastro() {
@@ -82,6 +85,8 @@ function Cadastro() {
                 <Button type="submit" loading={loading} size="large">
                   Cadastrar
                 </Button>
+                <GoogleLoginButton />
+
               </div>
             </form>
           </div>

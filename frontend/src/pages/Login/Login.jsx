@@ -1,8 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
 import Button from '../../components/Button/Button';
+import GoogleLoginButton from '../../components/GoogleLoginButton';
 import feiraLogo from '../../assets/logo-feira.jpg';
+
+
 import './Login.css';
 
 function Login() {
@@ -72,6 +76,7 @@ function Login() {
             <Button type="submit" loading={loading} size="large">
               Entrar
             </Button>
+            <GoogleLoginButton />
           </form>
         </div>
       </div>
