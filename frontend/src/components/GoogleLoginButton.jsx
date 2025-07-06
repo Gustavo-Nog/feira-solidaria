@@ -1,5 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google';
-import jwtDecode from "jwt-decode"; // Biblioteca para decodificar o token JWT
+import { jwtDecode } from "jwt-decode"; // Biblioteca para decodificar o token JWT
 import { useNavigate } from "react-router-dom";
 
 
