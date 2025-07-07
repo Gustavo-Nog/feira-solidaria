@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import Button from "../../components/Button/Button";
-import GoogleLoginButton from '../../components/GoogleLoginButton';
+import GoogleLoginButton from "../../components/LoginGoogle/GoogleLoginButton";
 import feiraLogo from '../../assets/logo-feira.jpg';
 
 import './Cadastro.css';
@@ -85,6 +85,13 @@ function Cadastro() {
                 <Button type="submit" loading={loading} size="large">
                   Cadastrar
                 </Button>
+
+                <div className="my-3 d-flex align-items-center">
+                  <hr className="flex-grow-1" />
+                  <span className="mx-2 text-white text-uppercase small">ou</span>
+                  <hr className="flex-grow-1" />
+                </div>
+
                 <GoogleLoginButton />
 
               </div>
