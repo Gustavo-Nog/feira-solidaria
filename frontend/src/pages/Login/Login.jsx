@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import Button from '../../components/Button/Button';
-import GoogleLoginButton from '../../components/GoogleLoginButton';
+import GoogleLoginButton from "../../components/LoginGoogle/GoogleLoginButton";
 import feiraLogo from '../../assets/logo-feira.jpg';
 
 
@@ -76,6 +76,13 @@ function Login() {
             <Button type="submit" loading={loading} size="large">
               Entrar
             </Button>
+
+            <div className="my-3 d-flex align-items-center">
+              <hr className="flex-grow-1" />
+              <span className="mx-2 text-white text-uppercase small">ou</span>
+              <hr className="flex-grow-1" />
+            </div>
+
             <GoogleLoginButton />
           </form>
         </div>
