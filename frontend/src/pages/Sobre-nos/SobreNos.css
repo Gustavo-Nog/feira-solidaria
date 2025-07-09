@@ -1,0 +1,60 @@
+.sobrenos-container {
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.sobrenos-container p {
+  padding: 1rem;
+}
+
+.mission-card {
+  background-color: #d9eed9;
+  /* Verde bem claro */
+  border-radius: 20px;
+  padding: 25px;
+  color: #2A6441;
+  margin-bottom: 20px;
+}
+
+.mission-card h1,
+.mission-card h3 {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #000000;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.hero-image-container {
+  background-color: #cccccc;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.hero-image-container img.image-styled {
+  border-radius: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.responsive-heading {
+  font-size: 2rem;
+}
+
+.responsive-paragraph {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .responsive-heading {
+    font-size: 1.5rem;
+  }
+
+  .responsive-paragraph {
+    font-size: 0.95rem;
+  }
+}

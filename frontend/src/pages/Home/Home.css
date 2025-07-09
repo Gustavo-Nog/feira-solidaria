@@ -1,0 +1,88 @@
+.home-container {
+  padding: 20px;
+  background-color: #fdfdfd;
+}
+
+/* Seção Hero */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.mission-card {
+  background-color: #E6F3E6; /* Verde bem claro */
+  border-radius: 20px;
+  padding: 25px;
+  color: #2A6441;
+}
+
+.mission-card h3 {
+  margin-bottom: 10px;
+}
+
+.hero-image-container .image-placeholder {
+  background-color: #ccc;
+  border-radius: 20px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Seção de Produtos */
+.products-section {
+  background-color: #FEF3B4; /* Amarelo claro */
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.products-section h2 {
+  text-align: center;
+  color: #2A6441;
+  margin-bottom: 20px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 50%; /* Faz o card ser um círculo */
+  aspect-ratio: 1 / 1; /* Mantém o card circular */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.product-image-placeholder {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #2A6441;
+  margin-bottom: 10px;
+}
+
+/* Media query para telas maiores */
+@media (min-width: 768px) {
+  .hero-section {
+    flex-direction: row;
+    align-items: center;
+  }
+  .mission-card, .hero-image-container {
+    flex: 1;
+  }
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
