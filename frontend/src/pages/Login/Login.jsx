@@ -64,13 +64,17 @@ function Login() {
               {errors.senha && <span className="text-danger">{errors.senha.message}</span>}
             </div>
 
-            <div className="form-check">
-              <input type="checkbox" id="logado" />
-              <label htmlFor="logado">Mantenha-me logado</label>
+            <div className="form-check mb-3">
+              <input className="form-check-input" type="checkbox" id="logado" />
+              <label className="form-check-label" htmlFor="logado">
+                Mantenha-me logado
+              </label>
             </div>
 
             <div className="form-link">
-              <Link to="/redefinir-senha" className="text-warning">Esqueci a senha</Link>
+              <Link to="/redefinir-senha" className="text-warning text-decoration-underlin">
+                Esqueci a senha
+              </Link>
             </div>
 
             <Button type="submit" loading={loading} size="large">
