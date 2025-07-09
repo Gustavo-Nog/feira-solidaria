@@ -7,13 +7,18 @@
   padding: 1rem;
 }
 
+section.container-fluid {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .mission-card {
   background-color: #d9eed9;
   /* Verde bem claro */
   border-radius: 20px;
   padding: 25px;
   color: #2A6441;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .mission-card h1,
@@ -31,13 +36,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 100px;
+  margin-bottom: 0;
 }
 
 .hero-image-container img.image-styled {
   border-radius: 15px;
+  border: 10px solid #d9eed9;
   max-width: 100%;
   max-height: 100%;
+  object-fit: cover;
+}
+
+.hero-image-container.no-radius {
+  border-radius: 0;
+  padding: 0;
+  min-height: 50%;
+}
+
+.hero-image-container.no-radius img {
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
@@ -47,6 +67,13 @@
 
 .responsive-paragraph {
   font-size: 1.1rem;
+}
+
+/* Remove margem lateral nos containers para tela grande */
+@media (min-width: 992px) {
+  .sobrenos-container {
+    padding: 0;
+  }
 }
 
 @media (max-width: 768px) {
