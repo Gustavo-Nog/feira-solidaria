@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import feiraLogo from '../../assets/logo-feira.jpg';
+import Button from '../../components/Button/Button'; 
 
 import './RedefinirSenha.css';
 
@@ -17,12 +18,16 @@ function RedefinirSenha() {
 
     const onSubmit = (data) => {
         console.log(data);
-        if (data.email === "Feira@gmail.com") {
-            alert("Email enviado com sucesso!");
-            navigate("/");
-        } else {
-            alert("Email inválido.");
-        }
+        setLoading(true);
+        setTimeout(() => {
+            if (data.email === "Feira@gmail.com") {
+                alert("Email enviado com sucesso!");
+                navigate("/");
+            } else {
+                alert("Email inválido.");
+            }
+            setLoading(false);
+        }, 1500); 
     };
 
     return (
@@ -38,9 +43,9 @@ function RedefinirSenha() {
                         {...register("email", { required: "Email é obrigatório" })}
                     />
                     {errors.email && <p className="error">{errors.email.message}</p>}
-                    <button type="submit" disabled={loading}>
-                        {loading ? "Enviando..." : "Enviar"}
-                    </button>
+                    <Button type="submit" loading={loading}>
+                        Enviar
+                    </Button>
                 </form>
             </div>
         </div>
@@ -48,3 +53,4 @@ function RedefinirSenha() {
 }
 
 export default RedefinirSenha;
+
