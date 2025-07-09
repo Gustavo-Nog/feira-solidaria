@@ -1,85 +1,149 @@
-/* Contêiner principal da barra de navegação */
+/* --- CSS Final e Definitivo da Navbar --- */
+
 .navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 25px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: 70px;
+  padding: 0 1.5rem; /* Espaçamento nas laterais */
 }
 
-.nav-links {
+.navbar-content {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between; /* ESSENCIAL: Joga um item para cada lado */
+  height: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.navbar-brand a {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #2A6441;
+  text-decoration: none;
+}
+
+/* --- ESTILOS PARA DESKTOP (Telas grandes) --- */
+.nav-desktop {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 auto; /* Centraliza os links de navegação */
 }
 
 .nav-link-item {
   text-decoration: none;
-  color: #2A6441; /* Verde do protótipo */
-  font-weight: bold;
-  font-size: 0.9rem;
-  padding: 8px 15px;
-  background-color: #FEF3B4; /* Amarelo claro do protótipo */
-  border-radius: 20px;
-  transition: transform 0.2s;
+  font-weight: 500;
+  color: #333;
 }
 
-.nav-link-item:hover {
-  transform: scale(1.05);
-}
-
-/* Seção do Perfil (Direita) */
-.profile-section {
+.profile-area-desktop {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
-/* Círculo que contém a foto ou o ícone padrão */
 .profile-icon {
   width: 45px;
   height: 45px;
-  background-color: #f0f0f0; /* Fundo cinza caso a imagem não carregue */
-  border: 2px solid #2A6441;
-  border-radius: 50%;
-  
-  /* Adicionado para centralizar o ícone e conter a imagem */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; 
 }
 
-/* Estilo para a foto do usuário quando logado */
-.profile-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Evita que a imagem fique distorcida */
-}
-
-/* Estilo para o ícone cinza padrão (quando não logado) */
 .default-user-icon {
-  color: #cccccc; /* Tom de cinza para o ícone */
   width: 100%;
   height: 100%;
+  color: #a0a0a0;
 }
 
-/* Links de "Cadastrar" e "Logar" */
 .profile-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Coloca um abaixo do outro */
   align-items: flex-start;
-  font-size: 0.9rem;
+  line-height: 1.2;
 }
 
 .profile-actions a {
   text-decoration: none;
+  font-size: 0.9rem;
   color: #2A6441;
   font-weight: 500;
-  line-height: 1.2; /* Melhora o alinhamento */
 }
 
-/* A barrinha "/" entre os links, atualmente desativada */
 .profile-actions span {
-  display: none; 
+  display: none; /* Esconde a barrinha "/" */
+}
+
+/* Esconde os elementos de mobile no desktop */
+.menu-toggle, .nav-mobile {
+  display: none;
+}
+
+
+/* --- ESTILOS PARA MOBILE (Telas pequenas) --- */
+@media (max-width: 992px) {
+  /* Esconde os elementos de desktop no mobile */
+  .nav-desktop, .profile-area-desktop {
+    display: none;
+  }
+
+  /* Mostra o botão de menu */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #2A6441;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .nav-mobile-profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  }
+  
+  /* Faz o logo ficar no meio quando o menu está fechado */
+  .navbar-content {
+    justify-content: space-between;
+  }
+
+  /* Estiliza o menu que abre */
+  /* DENTRO de @media (max-width: 992px) */
+
+  .nav-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  
+  /* --- MUDANÇAS PRINCIPAIS AQUI --- */
+  position: fixed;        /* 1. Fica fixo na tela, não rola com a página */
+  top: 0;                 /* 2. Alinhado ao topo da tela */
+  left: 0;
+  width: 100%;
+  height: 100%;           /* 3. Ocupa 100% da altura da tela (100vh) */
+  background-color: white;
+  z-index: 1000;
+  padding: 80px 1rem 2rem 1rem; /* Espaço interno (topo, lados, fundo) */
+  overflow-y: auto;       /* 4. ADICIONA SCROLL (rolagem) SE necessário */
+  
+  transform: translateY(-100%); /* Começa escondido em cima */
+  transition: transform 0.3s ease-in-out;
+  }
+  
+  .nav-mobile.open {
+    transform: translateY(0); /* Desce para a posição correta */
+  }
+  
+  .nav-mobile a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .separator {
+    width: 80%;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 0.5rem 0;
+  }
 }
