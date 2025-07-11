@@ -17,7 +17,7 @@ function Navbar() {
         <Link to="/cardapio" className="nav-link-item">Cardapio</Link>
         <Link to="/carrinho" className="nav-link-item">Carrinho</Link>
         <Link to="/cadastrar-itens" className="nav-link-item">Cadastrar Itens</Link>
-        <Link to="/seu-perfil" className="nav-link-item">Seu Perfil</Link>
+        <Link to="/perfil" className="nav-link-item">Seu Perfil</Link>
       </div>
 
        <div className="profile-section">
