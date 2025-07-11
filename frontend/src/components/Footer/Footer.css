@@ -1,16 +1,17 @@
-/* --- Estilos para o novo Footer de Contato --- */
-
 .footer-contato {
   display: flex;
-  flex-direction: column; /* Empilha os itens em telas pequenas */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* Espaçamento entre o texto e os ícones */
+  gap: 1rem;
   text-align: center;
-  padding: 2rem 1.5rem; /* Espaçamento interno (vertical e horizontal) */
-  background-color: #2A6441; /* Usando o verde escuro do tema para contraste */
-  color: #ffffff; /* Cor do texto (branco) */
-  width: 100%;
+  padding: 2rem 1.5rem;
+  background-color: #2A6441;
+  color: #ffffff;
+  width: 100vw; 
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .copyright-text p {
@@ -35,7 +36,6 @@
   color: #FEF3B4; /* Muda a cor do ícone para o amarelo do tema no hover */
 }
 
-/* Regra para telas maiores (desktops, tablets na horizontal) */
 @media (min-width: 768px) {
   .footer-contato {
     flex-direction: row; /* Alinha os itens na horizontal */

@@ -1,17 +1,18 @@
+// CÓDIGO AJUSTADO
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import './MainLayout.css';
 
 function MainLayout() {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <main>
-        {/* Outlet renderiza a rota filha, no nosso caso, a Home */}
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>                   
   );
 }
 
