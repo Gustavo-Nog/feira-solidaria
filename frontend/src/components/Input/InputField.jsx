@@ -1,7 +1,7 @@
 import './InputField.css';
 import { useFormContext } from 'react-hook-form';
 
-function InputField({ name, label, type = 'text', required }) {
+function InputField({ name, label, type = 'text', required, className = '' }) {
   const {
     register,
     formState: { errors },
@@ -9,14 +9,13 @@ function InputField({ name, label, type = 'text', required }) {
 
   return (
     <div className="input-wrapper">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="form-label">{label}</label>
       <input
         id={name}
         type={type}
-        className="custom-input"
+        className={`custom-input ${className}`} // junta a sua classe + bootstrap
         {...register(name, { required })}
         placeholder={`Digite seu ${label.toLowerCase()}`}
-        autoComplete="off"
       />
       {errors[name] && (
         <span className="text-danger">{errors[name].message}</span>
