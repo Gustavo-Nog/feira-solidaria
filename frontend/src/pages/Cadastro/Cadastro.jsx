@@ -56,6 +56,7 @@ function Cadastro() {
                   label="Confirme a senha"
                   type="password"
                   required="Confirmação de senha é obrigatória"
+                  className='mb-1'
                 />
 
                 <Button type="submit" loading={isSubmitting} size="large">
