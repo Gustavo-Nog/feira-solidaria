@@ -1,6 +1,7 @@
 import "./SobreNos.css";
 import EquipeCarrosel from "../../components/EquipeCarrosel/EquipeCarrosel";
 import feiraLogo from '../../assets/logo-feira.jpg';
+import progresso from '../../assets/progresso.png';
 
 function SobreNos() {
   return (
@@ -89,8 +90,17 @@ function SobreNos() {
             </section>
             <section className="col-12 col-md-6 text-center order-2 order-md-2 p-0">
               <div className="hero-image-container no-radius">
-                {/* <img src={equipeDesenvolvedora} alt="Equipe de desenvolvimento" className="img-fluid image-styled" /> */}
-                <p className="image-placeholder">IMAGEM ILUSTRATIVA</p>
+                {<img
+                  src={progresso}
+                  alt="Imagem alusão ao progresso"
+                  className="img-fluid image-styled"
+                  style={{
+                    width: '80%',
+                    height: '80%',
+                    maxHeight: '100vh',
+                    objectFit: 'contain'
+                  }}
+                />}
               </div>
             </section>
           </div>
