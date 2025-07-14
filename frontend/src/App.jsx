@@ -6,9 +6,10 @@ import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
 import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
+import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
-
 import './App.css';
+
 
 function App() {
   {/* GoogleOAuthProvider recebe o clientId da variável de ambiente para configurar o SDK do Google */ }
@@ -21,7 +22,9 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
+            <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
+
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>
