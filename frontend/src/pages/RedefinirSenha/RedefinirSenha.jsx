@@ -17,12 +17,17 @@ function RedefinirSenha() {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
         setLoading(true);
         setTimeout(() => {
             if (data.email === "Feira@gmail.com") {
-                alert("Email enviado com sucesso!");
-                navigate("/");
+                // Gera token falso
+                const fakeToken = Math.random().toString(36).substring(2, 15);
+                // Salva token e email no localStorage
+                localStorage.setItem('resetToken', fakeToken);
+                localStorage.setItem('resetEmail', data.email);
+
+                // Redireciona automaticamente para a página de redefinir senha nova
+                navigate(`/redefinir-senha-nova?token=${fakeToken}`);
             } else {
                 alert("Email inválido.");
             }
@@ -53,4 +58,6 @@ function RedefinirSenha() {
 }
 
 export default RedefinirSenha;
+
+
 

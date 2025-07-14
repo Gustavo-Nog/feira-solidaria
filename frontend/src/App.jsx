@@ -7,6 +7,7 @@ import Cadastro from './pages/Cadastro/Cadastro';
 import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
+import NovaSenha from './pages/NovaSenha/NovaSenha';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+          <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider >
