@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
 import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
+import Contato from './pages/Contato/Contato';
 import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
+            <Route path="/contato" element={<Contato />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}

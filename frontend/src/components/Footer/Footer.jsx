@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import './Footer.css'; // Vamos alterar este arquivo também
+import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();

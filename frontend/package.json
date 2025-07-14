@@ -14,6 +14,7 @@
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
     "react-slick": "^0.30.3",

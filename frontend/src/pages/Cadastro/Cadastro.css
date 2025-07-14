@@ -36,6 +36,38 @@
   color: #000;
 }
 
+/* Estilo personalizado direto na classe */
+.custom-input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove o fundo verde dos inputs válidos/inválidos */
+.custom-input:valid,
+.custom-input:invalid {
+  background-color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Foco estilizado */
+.custom-input:focus {
+  outline: 2px solid #4caf50;
+  box-shadow: none !important;
+}
+
+
 /* A imagem só aparece no desktop (como parte lateral) */
 .image-section {
   flex: 1;
