@@ -1,6 +1,6 @@
 {/* coloquem uma imagem de vocês com o nome do aquivo correspondente */ }
 //  import gabrielFoto from "../assets/equipe/gabriel.jpg";
-import gustavoFoto from "../assets/equipe/gustavo.png";
+import gustavoFoto from "../assets/equipe/gustavo.jpg";
 //  import henriqueFoto from "../assets/equipe/henrique.jpg";
 // import hudsonFoto from "../assets/equipe/hudson.jpg";
 //  import mariannaFoto from "../assets/equipe/marianne.jpg";
