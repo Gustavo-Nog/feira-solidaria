@@ -2,15 +2,18 @@ import "./SobreNos.css";
 import EquipeCarrosel from "../../components/EquipeCarrosel/EquipeCarrosel";
 import feiraLogo from '../../assets/logo-feira.jpg';
 import progresso from '../../assets/progresso.png';
+import missao from '../../assets/missao.png';
 
 function SobreNos() {
+  const temImagem = !!missao;
+
   return (
     <>
       <div className="sobrenos-container">
         {/* Primeira seção: texto à esquerda e imagem à direita */}
-        <section className="container-fluid py-5 px-0">
+        <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
-            <section className="col-12 col-md-6 p-0 m-0 order-1 order-md-1 p-4">
+            <section className="col-12 col-md-6 p-3 order-1 order-md-1">
               <div className="mission-card">
                 <h1 className="responsive-heading">
                   Olá!
@@ -29,18 +32,12 @@ function SobreNos() {
               </div>
 
             </section>
-            <section className="col-12 col-md-6 text-center order-2 order-md-2 p-0" >
+            <section className="col-12 col-md-6 p-3 text-center order-2 order-md-2 p-0" >
               <div className="hero-image-container no-radius">
                 <img
                   src={feiraLogo}
                   alt="Equipe de desenvolvime// você vai criar esse CSS a seguirnto"
                   className="img-fluid image-styled"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    maxHeight: '100vh',
-                    objectFit: 'contain'
-                  }}
                 />
               </div>
             </section>
@@ -48,15 +45,22 @@ function SobreNos() {
         </section>
 
         {/* Segunda seção: imagem à esquerda e texto à direita */}
-        <section className="container-fluid py-5 px-0">
+        <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
-            <section className="col-12 col-md-6 text-center order-2 order-md-1 p-0">
-              <div className="hero-image-container no-radius">
-                {/* <img src={equipeDesenvolvedora} alt="Equipe de desenvolvimento" className="img-fluid image-styled" /> */}
-                <p className="image-placeholder">IMAGEM DA EQUIPE</p>
+            <section className="col-12 col-md-6 p-3 text-center order-2 order-md-1">
+              <div className={`hero-image-container ${!temImagem ? '' : 'no-radius'}`}>
+                {temImagem ? (
+                  <img
+                    src={missao}
+                    alt="Equipe"
+                    className="img-fluid image-styled"
+                  />
+                ) : (
+                  <p className="image-placeholder">IMAGEM DA EQUIPE</p>
+                )}
               </div>
             </section>
-            <section className="col-12 col-md-6 order-1 order-md-2 p-4">
+            <section className="col-12 col-md-6 p-3 order-1 order-md-2 p-4">
               <div className="mission-card">
                 <h1 className="responsive-heading">
                   Nossa Missão
@@ -72,9 +76,9 @@ function SobreNos() {
         </section>
 
         {/* Seções futuras */}
-        <section className="container-fluid py-5 px-0">
+        <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
-            <section className="col-12 col-md-6 p-0 m-0 order-1 order-md-1 p-4">
+            <section className="col-12 col-md-6 p-3 m-0 order-1 order-md-1 p-4">
               <div className="mission-card">
                 <h1 className="responsive-heading">
                   O que nos move
@@ -88,18 +92,12 @@ function SobreNos() {
               </div>
 
             </section>
-            <section className="col-12 col-md-6 text-center order-2 order-md-2 p-0">
+            <section className="col-12 col-md-6 p-3 text-center order-2 order-md-2 p-0">
               <div className="hero-image-container no-radius">
                 {<img
                   src={progresso}
                   alt="Imagem alusão ao progresso"
                   className="img-fluid image-styled"
-                  style={{
-                    width: '80%',
-                    height: '80%',
-                    maxHeight: '100vh',
-                    objectFit: 'contain'
-                  }}
                 />}
               </div>
             </section>
