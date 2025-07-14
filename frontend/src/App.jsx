@@ -8,8 +8,8 @@ import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
 import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
-import './App.css';
 
+import './App.css';
 
 function App() {
   {/* GoogleOAuthProvider recebe o clientId da variável de ambiente para configurar o SDK do Google */ }

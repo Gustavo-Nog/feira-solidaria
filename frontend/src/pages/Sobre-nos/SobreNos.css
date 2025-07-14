@@ -14,7 +14,6 @@ section.container-fluid {
 
 .mission-card {
   background-color: #d9eed9;
-  /* Verde bem claro */
   border-radius: 20px;
   padding: 25px;
   color: #2A6441;
@@ -77,7 +76,6 @@ section.container-fluid {
   font-size: 1.1rem;
 }
 
-/* Remove margem lateral nos containers para tela grande */
 @media (min-width: 992px) {
   .sobrenos-container {
     padding: 0;
