@@ -1,7 +1,8 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Button from '../../components/Button/Button'; // Aqui já está importando o botão correto
+import Button from '../../components/Button/Button';
+import InputField from '../../components/InputField/InputField';
 import './NovaSenha.css';
 
 function RedefinirSenhaNova() {
@@ -16,12 +17,9 @@ function RedefinirSenhaNova() {
     // Pega o token salvo no localStorage
     const tokenSaved = localStorage.getItem('resetToken');
 
-    // Inicializa o react-hook-form
-    const {
-        register,
-        handleSubmit,
-        formState: { errors }
-    } = useForm();
+    // Inicializa o react-hook-form com FormProvider
+    const methods = useForm();
+    const { handleSubmit, formState: { errors } } = methods;
 
     // Se o token não existir ou não bater com o token salvo, mostra mensagem de erro
     if (!tokenUrl || tokenUrl !== tokenSaved) {
@@ -35,7 +33,6 @@ function RedefinirSenhaNova() {
         );
     }
 
-    // Função chamada quando o formulário for enviado
     const onSubmit = (data) => {
         if (data.senha !== data.confirmarSenha) {
             alert("As senhas não coincidem.");
@@ -58,33 +55,33 @@ function RedefinirSenhaNova() {
         <div className="reset-container">
             <div className="reset-form-container">
                 <h2>Defina sua nova senha</h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="reset-form">
-                    <input
-                        type="password"
-                        placeholder="Nova senha"
-                        {...register("senha", {
-                            required: "Senha é obrigatória",
-                            minLength: { value: 6, message: "Mínimo 6 caracteres" }
-                        })}
-                    />
-                    {errors.senha && <p className="error">{errors.senha.message}</p>}
+                <FormProvider {...methods}>
+                    <form onSubmit={handleSubmit(onSubmit)} className="reset-form">
+                        <InputField
+                            name="senha"
+                            label="Senha"
+                            type="password"
+                            required={{ value: true, message: "Senha é obrigatória" }}
+                        />
 
-                    <input
-                        type="password"
-                        placeholder="Confirme a nova senha"
-                        {...register("confirmarSenha", { required: "Confirmação é obrigatória" })}
-                    />
-                    {errors.confirmarSenha && <p className="error">{errors.confirmarSenha.message}</p>}
+                        <InputField
+                            name="confirmarSenha"
+                            label="Confirmação de Senha"
+                            type="password"
+                            required={{ value: true, message: "Confirmação é obrigatória" }}
+                        />
 
-                    <Button type="submit" loading={loading}>
-                        Concluir
-                    </Button>
-                </form>
+                        <Button type="submit" loading={loading}>
+                            Concluir
+                        </Button>
+                    </form>
+                </FormProvider>
             </div>
         </div>
     );
 }
 
 export default RedefinirSenhaNova;
+
 
 
