@@ -1,0 +1,74 @@
+
+.formulario-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #E6F3E6; /* Verde claro do modelo */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: #2A6441;
+  font-family: Arial, sans-serif;
+}
+
+.formulario-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2A6441;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  outline-color: #0a381d;
+}
+
+.campo textarea {
+  resize: none;
+}
+
+.botao {
+  background-color: #2A6441;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 5.s ease;
+}
+
+.botao:hover {
+  background-color: #1e4d32;
+}
+
+@media (max-width: 480px) {
+  .formulario-container {
+    padding: 20px;
+  }
+
+  .botao {
+    font-size: 0.9rem;
+  }
+}
