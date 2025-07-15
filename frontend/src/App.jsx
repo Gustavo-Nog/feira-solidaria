@@ -8,7 +8,6 @@ import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
 import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
-import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
 
@@ -28,7 +27,6 @@ function App() {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
-            <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>
