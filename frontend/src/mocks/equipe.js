@@ -1,5 +1,5 @@
 {/* coloquem uma imagem de vocês com o nome do aquivo correspondente */ }
-//  import gabrielFoto from "../assets/equipe/gabriel.jpg";
+import gabrielFoto from "../assets/equipe/gabriel.png";
 import gustavoFoto from "../assets/equipe/gustavo.jpg";
 //  import henriqueFoto from "../assets/equipe/henrique.jpg";
 // import hudsonFoto from "../assets/equipe/hudson.jpg";
@@ -11,7 +11,7 @@ const placeholder = "https://via.placeholder.com/150";
 {/* Lembrem-se de tirar o placeholder da 'foto: placeholder' e substituam de acordo nome correspondente */ }
 
 const membrosEquipe = [
-  { nome: 'Gabriel', nacionalidade: 'Brasileiro', github: 'https://github.com/gabrielcrispim-c', foto: placeholder },
+  { nome: 'Gabriel', nacionalidade: 'Brasileiro', github: 'https://github.com/gabrielcrispim-c', foto: gabrielFoto },
   { nome: 'Gustavo', nacionalidade: 'Brasileiro', github: 'https://github.com/Gustavo-Nog', foto: gustavoFoto },
   { nome: 'Henrique', nacionalidade: 'Brasileiro', github: 'https://github.com/HenriqueAdriel', foto: placeholder },
   { nome: 'Hudson', nacionalidade: 'Brasileiro', github: 'https://github.com/Hudson2207', foto: placeholder },
