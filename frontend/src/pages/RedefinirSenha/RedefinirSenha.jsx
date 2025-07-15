@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import feiraLogo from '../../assets/logo-feira.jpg';
 import Button from '../../components/Button/Button';
-import InputField from '../../components/InputField/InputField';
+import InputField from '../../components/Input/InputField'; // caminho do seu novo InputField
 
 import './RedefinirSenha.css';
 

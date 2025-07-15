@@ -2,7 +2,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import InputField from '../../components/InputField/InputField';
+import InputField from '../../components/Input/InputField'; // caminho do seu novo InputField
+
 import './NovaSenha.css';
 
 function RedefinirSenhaNova() {
