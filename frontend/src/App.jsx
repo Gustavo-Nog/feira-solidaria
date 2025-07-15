@@ -8,7 +8,9 @@ import MainLayout from './layout/MainLayout'; // Importe o layout
 import SobreNos from './pages/Sobre-nos/SobreNos';
 import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
-import CadastrarItem from './pages/Cadastro-item/CadastroItem';
+import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
+import NovaSenha from './pages/NovaSenha/NovaSenha';
+
 import './App.css';
 
 
@@ -25,11 +27,6 @@ function App() {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
-<<<<<<< HEAD
-
-=======
-            <Route path="/cadastrar-itens" element={<CadastrarItem />} />
->>>>>>> origin/developer
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>
@@ -37,6 +34,8 @@ function App() {
           {/* Rotas que NÃO usam o layout (tela cheia) */}
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+          <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider >
