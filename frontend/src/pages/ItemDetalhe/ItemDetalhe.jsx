@@ -1,21 +1,45 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { mockItem } from '../../mocks/itens'; // 1. Importando os dados do local correto
-import './ItemDetalhe.css'; // Vamos usar um CSS mais simples agora
+import { useParams, useNavigate } from 'react-router-dom'; // 1. Importe o useNavigate
+import { mockItem } from '../../mocks/items';
+import './ItemDetalhe.css';
+
+// --- Simulação de Autenticação e Carrinho ---
+// No seu projeto real, estes valores e funções viriam de um Contexto ou Redux.
+const usuarioLogado = true; // Mude para 'false' para testar o redirecionamento para o login.
+
+const adicionarAoCarrinho = (item) => {
+  console.log(`Item "${item.nome}" adicionado ao carrinho!`);
+  // Aqui você adicionaria a lógica real para atualizar o estado do carrinho.
+};
+// ---------------------------------------------
 
 function ItemDetalhe() {
   const { itemId } = useParams();
-  const item = mockItem; // Usando os dados importados
+  const navigate = useNavigate(); // 2. Inicialize o hook de navegação
+  const item = mockItem;
+
+  // 3. Crie a função que será chamada no clique do botão
+  const handleAddToCart = () => {
+    // Verifica se o usuário está logado
+    if (usuarioLogado) {
+      // Se estiver logado, adicione ao carrinho e redirecione
+      adicionarAoCarrinho(item);
+      alert(`"${item.nome}" foi adicionado ao seu carrinho!`);
+      navigate('/carrinho'); // Redireciona para a página do carrinho
+    } else {
+      // Se não estiver logado, redirecione para a página de login
+      alert('Você precisa estar logado para realizar esta ação. Redirecionando...');
+      navigate('/login');
+    }
+  };
 
   if (!item) {
     return <div>Item não encontrado!</div>;
   }
 
   return (
-    // 2. Usando classes do Bootstrap para o container principal
     <div className="container my-5">
       <div className="card p-4 shadow-sm">
-        {/* 3. Usando o sistema de Grid do Bootstrap (row/col) */}
         <div className="row g-5">
           {/* Coluna da Imagem */}
           <div className="col-lg-5">
@@ -48,8 +72,8 @@ function ItemDetalhe() {
               <p>{item.produtor.nome} (Nota: {item.produtor.nota} ⭐)</p>
             </div>
             
-            {/* mt-auto empurra o botão para o final do card */}
-            <button className="btn btn-lg btn-success mt-auto">
+            {/* O botão agora chama a nossa nova função */}
+            <button className="btn btn-lg btn-success mt-auto" onClick={handleAddToCart}>
               Tenho Interesse / Fazer Troca
             </button>
           </div>
