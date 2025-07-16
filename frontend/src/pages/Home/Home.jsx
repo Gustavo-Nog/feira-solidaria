@@ -1,7 +1,12 @@
-import './Home.css';
+import React from 'react';
 // Importe aqui as imagens que você vai usar, como no protótipo
 // import imagemVegetais from '../assets/vegetais.png';
-import Vegetais from './assets/vegetais.jpg';
+import Vegetais from '../assets/vegetais.jpg';
+import cesta1 from '../assets/cesta1.jpg';
+import cesta2 from '../assets/cesta2.png';
+import cesta3 from '../assets/cesta3.jpg';
+import './Home.css';
+
 
 function Home() {
   return (
@@ -15,7 +20,7 @@ function Home() {
           </p>
         </div>
         <div className="hero-image-container">
-          <img src={Vegetais} alt="Cesta de vegetais" />
+        <img src={Vegetais} alt="Cesta de vegetais" />
         </div>
       </section>
 
@@ -25,15 +30,18 @@ function Home() {
         <div className="products-grid">
           {/* Exemplo de card de produto */}
           <div className="product-card">
-            <div className="product-image-placeholder">Cesta 1</div>
+            <div className="product-image-placeholder">Cesta1</div>
+            <img src={cesta1} alt="Cesta 1" />
             <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
           </div>
           <div className="product-card">
-            <div className="product-image-placeholder">Cesta 2</div>
+            <div className="product-image-placeholder">Cesta2</div>
+             <img src={cesta2} alt="Cesta 2" />
             <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
           </div>
           <div className="product-card">
             <div className="product-image-placeholder">Cesta 3</div>
+            <img src={cesta3} alt="Cesta 3" />
             <strong>Nota 4 ⭐⭐⭐⭐</strong>
           </div>
         </div>
