@@ -4,3 +4,34 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+/* NOVO: Estilo para o link do item */
+.carrinho-item-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.carrinho-item-link:hover {
+  opacity: 0.8;
+}
+
+/* NOVO: Estilos para os controles de quantidade */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem; /* 6px */
+}
+
+.quantity-controls .btn {
+  border: none;
+  padding: 0.3rem 0.7rem;
+}
+
+.quantity-text {
+  padding: 0 1rem;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: center;
+}
