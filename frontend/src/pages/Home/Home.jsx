@@ -1,6 +1,7 @@
 import './Home.css';
 // Importe aqui as imagens que você vai usar, como no protótipo
 // import imagemVegetais from '../assets/vegetais.png';
+import Vegetais from './assets/vegetais.jpg';
 
 function Home() {
   return (
@@ -14,8 +15,7 @@ function Home() {
           </p>
         </div>
         <div className="hero-image-container">
-          {/* <img src={imagemVegetais} alt="Cesta de vegetais" /> */}
-          <p className="image-placeholder">IMAGEM GRANDE DE VEGETAIS</p>
+          <img src={Vegetais} alt="Cesta de vegetais" />
         </div>
       </section>
 
