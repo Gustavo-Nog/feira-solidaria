@@ -1,12 +1,28 @@
-// src/pages/Carrinho/Carrinho.jsx
-
 import React from 'react';
 import { useCart } from '../../context/ContextCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Carrinho.css';
+
+// --- VERIFICAÇÃO SIMULADA AQUI ---
+// Mude para 'false' para testar o comportamento de usuário deslogado.
+const usuarioLogado = true; 
+// ---------------------------------
 
 function Carrinho() {
   const { cartItems, removerDoCarrinho } = useCart();
+  const navigate = useNavigate();
+
+  const handleFinalizarTroca = () => {
+    // A verificação agora usa a variável 'usuarioLogado'
+    if (usuarioLogado) {
+      alert('Usuário logado! Prosseguindo para a finalização da troca...');
+      // Futuramente, você pode navegar para uma página de checkout
+      // navigate('/checkout');
+    } else {
+      alert('Você precisa fazer o login para finalizar a troca.');
+      navigate('/login');
+    }
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -38,7 +54,9 @@ function Carrinho() {
         ))}
       </ul>
       <div className="text-end mt-4">
-        <button className="btn btn-lg btn-success">Finalizar Troca</button>
+        <button className="btn btn-lg btn-success" onClick={handleFinalizarTroca}>
+          Finalizar Troca
+        </button>
       </div>
     </div>
   );
