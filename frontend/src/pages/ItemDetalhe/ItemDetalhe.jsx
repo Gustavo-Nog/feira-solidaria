@@ -3,13 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom'; // 1. Importe o useNa
 import { mockItem } from '../../mocks/itens';
 import './ItemDetalhe.css';
 
-// --- Simulação de Autenticação e Carrinho ---
-// No seu projeto real, estes valores e funções viriam de um Contexto ou Redux.
 const usuarioLogado = false; // Mude para 'false' para testar o redirecionamento para o login.
 
 const adicionarAoCarrinho = (item) => {
   console.log(`Item "${item.nome}" adicionado ao carrinho!`);
-  // Aqui você adicionaria a lógica real para atualizar o estado do carrinho.
+  // Logica do carrinho.
 };
 // ---------------------------------------------
 
