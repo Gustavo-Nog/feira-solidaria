@@ -5,9 +5,9 @@ import { CartProvider } from './context/ContextCart.jsx';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  //<StrictMode>
     <CartProvider>
       <App />
     </CartProvider>
-  </StrictMode>,
+  //</StrictMode>,
 );

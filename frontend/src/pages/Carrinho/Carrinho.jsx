@@ -2,29 +2,33 @@
 
 import React from 'react';
 import { useCart } from '../../context/ContextCart';
-// import { useAuth } from '../../context/AuthContext'; // 1. Import do AuthContext removido
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Carrinho.css';
 
-// 2. Adicionada a verificação simulada com uma variável
-const usuarioLogado = true; // Mude para 'false' para testar o comportamento de deslogado
+const usuarioLogado = true; 
 
 function Carrinho() {
-  const { cartItems, removerDoCarrinho } = useCart();
-  // const { isAutenticado } = useAuth(); // 3. Linha do AuthContext removida
+  const { cartItems, removerDoCarrinho, atualizarQuantidade } = useCart();
   const navigate = useNavigate();
 
   const handleFinalizarTroca = () => {
-    // 4. A verificação agora usa a variável 'usuarioLogado'
     if (usuarioLogado) {
       toast.success('Sucesso! Próximo passo: confirmação da troca.');
-      // Futuramente, você pode navegar para uma página de checkout
-      // navigate('/checkout');
+
     } else {
       toast.warn('Você precisa fazer o login para finalizar a troca.');
       navigate('/login');
     }
+  };
+
+  // 2. Funções para lidar com o clique nos botões de quantidade
+  const handleDiminuir = (item) => {
+    atualizarQuantidade(item.id, item.quantity - 1);
+  };
+
+  const handleAumentar = (item) => {
+    atualizarQuantidade(item.id, item.quantity + 1);
   };
 
   if (cartItems.length === 0) {
@@ -51,7 +55,12 @@ function Carrinho() {
               </div>
             </Link>
             <div className="d-flex align-items-center mt-2 mt-md-0">
-              {/* Controles de quantidade aqui, se implementados */}
+              {/* 3. Controles de quantidade adicionados de volta */}
+              <div className="quantity-controls">
+                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDiminuir(item)}>-</button>
+                <span className="quantity-text">{item.quantity}</span>
+                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleAumentar(item)}>+</button>
+              </div>
               <button className="btn btn-danger btn-sm ms-4" onClick={() => removerDoCarrinho(item.id)}>
                 Remover
               </button>
