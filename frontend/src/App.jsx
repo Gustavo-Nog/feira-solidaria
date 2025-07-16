@@ -10,6 +10,7 @@ import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
+import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 
 import './App.css';
 
