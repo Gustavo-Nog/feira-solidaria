@@ -10,6 +10,7 @@ import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
+import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/item/:itemId" element={<ItemDetalhe />} />
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>

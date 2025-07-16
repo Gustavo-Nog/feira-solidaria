@@ -1,0 +1,10 @@
+.item-nome {
+  color: #2A6441; /* Mantendo a cor verde do nosso tema para o título */
+  font-weight: 700;
+}
+
+/* Garante que a imagem do produto não fique esticada */
+.img-fluid {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
