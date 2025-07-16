@@ -1,5 +1,3 @@
-// Em: src/pages/Carrinho/Carrinho.jsx
-
 import React from 'react';
 import { useCart } from '../../context/ContextCart';
 import { Link, useNavigate } from 'react-router-dom';
@@ -22,7 +20,6 @@ function Carrinho() {
     }
   };
 
-  // 2. Funções para lidar com o clique nos botões de quantidade
   const handleDiminuir = (item) => {
     atualizarQuantidade(item.id, item.quantity - 1);
   };
@@ -55,7 +52,6 @@ function Carrinho() {
               </div>
             </Link>
             <div className="d-flex align-items-center mt-2 mt-md-0">
-              {/* 3. Controles de quantidade adicionados de volta */}
               <div className="quantity-controls">
                 <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDiminuir(item)}>-</button>
                 <span className="quantity-text">{item.quantity}</span>

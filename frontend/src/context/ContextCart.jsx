@@ -1,7 +1,5 @@
-// Em: src/context/ContextCart.jsx
-
 import React, { createContext, useState, useContext } from 'react';
-import { toast } from 'react-toastify'; // 1. Importe a função toast
+import { toast } from 'react-toastify';
 
 const ContextCart = createContext();
 
@@ -13,7 +11,6 @@ export function CartProvider({ children }) {
       const itemExistente = prevItems.find(cartItem => cartItem.id === item.id);
 
       if (itemExistente) {
-        // 2. Substitua o alert por uma notificação de informação
         toast.info(`Mais um "${item.nome}" foi adicionado ao carrinho!`);
         return prevItems.map(cartItem =>
           cartItem.id === item.id
@@ -21,7 +18,6 @@ export function CartProvider({ children }) {
             : cartItem
         );
       } else {
-        // 3. Substitua o alert por uma notificação de sucesso
         toast.success(`"${item.nome}" foi adicionado ao seu carrinho!`);
         return [...prevItems, { ...item, quantity: 1 }];
       }
@@ -32,7 +28,6 @@ export function CartProvider({ children }) {
     setCartItems((prevItems) => {
       const itemRemovido = prevItems.find(item => item.id === itemId);
       if (itemRemovido) {
-        // 4. (Opcional) Adicione uma notificação de erro/aviso ao remover
         toast.error(`"${itemRemovido.nome}" foi removido do carrinho.`);
       }
       return prevItems.filter(item => item.id !== itemId);

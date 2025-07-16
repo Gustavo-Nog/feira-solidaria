@@ -7,12 +7,11 @@ import './ItemDetalhe.css';
 function ItemDetalhe() {
   const { itemId } = useParams();
   const navigate = useNavigate();
-  const { adicionarAoCarrinho } = useCart(); // Pega a função do contexto
+  const { adicionarAoCarrinho } = useCart();
 
   const item = produtos.find((produto) => produto.id.toString() === itemId);
 
   const handleAddToCart = () => {
-    // LÓGICA SIMPLIFICADA: Não há mais verificação de login aqui.
     adicionarAoCarrinho(item); 
     navigate('/carrinho');
   };
@@ -25,12 +24,10 @@ function ItemDetalhe() {
     <div className="container my-5">
       <div className="card p-4 shadow-sm">
         <div className="row g-5">
-          {/* Coluna da Imagem */}
           <div className="col-lg-5">
             <img src={item.imagem} alt={item.nome} className="img-fluid rounded" />
           </div>
 
-          {/* Coluna das Informações */}
           <div className="col-lg-7 d-flex flex-column">
             <span className="badge bg-success align-self-start mb-2">{item.categoria}</span>
             <h1 className="item-nome mb-3">{item.nome}</h1>

@@ -46,11 +46,10 @@ function App() {
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
-            
+            <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
 
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
-            <Route path="/carrinho" element={<Carrinho />} />
           </Route>
 
           {/* Rotas que NÃO usam o layout (tela cheia) */}
