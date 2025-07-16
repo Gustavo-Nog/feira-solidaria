@@ -14,12 +14,8 @@ import Contato from './pages/Contato/Contato';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
 import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
-<<<<<<< HEAD
-import Produto from './pages/Produto/Produto';
-=======
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
->>>>>>> 216032fe2c1bb826d7e0d953fa5ade3440aa1e50
 
 import './App.css';
 
