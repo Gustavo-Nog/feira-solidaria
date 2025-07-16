@@ -11,7 +11,7 @@ import Contato from './pages/Contato/Contato';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
 import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
-import Produto from './pages/Produto/Produto';
+import Produtos from './pages/Produtos/Produto';
 
 import './App.css';
 
@@ -29,7 +29,10 @@ function App() {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/produtos" element={<Produtos />} />
+
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
+
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>
@@ -39,7 +42,6 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
           <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
-          <Route path="/produto" element={<Produto />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider >
