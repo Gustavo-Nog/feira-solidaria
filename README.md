@@ -1,7 +1,5 @@
 # Feira Solidária 🛍️
 
-![Banner do Projeto](https://i.imgur.com/k6K5OON.png)
-
 ## 📖 Sobre o Projeto
 
 **Feira Solidária** é uma aplicação web front-end desenvolvida como parte do programa **Capacita Brasil**. O projeto tem como missão conectar pequenos produtores e consumidores, facilitando a troca e o acesso a alimentos frescos e de qualidade de forma justa e solidária.
