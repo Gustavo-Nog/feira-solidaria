@@ -17,7 +17,6 @@ export function CartProvider({ children }) {
         return prevItems;
       }
       // Se não existe, adiciona o novo item à lista
-      alert(`"${item.nome}" foi adicionado ao seu carrinho!`);
       return [...prevItems, { ...item, quantity: 1 }];
     });
   };

@@ -1,28 +1,20 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCart } from '../../context/ContextCart'; // 1. Importe o hook useCart
+import { useCart } from '../../context/ContextCart'; // Importa o hook do carrinho
 import produtos from '../../mocks/produtos';
 
 import './ItemDetalhe.css';
 
-const usuarioLogado = true; 
-
 function ItemDetalhe() {
   const { itemId } = useParams();
   const navigate = useNavigate();
-  const { adicionarAoCarrinho } = useCart();
+  const { adicionarAoCarrinho } = useCart(); // Pega a função do contexto
 
   const item = produtos.find((produto) => produto.id.toString() === itemId);
 
   const handleAddToCart = () => {
-    if (usuarioLogado) {
-      // 3. Use a função do contexto para adicionar o item
-      adicionarAoCarrinho(item); 
-      // O alerta já é mostrado pela função do contexto, então não precisamos de outro aqui.
-      navigate('/carrinho');
-    } else {
-      alert('Você precisa estar logado para realizar esta ação. Redirecionando...');
-      navigate('/login');
-    }
+    // LÓGICA SIMPLIFICADA: Não há mais verificação de login aqui.
+    adicionarAoCarrinho(item); 
+    navigate('/carrinho');
   };
 
   if (!item) {
@@ -64,7 +56,6 @@ function ItemDetalhe() {
               <p>{item.produtor.nome} (Nota: {item.produtor.nota} ⭐)</p>
             </div>
 
-            {/* O botão agora chama a função que usa o contexto */}
             <button className="btn btn-lg btn-success mt-auto" onClick={handleAddToCart}>
               Tenho Interesse / Fazer Troca
             </button>
