@@ -12,8 +12,6 @@ import './Login.css';
 function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  // useForm hook principal
   const methods = useForm();
 
   const onSubmit = (data) => {
