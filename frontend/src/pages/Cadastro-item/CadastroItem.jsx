@@ -1,6 +1,6 @@
-import './Cadastro-item.css';
 import { useForm, FormProvider } from 'react-hook-form';
 import InputField from '../../components/Input/InputField';
+import './Cadastro-item.css';
 
 function CadastrarItem() {
   const methods = useForm();
@@ -30,7 +30,7 @@ function CadastrarItem() {
             label="Categoria:"
             required="Selecione uma categoria."
             options={[
-              
+
               { value: 'Folha', label: 'Folha' },
               { value: 'Talo', label: 'Talo' },
               { value: 'legume', label: 'Legume' },
@@ -61,7 +61,7 @@ function CadastrarItem() {
             label="Qualidade:"
             required="Selecione a qualidade."
             options={[
-              
+
               { value: 'otima', label: 'Ótima' },
               { value: 'Boa', label: 'Boa' },
               { value: 'regular', label: 'Regular' },
