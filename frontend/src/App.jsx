@@ -11,6 +11,7 @@ import Contato from './pages/Contato/Contato';
 import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
 import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
+import Produto from './pages/Produto/Produto';
 
 import './App.css';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
           <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
+          <Route path="/produto" element={<Produto />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider >
