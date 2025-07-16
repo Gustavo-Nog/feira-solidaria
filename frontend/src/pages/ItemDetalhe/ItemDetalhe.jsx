@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { mockItem } from '../../mocks/items'; // 1. Importando os dados do local correto
+import { mockItem } from '../../mocks/itens'; // 1. Importando os dados do local correto
 import './ItemDetalhe.css'; // Vamos usar um CSS mais simples agora
 
 function ItemDetalhe() {
