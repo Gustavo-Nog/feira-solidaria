@@ -12,6 +12,7 @@ import RedefinirSenha from './pages/RedefinirSenha/RedefinirSenha';
 import NovaSenha from './pages/NovaSenha/NovaSenha';
 import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
+import Carrinho from './pages/Carrinho/Carrinho';
 
 import './App.css';
 
@@ -30,11 +31,11 @@ function App() {
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
-
+            
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
 
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
-            {/* <Route path="/carrinho" element={<Carrinho />} /> */}
+            <Route path="/carrinho" element={<Carrinho />} />
           </Route>
 
           {/* Rotas que NÃO usam o layout (tela cheia) */}
