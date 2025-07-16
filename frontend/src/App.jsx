@@ -27,6 +27,7 @@ function App() {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/item/:itemId" element={<ItemDetalhe />} />
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
             {/* <Route path="/carrinho" element={<Carrinho />} /> */}
           </Route>
