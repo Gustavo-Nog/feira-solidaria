@@ -32,17 +32,21 @@ function EquipeCarrosel() {
         <Slider {...settings}>
           {equipeMembros.map((membro, index) => (
             <div key={index} className="team-card">
-              <img
-                src={membro.foto || "https://via.placeholder.com/150"}
-                alt={membro.nome}
-                className="team-photo"
-              />
-              <h4>
-                <a key={membro.nome} href={membro.github} target="_blank" rel="noopener noreferrer" className="text-dark">
-                  {membro.nome}
-                </a>
-              </h4>
-              <p>{membro.nacionalidade}</p>
+              <div className="image-container">
+                <img
+                  src={membro.foto || "https://via.placeholder.com/150"}
+                  alt={membro.nome}
+                  className="team-photo"
+                />
+                <div className="overlay-text">
+                  <h4>
+                    <a href={membro.github} target="_blank" rel="noopener noreferrer">
+                      {membro.nome}
+                    </a>
+                  </h4>
+                  <p>{membro.nacionalidade}</p>
+                </div>
+              </div>
             </div>
           ))}
         </Slider >

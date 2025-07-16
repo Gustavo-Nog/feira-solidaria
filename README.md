@@ -80,7 +80,7 @@ Este projeto foi desenvolvido com dedicação pela seguinte equipe de alunos do 
 | `Thierry`         | (https://github.com/Thierry-DV)   | `Home, NavBar, Footer e responvidade desses dois components`|
 | `Gustavo`         | (https://github.com/usuario2)     | `Design UI/UX e Estilização com CSS`                       |
 | `Marianna`        | (https://github.com/usuario3)     | `Lógica de Autenticação (Login/Cadastro) e Rotas`          |
-| `Gabriel`         | (https://github.com/usuario4)     | `Desenvolvimento dos Componentes React`                    |
+| `Gabriel`         | (https://github.com/gabrielcrispim-c)     | `RedefinirSenha, NovaSenha, criação do protótipo da tela de detalhamento de item`                    |
 | `Hudson`          | (https://github.com/usuario5)     | `Implementação de APIs e Gerenciamento de Estado`          |
 | `Henrique`        | (https://github.com/usuario6)     | `Documentação Técnica e Testes`                            |
 
