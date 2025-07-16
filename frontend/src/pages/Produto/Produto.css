@@ -1,0 +1,79 @@
+/* Container principal */
+.produtos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Título */
+.produtos-container h1 {
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+}
+
+/* Cartão do produto */
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+}
+
+/* Efeito hover no cartão */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+/* Imagem do produto */
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Corpo do cartão */
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Título do produto */
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+/* Descrição do produto */
+.card-text {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Badge de categoria */
+.badge {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  padding: 0.4em 0.75em;
+  border-radius: 12px;
+}
+
+/* Botão personalizado */
+/* Como você importa o botão de outro componente, aqui só deixo margem para cima */
+button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px;
+  }
+}
