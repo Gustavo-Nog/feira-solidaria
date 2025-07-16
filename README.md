@@ -1,5 +1,7 @@
 # Feira Solidária 🛍️
 
+![Banner do Projeto](https://i.imgur.com/k6K5OON.png)
+
 ## 📖 Sobre o Projeto
 
 **Feira Solidária** é uma aplicação web front-end desenvolvida como parte do programa **Capacita Brasil**. O projeto tem como missão conectar pequenos produtores e consumidores, facilitando a troca e o acesso a alimentos frescos e de qualidade de forma justa e solidária.
@@ -27,22 +29,41 @@ Este projeto foi construído com as seguintes tecnologias e ferramentas:
 - **@react-oauth/google:** Biblioteca oficial do Google para implementar a funcionalidade de login social.
 - **jwt-decode:** Utilitário para decodificar tokens JWT (JSON Web Tokens) recebidos após a autenticação.
 - **React Icons:** Biblioteca extensa para a utilização de ícones populares e consistentes em toda a aplicação.
+- **React Toastify:** Para a exibição de notificações e alertas modernos e não intrusivos.
 - **CSS3:** Estilização customizada com foco em responsividade e design moderno.
 
 ## 📂 Estrutura de Pastas
 
-O projeto segue uma arquitetura organizada para facilitar a escalabilidade e manutenção:
+O projeto segue uma arquitetura organizada para facilitar a escalabilidade e manutenção, refletindo a estrutura atual do projeto:
 
-```
+
 /src
-|-- /assets         # Imagens globais, logos e fontes
-|-- /components     # Componentes reutilizáveis (Navbar, Footer, Button, etc.)
-|-- /layout         # Componentes de layout principal (ex: com Navbar e Footer)
-|-- /mocks          # Dados mocados para simular APIs
-|-- /pages          # Componentes que representam as páginas (Home, Login, etc.)
-|-- App.jsx         # Componente raiz com a configuração das rotas
-|-- main.jsx        # Ponto de entrada da aplicação
-```
+|-- /assets
+|-- /components
+|   |-- /Button
+|   |-- /EquipeCarrosel
+|   |-- /Footer
+|   |-- /LoginGoogle
+|   |-- /Navbar
+|-- /context
+|-- /layout
+|-- /mocks
+|-- /pages
+|   |-- /Cadastro
+|   |-- /Cadastro-item
+|   |-- /Carrinho
+|   |-- /Contato
+|   |-- /Home
+|   |-- /ItemDetalhe
+|   |-- /Login
+|   |-- /NovaSenha
+|   |-- /Produtos
+|   |-- /RedefinirSenha
+|   |-- /Sobre-nos
+|-- App.jsx
+|-- main.jsx
+|-- ... (outros arquivos de configuração)
+
 
 ## 🚀 Como Executar o Projeto
 
@@ -50,7 +71,7 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
 
 1.  **Clone o repositório**
     ```bash
-    git clone [URL_DO_SEU_REPOSITORIO_AQUI]
+    git clone https://github.com/seu-usuario/feira-solidaria
     ```
 
 2.  **Navegue até a pasta do projeto**
@@ -59,10 +80,16 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
     ```
 
 3.  **Instale todas as dependências do projeto**
-    (Este comando instalará React, Vite, e todas as bibliotecas listadas acima)
     ```bash
     npm install
-    ```
+    npm install react-toastify
+    npm install react-slick slick-carousel
+    npm install react-icons
+    npm install @react-oauth/google
+    npm install jwt-decode
+    npm install react-hook-form
+    npm install react-router-dom
+    ```
 
 4.  **Execute o servidor de desenvolvimento**
     ```bash
@@ -75,14 +102,14 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
 
 Este projeto foi desenvolvido com dedicação pela seguinte equipe de alunos do programa **Capacita Brasil**. Nossas sinceras gratidões a todos que fizeram parte desta jornada.
 
-| Nome Completo     | GitHub                            | Contribuição Principal                                     |
-| :---------------- | :---------------------------------| :--------------------------------------------------------- |
-| `Thierry`         | (https://github.com/Thierry-DV)   | `Home, NavBar, Footer e responvidade desses dois components`|
-| `Gustavo`         | (https://github.com/usuario2)     | `Design UI/UX e Estilização com CSS`                       |
-| `Marianna`        | (https://github.com/usuario3)     | `Lógica de Autenticação (Login/Cadastro) e Rotas`          |
-| `Gabriel`         | (https://github.com/gabrielcrispim-c)     | `RedefinirSenha, NovaSenha, criação do protótipo da tela de detalhamento de item`                    |
-| `Hudson`          | (https://github.com/usuario5)     | `Implementação de APIs e Gerenciamento de Estado`          |
-| `Henrique`        | (https://github.com/usuario6)     | `Documentação Técnica e Testes`                            |
+| Nome Completo | GitHub                                             | Contribuição Principal                                    |
+| :------------ | :------------------------------------------------- | :-------------------------------------------------------- |
+| `Thierry`     | [@Thierry-DV](https://github.com/Thierry-DV)         | `Home, NavBar, Foote, Carrinho, ItemDetalhes, ContextCart`|
+| `Gustavo`     | [@usuario2](https://github.com/usuario2)           | `Design UI/UX e Estilização com CSS`                      |
+| `Marianna`    | [@usuario3](https://github.com/usuario3)           | `Lógica de Autenticação (Login/Cadastro) e Rotas`         |
+| `Gabriel`     | [@gabrielcrispim-c](https://github.com/gabrielcrispim-c) | `RedefinirSenha, NovaSenha, criação do protótipo da tela de detalhamento de item` |
+| `Hudson`      | [@usuario5](https://github.com/usuario5)           | `Implementação de APIs e Gerenciamento de Estado`         |
+| `Henrique`    | [@usuario6](https://github.com/usuario6)           | `Documentação Técnica e Testes`                           |
 
 ---
 
