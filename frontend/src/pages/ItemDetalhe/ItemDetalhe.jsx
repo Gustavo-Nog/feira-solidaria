@@ -12,7 +12,7 @@ function ItemDetalhe() {
   const item = produtos.find((produto) => produto.id.toString() === itemId);
 
   const handleAddToCart = () => {
-    adicionarAoCarrinho(item); 
+    adicionarAoCarrinho(item);
     navigate('/carrinho');
   };
 
