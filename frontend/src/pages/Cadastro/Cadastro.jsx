@@ -1,88 +1,65 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useNavigate, Link } from 'react-router-dom';
 
-import Button from "../../components/Button/Button";
-import GoogleLoginButton from "../../components/LoginGoogle/GoogleLoginButton";
+import Button from '../../components/Button/Button';
+import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
+import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
 import './Cadastro.css';
 
 function Cadastro() {
   const navigate = useNavigate();
-  const [nomeUsuario, setNomeUsuario] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const methods = useForm();
+  const { handleSubmit, formState: { isSubmitting } } = methods;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.log(`Usuário ${nomeUsuario} cadastrado com sucesso!`);
-    navigate("/login");
+  const onSubmit = (data) => {
+    console.log(`Usuário ${data.nomeUsuario} cadastrado com sucesso!`, data);
+    navigate('/login');
   };
 
   return (
-    <>
-      <div className="cadastro-container">
-        <div className="form-section">
-          <div className="form-wrapper">
-            <h1>Cadastro de Usuários</h1>
-            <p>
-              Já tem conta? <Link to="/login" className="text-warning">Fazer Login</Link>
-            </p>
+    <div className="cadastro-container">
+      <div className="form-section">
+        <div className="form-wrapper">
+          <h1>Cadastro de Usuários</h1>
+          <p>
+            Já tem conta? <Link to="/login" className="text-warning">Fazer Login</Link>
+          </p>
 
-            <form onSubmit={handleSubmit}>
+          <FormProvider {...methods}>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
               <div className="form-fields">
-                <div className="form-group">
-                  <label htmlFor="nomeUsuario">Nome de Usuário</label>
-                  <input
-                    id="nomeUsuario"
-                    type="text"
-                    value={nomeUsuario}
-                    onChange={(e) => setNomeUsuario(e.target.value)}
-                    required
-                    placeholder="Digite seu nome de usuário"
-                  />
-                </div>
+                <InputField
+                  name="nomeUsuario"
+                  label="Nome de Usuário"
+                  required="Nome de usuário é obrigatório"
+                />
 
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="Digite seu email"
-                  />
-                </div>
+                <InputField
+                  name="email"
+                  label="Email"
+                  type="email"
+                  required="Email é obrigatório"
+                />
 
-                <div className="form-group">
-                  <label htmlFor="password">Senha</label>
-                  <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="Digite sua senha"
-                  />
-                </div>
+                <InputField
+                  name="password"
+                  label="Senha"
+                  type="password"
+                  required="Senha é obrigatória"
+                />
 
-                <div className="form-group">
-                  <label htmlFor="confirmPassword">Confirme a senha</label>
-                  <input
-                    id="confirmPassword"
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    placeholder="Confirme sua senha"
-                  />
-                </div>
+                <InputField
+                  name="confirmPassword"
+                  label="Confirme a senha"
+                  type="password"
+                  required="Confirmação de senha é obrigatória"
+                  className='mb-1'
+                />
 
-                <Button type="submit" loading={loading} size="large">
+                <Button type="submit" loading={isSubmitting} size="large">
                   Cadastrar
                 </Button>
 
@@ -93,18 +70,16 @@ function Cadastro() {
                 </div>
 
                 <GoogleLoginButton />
-
               </div>
             </form>
-          </div>
-        </div>
-
-        <div className="image-section">
-          <img src={feiraLogo} alt="Feira de Trocas" className="cadastro-image" />
+          </FormProvider>
         </div>
       </div>
-    </>
 
+      <div className="image-section">
+        <img src={feiraLogo} alt="Feira de Trocas" className="cadastro-image" />
+      </div>
+    </div>
   );
 }
 

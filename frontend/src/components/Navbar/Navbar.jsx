@@ -1,46 +1,75 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
-import './Navbar.css'; // Estilos personalizados
+import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
+import './Navbar.css';
 
 function Navbar() {
-  // Simulação de autenticação
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const usuarioLogado = false;
 
-  // Quando o usuário estiver logado, você terá um objeto com os dados dele.
-  // const usuario = { nome: 'Maria', foto: 'url-da-foto.jpg' };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className="navbar-container sticky-top">
-      <div className="nav-links">
-        <Link to="/" className="nav-link-item">Início</Link>
-        <Link to="/sobre-nos" className="nav-link-item">Sobre Nos</Link>
-        <Link to="/cardapio" className="nav-link-item">Cardapio</Link>
-        <Link to="/carrinho" className="nav-link-item">Carrinho</Link>
-        <Link to="/cadastrar-itens" className="nav-link-item">Cadastrar Itens</Link>
-        <Link to="/perfil" className="nav-link-item">Seu Perfil</Link>
-      </div>
+      <div className="navbar-content">
 
-       <div className="profile-section">
+        <div className="navbar-brand">
+          <Link to="/" onClick={closeMenu}>Feira Solidária</Link>
+        </div>
+
+        <nav className="nav-desktop">
+          <Link to="/" className="nav-link-item">Início</Link>
+          <Link to="/produtos" className="nav-link-item">Produtos</Link>
+          <Link to="/contato" className="nav-link-item">Contato</Link>
+          <Link to="/sobre-nos" className="nav-link-item">Sobre nós</Link>
+          <Link to="/carrinho" className="nav-link-item">Carrinho</Link>
+        </nav>
+
+        <div className="profile-area-desktop">
+          <Link to="/perfil">
             <div className="profile-icon">
-            {/* 2. Lógica para mostrar a foto ou o ícone padrão */}
-            {usuarioLogado ? (
-                // Se estiver logado, mostre a foto do usuário
-                <img src={"url-da-foto-do-usuario.jpg"} alt="Foto do usuário" />
-            ) : (
-                // Se não, mostre o ícone cinza padrão
-                <FaUserCircle className="default-user-icon" />
-            )}
+              <FaUserCircle className="default-user-icon" />
             </div>
-            <div className="profile-actions">
+          </Link>
+
+          <div className="profile-actions">
             {usuarioLogado ? (
-                <span>Bem-vindo!</span>
+              <Link to="/perfil">Meu Perfil</Link>
             ) : (
-                <>
+              <>
                 <Link to="/cadastro">Cadastrar</Link>
+                <span>/</span>
                 <Link to="/login">Logar</Link>
-                </>
+              </>
             )}
+          </div>
+        </div>
+
+        <button className="menu-toggle" onClick={toggleMenu}>
+          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+
+        <div className={isMenuOpen ? "nav-mobile open" : "nav-mobile"}>
+          <Link to="/" onClick={closeMenu}>Início</Link>
+          <Link to="/produtos" onClick={closeMenu}>Produtos</Link>
+          <Link to="/contato" onClick={closeMenu}>Contato</Link>
+          <Link to="/sobre-nos" onClick={closeMenu}>Sobre nós</Link>
+          <Link to="/carrinho" onClick={closeMenu}>Carrinho</Link>
+          <Link to="/perfil" onClick={closeMenu}>Seu Perfil</Link>
+
+          <div className="separator"></div>
+
+          {usuarioLogado ? (
+            null
+          ) : (
+            <div className="nav-mobile-profile-actions">
+              <Link to="/cadastro" onClick={closeMenu}>Cadastrar</Link>
+              <Link to="/login" onClick={closeMenu}>Logar</Link>
             </div>
+          )}
+        </div>
+
       </div>
     </header>
   );

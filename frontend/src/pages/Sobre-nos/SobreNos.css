@@ -1,19 +1,23 @@
 .sobrenos-container {
   padding: 20px;
-  background-color: #fafafa;
+  background-color: #eff9ed;
 }
 
 .sobrenos-container p {
   padding: 1rem;
 }
 
+section.container-fluid {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .mission-card {
   background-color: #d9eed9;
-  /* Verde bem claro */
   border-radius: 20px;
   padding: 25px;
   color: #2A6441;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .mission-card h1,
@@ -25,20 +29,43 @@
 }
 
 .hero-image-container {
-  background-color: #cccccc;
-  border-radius: 20px;
-  padding: 10px;
+  height: 380px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  background-color: transparent;
+  overflow: hidden;
 }
 
 .hero-image-container img.image-styled {
-  border-radius: 15px;
-  max-width: 100%;
   max-height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.hero-image-container.no-radius {
+  border-radius: 0;
+  padding: 0;
+  max-height: 400px;
+}
+
+.hero-image-container.no-radius img {
+  border-radius: 0;
+  height: 100%;
+  object-fit: contain;
+  width: auto;
+  max-height: 100%;
+}
+
+.image-placeholder {
+  background-color: #cccccc;
+  padding: 40px;
+  border-radius: 20px;
+  color: #444;
+  font-weight: bold;
 }
 
 .responsive-heading {
@@ -47,6 +74,12 @@
 
 .responsive-paragraph {
   font-size: 1.1rem;
+}
+
+@media (min-width: 992px) {
+  .sobrenos-container {
+    padding: 0;
+  }
 }
 
 @media (max-width: 768px) {
