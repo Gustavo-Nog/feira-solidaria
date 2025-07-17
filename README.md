@@ -22,19 +22,43 @@ Este projeto foi construído com as seguintes tecnologias e ferramentas:
 - **React:** Biblioteca JavaScript para a construção da interface de usuário.
 - **Vite:** Ferramenta de build moderna e extremamente rápida para o desenvolvimento front-end.
 - **React Router DOM:** Para o gerenciamento de rotas e navegação entre as páginas da aplicação.
+```bash
+npm install react react-dom
+```
 - **React Hook Form:** Biblioteca de alta performance para gerenciamento de estados, validações e submissão de formulários.
+```bash
+npm install react-hook-form
+```
 - **React Slick & Slick Carousel:** Para a criação de carrosséis dinâmicos e responsivos.
+```bash
+npm install react-slick slick-carousel
+```
 - **@react-oauth/google:** Biblioteca oficial do Google para implementar a funcionalidade de login social.
+```bash
+npm install @react-oauth/google
+```
 - **jwt-decode:** Utilitário para decodificar tokens JWT (JSON Web Tokens) recebidos após a autenticação.
+```bash
+npm install jwt-decode
+```
 - **React Icons:** Biblioteca extensa para a utilização de ícones populares e consistentes em toda a aplicação.
-- **React Toastify:** Para a exibição de notificações e alertas modernos e não intrusivos.
+```bash
+npm install react-icons
+```
+- **React Toastify:** Notificações elegantes e personalizáveis.
+```bash
+npm install react-toastify
+
+```
 - **CSS3:** Estilização customizada com foco em responsividade e design moderno.
+- **Bootstrap:** Framework CSS para responsividade e layout moderno.
+
 
 ## 📂 Estrutura de Pastas
 
-O projeto segue uma arquitetura organizada para facilitar a escalabilidade e manutenção, refletindo a estrutura atual do projeto:
+O projeto segue uma arquitetura organizada para facilitar a escalabilidade e manutenção:
 
-
+```bash
 /src
 |-- /assets
 |-- /components
@@ -58,10 +82,12 @@ O projeto segue uma arquitetura organizada para facilitar a escalabilidade e man
 |   |-- /Produtos
 |   |-- /RedefinirSenha
 |   |-- /Sobre-nos
+|   |-- /Perfil
 |-- App.jsx
 |-- main.jsx
 |-- ... (outros arquivos de configuração)
 
+```
 
 ## 🚀 Como Executar o Projeto
 
@@ -69,7 +95,8 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
 
 1.  **Clone o repositório**
     ```bash
-    git clone https://github.com/seu-usuario/feira-solidaria
+    git clone https://github.com/Gustavo-Nog/feira-solidaria.git
+
     ```
 
 2.  **Navegue até a pasta do projeto**
@@ -78,16 +105,10 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
     ```
 
 3.  **Instale todas as dependências do projeto**
+    (Este comando instalará React, Vite, e todas as bibliotecas listadas acima)
     ```bash
     npm install
-    npm install react-toastify
-    npm install react-slick slick-carousel
-    npm install react-icons
-    npm install @react-oauth/google
-    npm install jwt-decode
-    npm install react-hook-form
-    npm install react-router-dom
-    ```
+    ```
 
 4.  **Execute o servidor de desenvolvimento**
     ```bash
@@ -100,14 +121,15 @@ Para rodar este projeto em sua máquina local, siga os passos abaixo:
 
 Este projeto foi desenvolvido com dedicação pela seguinte equipe de alunos do programa **Capacita Brasil**. Nossas sinceras gratidões a todos que fizeram parte desta jornada.
 
-| Nome Completo | GitHub                                             | Contribuição Principal                                    |
-| :------------ | :------------------------------------------------- | :-------------------------------------------------------- |
-| `Thierry`     | [@Thierry-DV](https://github.com/Thierry-DV)         | `Home, NavBar, Foote, Carrinho, ItemDetalhes, ContextCart`|
-| `Gustavo`     | [@usuario2](https://github.com/usuario2)           | `Design UI/UX e Estilização com CSS`                      |
-| `Marianna`    | [@usuario3](https://github.com/usuario3)           | `Lógica de Autenticação (Login/Cadastro) e Rotas`         |
-| `Gabriel`     | [@gabrielcrispim-c](https://github.com/gabrielcrispim-c) | `RedefinirSenha, NovaSenha, criação do protótipo da tela de detalhamento de item` |
-| `Hudson`      | [@usuario5](https://github.com/usuario5)           | `Implementação de APIs e Gerenciamento de Estado`         |
-| `Henrique`    | [@usuario6](https://github.com/usuario6)           | `Documentação Técnica e Testes`                           |
+| Nome Completo     | GitHub                            | Contribuição Principal                                     |
+| :---------------- | :---------------------------------| :--------------------------------------------------------- |
+| `Gabriel`         | (https://github.com/gabrielcrispim-c)     | `RedefinirSenha, NovaSenha e Produtos, criação do protótipo da tela de detalhamento de item`                    |
+| `Gustavo`         | (https://github.com/Gustavo-Nog)     | `Login, Cadastro, Sobre nos, Contato e Produtos`                       |
+| `Henrique`        | (https://github.com/HenriqueAdriel)     | `Perfil do usuário`                            |
+| `Hudson`          | (https://github.com/Hudson2207)     | `Implementação de APIs e Gerenciamento de Estado`          |
+| `Marianna`        | (https://github.com/Marionofree)     | `Cadastro de Item`          |
+| `Thierry`         | (https://github.com/Thierry-DV)   | `Home, NavBar, Footer e responvidade desses dois components`|
+
 
 ---
 
