@@ -11,12 +11,49 @@ const placeholder = "https://via.placeholder.com/150";
 {/* Lembrem-se de tirar o placeholder da 'foto: placeholder' e substituam de acordo nome correspondente */ }
 
 const membrosEquipe = [
-  { nome: 'Gabriel', nacionalidade: 'Brasileiro', github: 'https://github.com/gabrielcrispim-c', foto: gabrielFoto },
-  { nome: 'Gustavo', nacionalidade: 'Brasileiro', github: 'https://github.com/Gustavo-Nog', foto: gustavoFoto },
-  { nome: 'Henrique', nacionalidade: 'Brasileiro', github: 'https://github.com/HenriqueAdriel', foto: placeholder },
-  { nome: 'Hudson', nacionalidade: 'Brasileiro', github: 'https://github.com/Hudson2207', foto: placeholder },
-  { nome: 'Marianna', nacionalidade: 'Brasileira', github: 'https://github.com/Marionofree', foto: placeholder },
-  { nome: 'Thierry', nacionalidade: 'Brasileiro', github: 'https://github.com/Thierry-DV', foto: thierryFoto },
+  {
+    nome: 'Gabriel',
+    funcao: 'Fullstack',
+    linkedin: 'https://www.linkedin.com/in/gabriel-silva-crispim-5765a92b1/',
+    github: 'https://github.com/gabrielcrispim-c',
+    foto: gabrielFoto
+  },
+  {
+    nome: 'Gustavo',
+    funcao: 'Fullstack',
+    github: 'https://github.com/Gustavo-Nog',
+    linkedin: 'https://www.linkedin.com/in/gustavo-alves-nogueira',
+    foto: gustavoFoto
+
+  },
+  {
+    nome: 'Henrique',
+    funcao: 'Fullstack',
+    linkedin: 'https://www.linkedin.com/in/henrique-adriel-241264262/',
+    github: 'https://github.com/HenriqueAdriel',
+    foto: placeholder
+  },
+  {
+    nome: 'Hudson',
+    funcao: 'Fullstack',
+    linkedin: '',
+    github: 'https://github.com/Hudson2207',
+    foto: placeholder
+  },
+  {
+    nome: 'Marianna',
+    funcao: 'Fullstack',
+    linkedin: 'https://www.linkedin.com/in/marianna-onofre-08039a338/',
+    github: 'https://github.com/Marionofree',
+    foto: placeholder
+  },
+  {
+    nome: 'Thierry',
+    funcao: 'Fullstack',
+    linkedin: 'https://www.linkedin.com/in/thierryuchoa/',
+    github: 'https://github.com/Thierry-DV',
+    foto: thierryFoto
+  }
 ];
 
 export default membrosEquipe;
