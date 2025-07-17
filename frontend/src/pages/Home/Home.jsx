@@ -1,6 +1,11 @@
 import './Home.css';
 // Importe aqui as imagens que você vai usar, como no protótipo
 // import imagemVegetais from '../assets/vegetais.png';
+import imagemVegetais from '../Home/assets/vegetais.jpg';
+import PrimeiraCesta from '../assets/imagens/cesta.jpg';
+import SegundaCesta from '../assets/cesta-2.jpg';
+import TerceiraCesta from '../assets/cesta-3.jpg';
+
 
 function Home() {
   return (
@@ -10,12 +15,11 @@ function Home() {
         <div className="mission-card">
           <h3>Nossa missão</h3>
           <p>
-            Conectar pequenos produtores e consumidores, promovendo a troca justa e o acesso a alimentos frescos e de qualidade.
+         Conectar pequenos produtores e consumidores, promovendo a troca justa e o acesso a alimentos frescos e de qualidade.
           </p>
         </div>
         <div className="hero-image-container">
-          {/* <img src={imagemVegetais} alt="Cesta de vegetais" /> */}
-          <p className="image-placeholder">IMAGEM GRANDE DE VEGETAIS</p>
+          <img src={imagemVegetais} alt="Cesta de vegetais" />
         </div>
       </section>
 
@@ -25,15 +29,17 @@ function Home() {
         <div className="products-grid">
           {/* Exemplo de card de produto */}
           <div className="product-card">
-            <div className="product-image-placeholder">Cesta 1</div>
+            <img src={PrimeiraCesta} alt="cesta 1" />
             <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
           </div>
           <div className="product-card">
             <div className="product-image-placeholder">Cesta 2</div>
+            <img src={SegundaCesta} alt="cesta 2" />
             <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
           </div>
           <div className="product-card">
             <div className="product-image-placeholder">Cesta 3</div>
+            <img src={TerceiraCesta} alt="cesta 3" />
             <strong>Nota 4 ⭐⭐⭐⭐</strong>
           </div>
         </div>
