@@ -1,0 +1,44 @@
+.footer-contato {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background-color: #2A6441;
+  color: #ffffff;
+  width: 100vw; 
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.copyright-text p {
+  margin: 0; /* Remove a margem padrão do parágrafo */
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Espaçamento entre os ícones de rede social */
+}
+
+.social-icon {
+  color: #ffffff; /* Cor dos ícones (branco) */
+  transition: transform 0.3s ease, color 0.3s ease; /* Efeito de transição suave */
+}
+
+.social-icon:hover {
+  transform: scale(1.2); /* Aumenta o tamanho do ícone ao passar o mouse */
+  color: #FEF3B4; /* Muda a cor do ícone para o amarelo do tema no hover */
+}
+
+@media (min-width: 768px) {
+  .footer-contato {
+    flex-direction: row; /* Alinha os itens na horizontal */
+    justify-content: space-between; /* Coloca o texto na esquerda e os ícones na direita */
+  }
+}

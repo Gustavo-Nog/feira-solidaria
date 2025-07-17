@@ -1,0 +1,12 @@
+.google-login-wrapper {
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Estilo extra para telas pequenas */
+@media (max-width: 768px) {
+  .google-login-wrapper>div {
+    transform: scale(1);
+    /* Reduz o tamanho do botão */
+  }
+}

@@ -1,0 +1,35 @@
+.carrinho-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carrinho-item-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.carrinho-item-link:hover {
+  opacity: 0.8;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem; 
+}
+
+.quantity-controls .btn {
+  border: none;
+  padding: 0.3rem 0.7rem;
+}
+
+.quantity-text {
+  padding: 0 1rem;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: center;
+}

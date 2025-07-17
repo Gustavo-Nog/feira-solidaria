@@ -1,0 +1,9 @@
+.item-nome {
+  color: #2A6441;
+  font-weight: 700;
+}
+
+.img-fluid {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
