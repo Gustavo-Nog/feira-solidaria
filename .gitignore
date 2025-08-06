@@ -101,3 +101,5 @@ build/Release
 .tern-port
 .license
 
+
+/generated/prisma
