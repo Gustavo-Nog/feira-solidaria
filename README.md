@@ -124,11 +124,11 @@ Este projeto foi desenvolvido com dedicação pela seguinte equipe de alunos do 
 | Nome Completo     | GitHub                            | Contribuição Principal                                     |
 | :---------------- | :---------------------------------| :--------------------------------------------------------- |
 | `Gabriel`         | (https://github.com/gabrielcrispim-c)     | `RedefinirSenha, NovaSenha e Produtos, criação do protótipo da tela de detalhamento de item`                    |
-| `Gustavo`         | (https://github.com/Gustavo-Nog)     | `Login, Cadastro, Sobre nos, Contato e Produtos`                       |
-| `Henrique`        | (https://github.com/HenriqueAdriel)     | `Perfil do usuário`                            |
-| `Hudson`          | (https://github.com/Hudson2207)     | `Implementação de APIs e Gerenciamento de Estado`          |
+| `Gustavo`         | (https://github.com/Gustavo-Nog)     | `Login, Cadastro, Sobre nos, Contato, inputField, Button, Carrosel da equipe e Produtos`                       |
+| `Henrique`        | (https://github.com/HenriqueAdriel)     | `Tela de Perfil`                            |
+| `Hudson`          | (https://github.com/Hudson2207)     | `Fotos da Home`          |
 | `Marianna`        | (https://github.com/Marionofree)     | `Cadastro de Item`          |
-| `Thierry`         | (https://github.com/Thierry-DV)   | `Home, NavBar, Footer e responvidade desses dois components`|
+| `Thierry`         | (https://github.com/Thierry-DV)   | `Home, Carrinho, Detalhamento de itens, Footer, NavBar e responvidade desses dois components`|
 
 
 ---
