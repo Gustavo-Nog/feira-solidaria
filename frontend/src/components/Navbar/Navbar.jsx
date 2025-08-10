@@ -27,7 +27,7 @@ function Navbar() {
         </nav>
 
         <div className="profile-area-desktop">
-          <Link to="/seu-perfil">
+          <Link to="/perfil">
             <div className="profile-icon">
               <FaUserCircle className="default-user-icon" />
             </div>
@@ -35,7 +35,7 @@ function Navbar() {
 
           <div className="profile-actions">
             {usuarioLogado ? (
-              <Link to="/seu-perfil">Meu Perfil</Link>
+              <Link to="/perfil">Meu Perfil</Link>
             ) : (
               <>
                 <Link to="/cadastro">Cadastrar</Link>
@@ -56,7 +56,7 @@ function Navbar() {
           <Link to="/contato" onClick={closeMenu}>Contato</Link>
           <Link to="/sobre-nos" onClick={closeMenu}>Sobre nós</Link>
           <Link to="/carrinho" onClick={closeMenu}>Carrinho</Link>
-          <Link to="/seu-perfil" onClick={closeMenu}>Seu Perfil</Link>
+          <Link to="/perfil" onClick={closeMenu}>Seu Perfil</Link>
 
           <div className="separator"></div>
 
