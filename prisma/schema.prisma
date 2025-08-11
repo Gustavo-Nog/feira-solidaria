@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model usuario {
+ id_usuario int @default(autoincrement())
+ nome String
+ email String @unique
+ senhaHash String
+ telefone String?
+ cidade String?
+ estado String?
+ produto 
+}
+datasource db {
+  provider = "postgresql" // ou "mysql" ou "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum StatusProduto {
+  DISPONIVEL
+  RESERVADO
+  ENTREGUE
+  CANCELADO
+}
+
+model Usuario {
+  id                  Int        @id @default(autoincrement())
+  nome                String
+  email               String     @unique
+  senhaHash           String
+  telefone            String?
+  cidade              String?
+  estado              String?
+  produtos            Produto[]
+  doacoesFeitas       Doacao[]   @relation("DoacoesFeitas")
+  doacoesRecebidas    Doacao[]   @relation("DoacoesRecebidas")
+  mensagensEnviadas   Mensagem[] @relation("MensagensEnviadas")
+  mensagensRecebidas  Mensagem[] @relation("MensagensRecebidas")
+}
+
+model Categoria {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  produtos Produto[]
+}
+
+model Produto {
+  id            Int        @id @default(autoincrement())
+  nome          String
+  descricao     String
+  qualidade     String
+  quantidade    Int
+  imagemUrl     String?
+  status        StatusProduto @default(DISPONIVEL)
+  dataCadastro  DateTime   @default(now())
+  usuario       Usuario    @relation(fields: [usuarioId], references: [id])
+  usuarioId     Int
+  categoria     Categoria  @relation(fields: [categoriaId], references: [id])
+  categoriaId   Int
+}
+
+model Doacao {
+  id                 Int       @id @default(autoincrement())
+  dataSolicitacao    DateTime  @default(now())
+  dataEntrega        DateTime?
+  avaliacaoDoador    String?
+  avaliacaoReceptor  String?
+  doador             Usuario   @relation("DoacoesFeitas", fields: [doadorId], references: [id])
+  doadorId           Int
+  receptor           Usuario   @relation("DoacoesRecebidas", fields: [receptorId], references: [id])
+  receptorId         Int
+  produto            Produto   @relation(fields: [produtoId], references: [id])
+  produtoId          Int
+}
+
+model Mensagem {
+  id             Int       @id @default(autoincrement())
+  conteudo       String
+  dataEnvio      DateTime  @default(now())
+  lida           Boolean   @default(false)
+  doacao         Doacao    @relation(fields: [doacaoId], references: [id])
+  doacaoId       Int
+  remetente      Usuario   @relation("MensagensEnviadas", fields: [remetenteId], references: [id])
+  remetenteId    Int
+  destinatario   Usuario   @relation("MensagensRecebidas", fields: [destinatarioId], references: [id])
+  destinatarioId Int
+}
+
