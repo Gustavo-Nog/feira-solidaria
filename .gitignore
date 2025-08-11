@@ -121,3 +121,6 @@ build/Release
 /frontend/dist
 /frontend/.env
 
+/generated/prisma
+postgres/
+dist/
