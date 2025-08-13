@@ -66,7 +66,7 @@ model Doacao {
   doador            Usuario    @relation("DoacoesFeitas", fields: [doadorId], references: [id])
   doadorId          Int
   receptor          Usuario    @relation("DoacoesRecebidas", fields: [receptorId], references: [id])
-  receptorId        Int        @unique
+  receptorId        Int
   produto           Produto    @relation(fields: [produtoId], references: [id])
   produtoId         Int
   mensagens         Mensagem[]
