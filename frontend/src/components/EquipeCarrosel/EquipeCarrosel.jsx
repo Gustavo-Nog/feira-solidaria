@@ -44,7 +44,15 @@ function EquipeCarrosel() {
                       {membro.nome}
                     </a>
                   </h4>
-                  <p>{membro.nacionalidade}</p>
+                  <p>
+                    {membro.linkedin ? (
+                      <a href={membro.linkedin} target="_blank" rel="noopener noreferrer">
+                        {membro.funcao}
+                      </a>
+                    ) : (
+                      membro.funcao
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
