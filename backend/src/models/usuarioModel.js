@@ -1,4 +1,4 @@
-const prisma = require('../prisma');
+const prisma = require('../generated/prisma');
 const bcrypt = require('bcryptjs');
 
 const senhaHash = async (senha) => {
