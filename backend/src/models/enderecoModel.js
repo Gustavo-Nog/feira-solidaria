@@ -1,4 +1,4 @@
-const prisma = require('../prisma');
+const prisma = require('../generated/prisma');
 
 const listarEnderecos = async () => {
   return prisma.endereco.findMany();

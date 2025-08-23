@@ -1,4 +1,4 @@
-const pessoaEnderecoModel = require('../models/pessoaEndereco');
+const pessoaEnderecoModel = require('../models/pessoaEnderecoModel');
 
 const associarPessoaEnderecoHandler = async (req, res) => {
   try {

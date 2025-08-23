@@ -1,4 +1,4 @@
-const prisma = require('../prisma');
+const prisma = require('../generated/prisma');
 const enderecoModel = require('./enderecoModel');
 
 const associarPessoaEndereco = async (pessoaId, dadosEndereco) => {
