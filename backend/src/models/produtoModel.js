@@ -3,7 +3,7 @@ const prisma = require('../gerador/prismaclient');
 const listaProdutos = async () => {
     return prisma.produto.findMany({
         orderBy: {
-            nome: "asc"
+            nomeProduto: "asc"
         }
     });
 }
