@@ -1,3 +1,4 @@
+const { data } = require('react-router-dom');
 const prisma = require('../generated/prisma');
 
 const listarFavoritos = async () => {
@@ -27,10 +28,13 @@ const criarFavorito = async (dadosFavorito) => {
     throw new Error("PessoaId e ProdutoId são obrigatórios para criar um favorito.");
   }
   return prisma.favorito.create({
-    data: dadosFavorito,
-    include: {
-      pessoa: true,
-      produto: true
+  data: {
+    ...dadosFavorito,
+    dataAdicao: new Date()
+  },
+  include: {
+    pessoa: true,
+    produto: true
     }
   });
 };
