@@ -1,7 +1,7 @@
 const prisma = require('../generated/prisma');
 
 const listarAcoesAdm = async () => {
-    return prisma.acoesadm.findMany();({
+    return prisma.acaoAdministrativa.findMany({
         orderBy: {
             id: "desc"
         }   
@@ -10,7 +10,7 @@ const listarAcoesAdm = async () => {
 };
 
 const buscarAcoesAdmPorId = async (id) => {
-    return prisma.acoesadm.findUnique({
+    return prisma.acaoAdministrativa.findUnique({
         where: {
             id
         }
@@ -18,7 +18,7 @@ const buscarAcoesAdmPorId = async (id) => {
 };
 
 const buscarAcoesPorUsuario = async (idDoUsuario) => {
-    return prisma.acoesadm.findMany({
+    return prisma.acaoAdministrativa.findMany({
         where: {
             usuarioId: idDoUsuario
         }
@@ -30,13 +30,13 @@ const criarAcaoAdm = async (dadosAcaoAdm) => {
     throw new Error("Descrição e ID do usuário são obrigatórios para criar uma ação.");
   }
 
-    return prisma.acoesadm.create({
+    return prisma.acaoAdministrativa.create({
         data: dadosAcaoAdm
     });
 };
 
 const atualizarAcaoAdm = async (id, dadosParaAtualizar) => {
-    const acaoAdmExistente = await prisma.acoesadm.findUnique({
+    const acaoAdmExistente = await prisma.acaoAdministrativa.findUnique({
         where: {
             id
         }
@@ -46,7 +46,7 @@ const atualizarAcaoAdm = async (id, dadosParaAtualizar) => {
         throw new Error("Ação administrativa não encontrada!");
     }
 
-    return prisma.acoesadm.update({
+    return prisma.acaoAdministrativa.update({
         where: {
             id
         },
@@ -55,7 +55,7 @@ const atualizarAcaoAdm = async (id, dadosParaAtualizar) => {
 };
 
 const deletarAcaoAdm = async (id) => {
-    const acaoAdmExistente = await prisma.acoesadm.findUnique({
+    const acaoAdmExistente = await prisma.acaoAdministrativa.findUnique({
         where: {
             id
         }
@@ -65,7 +65,7 @@ const deletarAcaoAdm = async (id) => {
         throw new Error("Ação administrativa não encontrada!");
     }
 
-    return prisma.acoesadm.delete({
+    return prisma.acaoAdministrativa.delete({
         where: {
             id
         },
