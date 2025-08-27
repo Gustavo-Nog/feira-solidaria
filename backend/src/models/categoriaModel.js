@@ -20,7 +20,7 @@ const buscarCategoriaPorId = async (id) => {
 };
 
 const criarCategoria = async (categoria) => {
-    if (!dadosCategoria.nomeCategoria) {
+    if (!categoria.nomeCategoria) {
         throw new Error("Nome da categoria é obrigatório.");
     }
     
