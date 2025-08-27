@@ -13,7 +13,7 @@ const buscarCategoriaPorId = async (id) => {
         where: {
             id
         },
-        include: {
+        include: {  
             produtos: true
         }
     });
