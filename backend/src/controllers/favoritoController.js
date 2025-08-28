@@ -1,4 +1,4 @@
-const favoritoService = require('../services/favoritoService');
+const favoritoService = require('../models/favoritoService');
 
 const listarFavoritosHandler = async (req, res) => {
   try {
