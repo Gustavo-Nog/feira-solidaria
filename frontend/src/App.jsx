@@ -1,5 +1,7 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google'; // importe o provedor
+import { UserProvider } from './context/UserContext';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +18,7 @@ import NovaSenha from './pages/NovaSenha/NovaSenha';
 import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
+import Perfil from './pages/Perfil/Perfil';
 
 import './App.css';
 
@@ -48,6 +51,7 @@ function App() {
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
+            <Route path="/perfil" element={<Perfil />} />
 
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
           </Route>

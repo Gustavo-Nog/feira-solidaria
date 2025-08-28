@@ -1,0 +1,17 @@
+# Node modules
+node_modules
+
+# Environment variables
+.env
+
+# Prisma Client gerado
+/src/generated/prisma
+
+# Optional Node logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE/editor files
+.vscode/
+.idea/
