@@ -1,4 +1,4 @@
-const prisma = require('../../prisma');
+const prisma = require('../generated/prisma');
 
 const listaProdutos = async () => {
     return prisma.produto.findMany({
