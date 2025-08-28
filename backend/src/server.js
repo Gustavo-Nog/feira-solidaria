@@ -5,6 +5,8 @@ const pessoaRoutes = require('./routes/pessoaRoutes');
 
 
 app.use('/api/pessoas', pessoaRoutes);
+ 
+
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

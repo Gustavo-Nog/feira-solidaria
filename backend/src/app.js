@@ -16,6 +16,8 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/enderecos', enderecoRoutes);
 app.use('/api/pessoas', pessoaRoutes);
 
+app.use('/favoritos', favoritoRoutes);
+app.use('/produto', produtoRoutes);
 app.get('/', (req, res) => {
     res.send("feira-solidaria");
 });
