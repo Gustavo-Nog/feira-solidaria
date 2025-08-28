@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const produtoRoutes = require('./routes/produtoRoutes');
+const favoritoRoutes = require('./routes/favoritoRoutes');
+
+app.use('/produtos', produtoRoutes); 
+app.use('/favoritos', favoritoRoutes);
 
 app.use(express.json());
 
