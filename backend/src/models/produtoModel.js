@@ -1,6 +1,6 @@
 const prisma = require('../generated/prisma');
 
-const listaProdutos = async () => {
+const listarProdutos = async () => {
     return prisma.produto.findMany({
         orderBy: {
             nomeProduto: "asc"
@@ -60,7 +60,7 @@ const deletarProduto = async (id) => {
 };
 
 module.exports = {
-    listaProdutos,
+    listarProdutos,
     buscarProdutoPorId,
     criarProduto,
     atualizarProduto,
