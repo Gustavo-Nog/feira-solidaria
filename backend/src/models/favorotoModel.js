@@ -1,4 +1,3 @@
-
 const prisma = require('../generated/prisma');
 
 const listarFavoritos = async () => {
@@ -24,7 +23,7 @@ const buscarFavoritoPorId = async (id) => {
 };
 
 const criarFavorito = async (dadosFavorito) => {
-  if (!dadosFavorito.pessoaId || !dadosFavorito.produtoId) {
+  if (dadosFavorito.pessoaId == null || dadosFavorito.produtoId == null) {
     throw new Error("PessoaId e ProdutoId são obrigatórios para criar um favorito.");
   }
   return prisma.favorito.create({
