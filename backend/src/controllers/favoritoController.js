@@ -1,8 +1,8 @@
-const favoritoService = require('../models/favoritoService');
+const favoritoModel = require('../models/favoritoModel');
 
 const listarFavoritosHandler = async (req, res) => {
   try {
-    const favoritos = await favoritoService.listarFavoritos();
+    const favoritos = await favoritoModel.listarFavoritos();
     res.json(favoritos);
   } catch (err) {
     res.status(500).json({ erro: err.message });
@@ -11,7 +11,7 @@ const listarFavoritosHandler = async (req, res) => {
 
 const buscarFavoritoPorIdHandler = async (req, res) => {
   try {
-    const favorito = await favoritoService.buscarFavoritoPorId(Number(req.params.id));
+    const favorito = await favoritoModel.buscarFavoritoPorId(Number(req.params.id));
     if (!favorito) return res.status(404).json({ erro: "Favorito não encontrado" });
     res.json(favorito);
   } catch (err) {
@@ -21,7 +21,7 @@ const buscarFavoritoPorIdHandler = async (req, res) => {
 
 const criarFavoritoHandler = async (req, res) => {
   try {
-    const novoFavorito = await favoritoService.criarFavorito(req.body);
+    const novoFavorito = await favoritoModel.criarFavorito(req.body);
     res.status(201).json(novoFavorito);
   } catch (err) {
     res.status(400).json({ erro: err.message });

@@ -1,4 +1,4 @@
-const { data } = require('react-router-dom');
+
 const prisma = require('../generated/prisma');
 
 const listarFavoritos = async () => {
