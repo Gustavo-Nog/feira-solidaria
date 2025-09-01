@@ -38,6 +38,23 @@ const criarFavorito = async (dadosFavorito) => {
   });
 };
 
+const atualizarFavorito = async (id, dadosParaAtualizar) => {
+  const favoritoExistente = await prisma.favorito.findUnique({ where: { id } });
+
+  if (!favoritoExistente) {
+    throw new Error("Favorito não encontrado!");
+  }
+
+  return prisma.favorito.update({
+    where: { id },
+    data: dadosParaAtualizar,
+    include: {
+      pessoa: true,
+      produto: true
+    }
+  });
+};
+
 const deletarFavorito = async (id) => {
   const favoritoExistente = await prisma.favorito.findUnique({ where: { id } });
 
@@ -48,9 +65,11 @@ const deletarFavorito = async (id) => {
   return prisma.favorito.delete({ where: { id } });
 };
 
+
 module.exports = {
     listarFavoritos,
     buscarFavoritoPorId,
     criarFavorito,
+    atualizarFavorito,
     deletarFavorito
 };

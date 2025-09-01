@@ -33,6 +33,17 @@ const criarFavoritoHandler = async (req, res) => {
   }
 };
 
+const atualizarFavoritoHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dadosParaAtualizar = req.body;
+    const favoritoAtualizado = await favoritoModel.atualizarFavorito(parseInt(id), dadosParaAtualizar);
+    res.status(200).json(favoritoAtualizado);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
 const deletarFavoritoHandler = async (req, res) => {
   try {
     await favoritoModel.deletarFavorito(Number(req.params.id));
@@ -46,5 +57,6 @@ module.exports = {
     listarFavoritosHandler,
     buscarFavoritoPorIdHandler,
     criarFavoritoHandler,
+    atualizarFavoritoHandler,
     deletarFavoritoHandler
 };
