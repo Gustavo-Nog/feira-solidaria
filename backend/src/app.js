@@ -1,10 +1,6 @@
 const express = require('express');
 const app = express();
 
-
-
-
-
 app.use(express.json());
 
 const usuarioRoutes = require('./routes/usuarioRoutes');
@@ -17,7 +13,7 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/enderecos', enderecoRoutes);
 app.use('/api/pessoas', pessoaRoutes);
 app.use('/api/favoritos', favoritoRoutes);
-app.use('/api/produto', produtoRoutes);
+app.use('/api/produtos', produtoRoutes);
 
 app.get('/', (req, res) => {
     res.send("feira-solidaria");
