@@ -25,12 +25,9 @@ const criarCategoria = async (dadosCategoria) => {
     }
     
     return prisma.categoria.create({
-        data: {
-            dadosCategoria
-        }
+        data: dadosCategoria
     });
 };
-
 const atualizarCategoria = async (id, dadosParaAtualizar) => {
     const categoriaExistente = await prisma.categoria.findUnique({
         where: {
