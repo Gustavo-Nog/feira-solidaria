@@ -61,7 +61,6 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
           <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
-          <Route path="/produto" element={<Produto />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider >
