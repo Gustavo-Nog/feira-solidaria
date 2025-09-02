@@ -13,10 +13,7 @@ const enderecoRoutes = require('./routes/enderecoRoutes');
 const telefoneRoutes = require('./routes/telefoneRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const doacaoRoutes = require('./routes/doacaoRoutes');
-<<<<<<< HEAD
 const mensagemRoutes = require('./routes/mensagemRoutes');
-=======
->>>>>>> 57caedf (feat: adicionar gerenciamento de doações com rotas, controladores e modelos)
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
