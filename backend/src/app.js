@@ -21,7 +21,6 @@ const produtoRoutes = require('./routes/produtoRoutes');
 const doacaoRoutes = require('./routes/doacaoRoutes');
 const mensagemRoutes = require('./routes/mensagemRoutes');
 
-
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
