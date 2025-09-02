@@ -8,12 +8,14 @@ const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const enderecoRoutes = require('./routes/enderecoRoutes');
+const telefoneRoutes = require('./routes/telefoneRoutes');
 
-app.use('/api/pessoas', pessoaRoutes);
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/enderecos', enderecoRoutes);
+app.use('/api/pessoas', pessoaRoutes);
+app.use('/api/telefones', telefoneRoutes);
 
 app.get('/', (req, res) => {
     res.send("feira-solidaria");
