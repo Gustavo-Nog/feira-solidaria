@@ -25,7 +25,7 @@ app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/doacoes', doacaoRoutes);
+app.use('/api/doacoes', doacaoRoutes);)
 app.use('/api/produtos', produtoRoutes);
 app.use('/api/enderecos', enderecoRoutes);
 app.use('/api/favoritos', favoritoRoutes);
