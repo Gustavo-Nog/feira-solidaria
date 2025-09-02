@@ -11,11 +11,13 @@ const favoritoRoutes = require('./routes/favoritoRoutes');
 const authRoutes = require('./routes/authRoutes');
 const enderecoRoutes = require('./routes/enderecoRoutes');
 const telefoneRoutes = require('./routes/telefoneRoutes');
+const produtoRoutes = require('./routes/produtoRoutes');
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/produtos', produtoRoutes);
 app.use('/api/enderecos', enderecoRoutes);
 app.use('/api/favoritos', favoritoRoutes);
 app.use('/api/pessoas', pessoaRoutes);
