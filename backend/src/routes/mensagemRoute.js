@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const MensagemModel = require('../models/mensagemModel');
+const mensagemController = require('../controllers/mensagemController');
 
 // Listar todas as mensagens
-router.get('/', async (req, res) => {
-  const mensagens = await MensagemModel.listarMensagens();
-  res.json(mensagens);
-});
+router.get('/', mensagemController.listarMensagens);
 
-// Criar uma mensagem
-router.post('/', async (req, res) => {
-  const novaMensagem = await MensagemModel.criarMensagem(req.body);
-  res.json(novaMensagem);
-});
+// Buscar mensagem por ID
+router.get('/:id', mensagemController.buscarMensagemPorId);
+
+// Criar nova mensagem
+router.post('/', mensagemController.criarMensagem);
+
+// Atualizar mensagem por ID
+router.put('/:id', mensagemController.atualizarMensagem);
+
+// Deletar mensagem por ID
+router.delete('/:id', mensagemController.deletarMensagem);
 
 module.exports = router;

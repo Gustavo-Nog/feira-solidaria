@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const DoacaoModel = require('../models/doacaoModel');
+const doacaoController = require('../controllers/doacaoController');
 
-// Listar todas as doações
-router.get('/', async (req, res) => {
-  const doacoes = await DoacaoModel.listarDoacoes();
-  res.json(doacoes);
-});
+// Rota para solicitar uma nova doação
+router.post('/', doacaoController.solicitarDoacao);
 
-// Criar uma doação
-router.post('/', async (req, res) => {
-  const novaDoacao = await DoacaoModel.criarDoacao(req.body);
-  res.json(novaDoacao);
-});
+// Rota para listar doações (opcionalmente com filtros)
+router.get('/', doacaoController.listarDoacoes);
+
+// Rota para listar doações de um usuário específico
+router.get('/usuario/:usuarioId', doacaoController.listarDoacoesPorUsuario);
+
+// Rota para atualizar o status de uma doação
+router.put('/:doacaoId/status', doacaoController.atualizarStatusDoacao);
+
+// Rota para deletar uma doação
+router.delete('/:doacaoId', doacaoController.deletarDoacao);
 
 module.exports = router;

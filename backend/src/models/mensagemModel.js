@@ -1,26 +1,88 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../generated/prisma');
 
-const MensagemModel = {
-  async criarMensagem(data) {
-    return await prisma.mensagem.create({ data });
-  },
-
-  async listarMensagens() {
-    return await prisma.mensagem.findMany();
-  },
-
-  async buscarPorId(id) {
-    return await prisma.mensagem.findUnique({ where: { id } });
-  },
-
-  async atualizarMensagem(id, data) {
-    return await prisma.mensagem.update({ where: { id }, data });
-  },
-
-  async deletarMensagem(id) {
-    return await prisma.mensagem.delete({ where: { id } });
-  }
+const listarMensagens = async () => {
+  return prisma.mensagem.findMany({
+    orderBy: {
+      dataEnvio: 'asc'
+    },
+    include: {
+      remetente: true,
+      destinatario: true,
+      troca: true
+    }
+  });
 };
 
-module.exports = MensagemModel;
+const buscarMensagemPorId = async (id) => {
+  const mensagem = await prisma.mensagem.findUnique({
+    where: { id },
+    include: {
+      remetente: true,
+      destinatario: true,
+      troca: true
+    }
+  });
+
+  if (!mensagem) {
+    throw new Error('Mensagem não encontrada!');
+  }
+
+  return mensagem;
+};
+
+const criarMensagem = async (dadosMensagem) => {
+  if (!dadosMensagem.conteudo || !dadosMensagem.remetenteId || !dadosMensagem.destinatarioId || !dadosMensagem.trocaId) {
+    throw new Error('Conteúdo, remetente, destinatário e troca são obrigatórios.');
+  }
+
+  return prisma.mensagem.create({
+    data: dadosMensagem,
+    include: {
+      remetente: true,
+      destinatario: true,
+      troca: true
+    }
+  });
+};
+
+const atualizarMensagem = async (id, dadosParaAtualizar) => {
+  const mensagemExistente = await prisma.mensagem.findUnique({
+    where: { id }
+  });
+
+  if (!mensagemExistente) {
+    throw new Error('Mensagem não encontrada!');
+  }
+
+  return prisma.mensagem.update({
+    where: { id },
+    data: dadosParaAtualizar,
+    include: {
+      remetente: true,
+      destinatario: true,
+      troca: true
+    }
+  });
+};
+
+const deletarMensagem = async (id) => {
+  const mensagemExistente = await prisma.mensagem.findUnique({
+    where: { id }
+  });
+
+  if (!mensagemExistente) {
+    throw new Error('Mensagem não encontrada!');
+  }
+
+  return prisma.mensagem.delete({
+    where: { id }
+  });
+};
+
+module.exports = {
+  listarMensagens,
+  buscarMensagemPorId,
+  criarMensagem,
+  atualizarMensagem,
+  deletarMensagem
+};
