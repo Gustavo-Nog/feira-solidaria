@@ -1,27 +1,22 @@
 const prisma = require('../generated/prisma');
 const bcrypt = require('bcryptjs');
 
-// Listar todos os usuários
 const listarUsuarios = async () => {
     return prisma.usuario.findMany({
         orderBy: { 
           id: 'asc' 
-          
         }
     });
 };
 
-// Buscar usuário por ID
 const buscarUsuarioPorId = async (id) => {
     return prisma.usuario.findUnique({
         where: { 
           id 
-          
         }
     });
 };
 
-// Criar usuário
 const criarUsuario = async (dadosUsuario) => {
     if (!dadosUsuario.email || !dadosUsuario.senha) {
         throw new Error("Email e senha são obrigatórios");
@@ -41,7 +36,6 @@ const criarUsuario = async (dadosUsuario) => {
     });
 };
 
-// Atualizar usuário
 const atualizarUsuario = async (id, dadosParaAtualizar) => {
     const usuarioExistente = await prisma.usuario.findUnique({ where: { 
         id
@@ -52,7 +46,6 @@ const atualizarUsuario = async (id, dadosParaAtualizar) => {
         throw new Error("Usuário não encontrado");
     }
 
-    // Validar e-mail único
     if (dadosParaAtualizar.email && dadosParaAtualizar.email !== usuarioExistente.email) {
         const emailExistente = await prisma.usuario.findUnique({
           where: { 
