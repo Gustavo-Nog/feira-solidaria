@@ -16,7 +16,7 @@ function Cadastro() {
   const methods = useForm();
   const { handleSubmit, formState: { isSubmitting } } = methods;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
       const response =  await usuarioServices.criarUsuario({
         nome_usuario: data.nomeUsuario,
