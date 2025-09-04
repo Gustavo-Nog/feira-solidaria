@@ -1,6 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google'; // importe o provedor
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserProvider } from './context/UserContext';
 
 import { ToastContainer } from 'react-toastify';
@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
-import MainLayout from './layout/MainLayout'; // Importe o layout
+import MainLayout from './layout/MainLayout';
 import SobreNos from './pages/Sobre-nos/SobreNos';
 import CadastrarItem from './pages/Cadastro-item/CadastroItem';
 import Contato from './pages/Contato/Contato';
