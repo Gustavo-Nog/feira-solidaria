@@ -7,6 +7,8 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
+import usuarioServices from '../../services/usuarioServices';
+
 import './Cadastro.css';
 
 function Cadastro() {
@@ -15,8 +17,19 @@ function Cadastro() {
   const { handleSubmit, formState: { isSubmitting } } = methods;
 
   const onSubmit = (data) => {
-    console.log(`Usuário ${data.nomeUsuario} cadastrado com sucesso!`, data);
-    navigate('/login');
+    try {
+      const response =  await usuarioServices.criarUsuario({
+        nome_usuario: data.nomeUsuario,
+        email: data.email,
+        senha: data.password
+      });
+          console.log(`Usuário ${response.nome_usuario} cadastrado com sucesso!`, response);
+      navigate('/login');
+    } catch (error) {
+      console.error('Erro ao cadastrar usuário:', error.message);
+      alert('Erro ao cadastrar usuário, tente novamente!');
+    }
+
   };
 
   return (
