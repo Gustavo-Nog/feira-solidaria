@@ -7,7 +7,7 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
-import usuarioServices from '../../services/usuarioServices';
+import usuarioServices from '../../services/usuarioService';
 
 import './Cadastro.css';
 
@@ -16,7 +16,7 @@ function Cadastro() {
   const methods = useForm();
   const { handleSubmit, formState: { isSubmitting } } = methods;
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     try {
       const response =  await usuarioServices.criarUsuario({
         nome_usuario: data.nomeUsuario,
