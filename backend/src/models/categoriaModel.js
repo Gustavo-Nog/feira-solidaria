@@ -65,4 +65,10 @@ const deletarCategoria = async (id) => {
     });
 };
 
-module.exports = { listarCategorias, buscarCategoriaPorId, criarCategoria, atualizarCategoria, deletarCategoria };
+module.exports = { 
+listarCategorias,
+buscarCategoriaPorId,
+criarCategoria,
+atualizarCategoria,
+deletarCategoria
+};
