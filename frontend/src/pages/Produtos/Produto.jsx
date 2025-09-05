@@ -1,32 +1,46 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import produtos from '../../mocks/produtos';
+import { useState,useEffect } from 'react';
+import produtoService from '../../services/produtoService';
 
 import Button from '../../components/Button/Button';
 import './Produto.css';
 
-const categorias = [...new Set(produtos.map(produto => produto.categoria))];
-const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
-const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
 
 function Produtos() {
   const navigate = useNavigate();
+  const [produtos, setProdutos] = useState([]);
   const [busca, setBusca] = useState('');
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [localizacao, setLocalizacao] = useState('');
   const [qualidade, setQualidade] = useState('');
 
-  const verDetalhes = (id) => {
-    navigate(`/item/${id}`);
-  };
+   useEffect(() => {
+    async function carregarProdutos() {
+      try {
+        const lista = await produtoService.listarProdutos();
+        setProdutos(lista);
+      } catch (err) {
+        console.error('Erro ao carregar produtos:', err.message);
+      }
+    }
+    carregarProdutos();
+  }, []);
 
-  const produtosFiltrados = produtos.filter(
+const categorias = [...new Set(produtos.map(produto => produto.categoria))];
+const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
+const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
+
+const produtosFiltrados = produtos.filter(
     (produto) =>
       produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
       (categoriaSelecionada === '' || produto.categoria === categoriaSelecionada) &&
       (localizacao === '' || produto.localizacao === localizacao) &&
       (qualidade === '' || produto.qualidade === qualidade)
   );
+
+  const verDetalhes = (id) => {
+    navigate(`/item/${id}`);
+  };
 
   return (
     <div className="container py-5">
