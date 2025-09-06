@@ -13,10 +13,12 @@ const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const doacaoRoutes = require('./routes/doacaoRoutes');
 const favoritoRoutes = require('./routes/favoritoRoutes');
 const authRoutes = require('./routes/authRoutes');
 const enderecoRoutes = require('./routes/enderecoRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
+
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);

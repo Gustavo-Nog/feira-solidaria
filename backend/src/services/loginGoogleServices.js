@@ -1,6 +1,6 @@
 const prisma = require('../generated/prisma');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+/*const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -19,6 +19,7 @@ passport.use(
             ],
           }
         });
+        
 
         if (usuario) {
           return done(null, usuario);
@@ -47,7 +48,7 @@ passport.use(
       }
     }
   )
-);
+);*/
 
 passport.serializeUser((usuario, done) => {
   done(null, usuario.id);

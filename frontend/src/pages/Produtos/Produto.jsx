@@ -26,17 +26,18 @@ function Produtos() {
     carregarProdutos();
   }, []);
 
-const categorias = [...new Set(produtos.map(produto => produto.categoria))];
+const categorias = [...new Set(produtos.map(produto => produto.categoria.nome))];
 const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
 const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
 
-const produtosFiltrados = produtos.filter(
-    (produto) =>
-      produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
-      (categoriaSelecionada === '' || produto.categoria === categoriaSelecionada) &&
-      (localizacao === '' || produto.localizacao === localizacao) &&
-      (qualidade === '' || produto.qualidade === qualidade)
-  );
+const produtosFiltrados = produtos.filter((produto) => {
+  const filtraNome = produto.nome.toLowerCase().includes(busca.toLowerCase());
+  const filtraCategoria = categoriaSelecionada === '' || produto.categoria === categoriaSelecionada;
+  const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
+  const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
+
+  return filtraNome && filtraCategoria && filtraLocalizacao && filtraQualidade;
+});
 
   const verDetalhes = (id) => {
     navigate(`/item/${id}`);
@@ -115,18 +116,18 @@ const produtosFiltrados = produtos.filter(
             <div className="col-sm-6 col-md-4 col-lg-3" key={produto.id}>
               <div className="card h-100 shadow-sm">
                 <img
-                  src={produto.imagem}
-                  alt={produto.nome}
+                  src={produto.imagemProduto}
+                  alt={produto.nomeProduto}
                   className="card-img-top"
                   style={{ height: '180px', objectFit: 'cover' }}
                 />
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{produto.nome}</h5>
+                  <h5 className="card-title">{produto.nomeProduto}</h5>
                   <p className="card-text text-muted" style={{ fontSize: '0.9rem' }}>
-                    {produto.descricao}
+                    {produto.descricaoProduto}
                   </p>
                   <span className="badge bg-primary mb-2 align-self-start">
-                    {produto.categoria}
+                    {produto.categoria.nome}
                   </span>
                   <div className="mb-2 text-warning">★★★★★</div>
                   <Button size="small" onClick={() => verDetalhes(produto.id)}>
