@@ -9,7 +9,6 @@ const listarMensagens = async (req, res) => {
   }
 };
 
-// Buscar mensagem por ID
 const buscarMensagemPorId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -20,7 +19,6 @@ const buscarMensagemPorId = async (req, res) => {
   }
 };
 
-// Criar mensagem
 const criarMensagem = async (req, res) => {
   try {
     const novaMensagem = await mensagemModel.criarMensagem(req.body);
@@ -30,7 +28,6 @@ const criarMensagem = async (req, res) => {
   }
 };
 
-// Atualizar mensagem
 const atualizarMensagem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -41,7 +38,6 @@ const atualizarMensagem = async (req, res) => {
   }
 };
 
-// Deletar mensagem
 const deletarMensagem = async (req, res) => {
   try {
     const { id } = req.params;
