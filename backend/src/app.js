@@ -16,7 +16,6 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const favoritoRoutes = require('./routes/favoritoRoutes');
 const authRoutes = require('./routes/authRoutes');
 const enderecoRoutes = require('./routes/enderecoRoutes');
-const favoritoRoutes = require('./routes/favoritoRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
