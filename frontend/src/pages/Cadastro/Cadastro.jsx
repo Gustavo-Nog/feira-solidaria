@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Importe o useState
+import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -7,7 +7,6 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
-// Nossos novos imports
 import usuarioServices from '../../services/usuarioServices';
 import PessoaModal from '../../components/PessoaModal/PessoaModal';
 
@@ -16,12 +15,19 @@ import './Cadastro.css';
 function Cadastro() {
   const navigate = useNavigate();
   const methods = useForm();
-  const { handleSubmit, formState: { isSubmitting } } = methods;
+  const { handleSubmit, watch, formState: { isSubmitting, errors } } = methods;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUserId, setNewUserId] = useState(null);
 
   const onSubmit = async (data) => {
+    if (data.password !== data.confirmPassword) {
+      alert('As senhas não coincidem.');
+      return;
+    }
+
+    console.log('Dados do formulário de cadastro:', data);
+
     try {
       const response = await usuarioServices.criarUsuario({
         nomeUsuario: data.nomeUsuario,
@@ -108,7 +114,7 @@ function Cadastro() {
         </div>
       </div>
 
-      <PessoaModal 
+      <PessoaModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         usuarioId={newUserId}
