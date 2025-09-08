@@ -4,7 +4,7 @@ const cors = require('cors');
 
 app.use(cors({
   origin: 'http://localhost:5173',
-  method: ['GET', 'POST', 'PUT', 'DELETE']
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.use(express.json());
@@ -29,8 +29,7 @@ app.use('/api/produtos', produtoRoutes);
 app.use('/api/enderecos', enderecoRoutes);
 app.use('/api/favoritos', favoritoRoutes);
 app.use('/api/pessoas', pessoaRoutes);
-app.use('/api/favoritos', favoritoRoutes);
-app.use('/api/produtos', produtoRoutes);
+
 
 app.get('/', (req, res) => {
     res.send("feira-solidaria");
