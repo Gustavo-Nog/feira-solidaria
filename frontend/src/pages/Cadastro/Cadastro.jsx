@@ -16,14 +16,14 @@ function Cadastro() {
   const methods = useForm();
   const { handleSubmit, formState: { isSubmitting } } = methods;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
       const response =  await usuarioServices.criarUsuario({
-        nome_usuario: data.nomeUsuario,
+        nomeUsuario: data.nomeUsuario,
         email: data.email,
         senha: data.password
       });
-          console.log(`Usuário ${response.nome_usuario} cadastrado com sucesso!`, response);
+      console.log(`Usuário ${response.nome_usuario} cadastrado com sucesso!`, response);
       navigate('/login');
     } catch (error) {
       console.error('Erro ao cadastrar usuário:', error.message);
