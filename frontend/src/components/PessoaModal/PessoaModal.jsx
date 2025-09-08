@@ -88,17 +88,19 @@ function PessoaModal({ isOpen, onClose, usuarioId }) {
               {errors.dataNascimento && <p className="error-message">{errors.dataNascimento.message}</p>}
             </div>
             <div className="form-group">
-              <label htmlFor="genero">Gênero</label>
-              <select
-                id="genero"
-                {...register('genero')}
-                defaultValue="FEMININO"
-                className="form-control"
-              >
-                <option value="FEMININO">Feminino</option>
-                <option value="MASCULINO">Masculino</option>
-                <option value="OUTRO">Outro</option>
-              </select>
+              <label htmlFor="genero">Género</label>
+              <div className="select-wrapper">
+                <select
+                  id="genero"
+                  {...register('genero')}
+                  defaultValue="FEMININO"
+                  className="form-control"
+                >
+                  <option value="FEMININO">Feminino</option>
+                  <option value="MASCULINO">Masculino</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
             </div>
           </div>
 
