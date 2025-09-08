@@ -63,6 +63,15 @@ const removerEnderecoPessoa = async (pessoaId, enderecoId) => {
   }
 };
 
+const listarDoacoesDaPessoa = async (pessoaId) => {
+  try {
+    const response = await api.get(`/api/pessoas/${Number(pessoaId)}/doacoes`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Falha ao listar as doações da pessoa: ${error.message}`);
+  }
+};
+
 export default {
   listarPessoas,
   buscarPessoaPorId,
@@ -71,4 +80,5 @@ export default {
   deletarPessoa,
   adicionarEnderecoPessoa,
   removerEnderecoPessoa,
+  listarDoacoesDaPessoa,
 };
