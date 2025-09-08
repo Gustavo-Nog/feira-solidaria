@@ -1,4 +1,4 @@
-const prisma = require('../prisma');
+const prisma = require('../generated/prisma');
 
 const adicionarTelefone = async (pessoaId, dadosTelefone) => {
   const { numero, tipo } = dadosTelefone;
