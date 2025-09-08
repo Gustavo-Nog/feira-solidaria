@@ -31,7 +31,7 @@ const criarUsuario = async (dadosUsuario) => {
             email: dadosUsuario.email,
             senha: senhaHash,
             tipo,
-            nome_usuario: dadosUsuario.nome_usuario
+            nomeUsuario: dadosUsuario.nomeUsuario
         }
     });
 };

@@ -23,6 +23,22 @@ function Home() {
       <section className="products-section">
         <h2>Conheça nossas cestas</h2>
         <div className="products-grid">
+          {/* Exemplo de card de produto */}
+          <div className="product-card">
+            <div className="product-image-placeholder">Cesta1</div>
+            <img src={cesta1} alt="Cesta 1" />
+            <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
+          </div>
+          <div className="product-card">
+            <div className="product-image-placeholder">Cesta2</div>
+             <img src={cesta2} alt="Cesta 2" />
+            <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
+          </div>
+          <div className="product-card">
+            <div className="product-image-placeholder">Cesta 3</div>
+            <img src={cesta3} alt="Cesta 3" />
+            <strong>Nota 4 ⭐⭐⭐⭐</strong>
+          </div>
           
           <Link to="/item/1" className="product-card-link">
             <div className="product-card">
