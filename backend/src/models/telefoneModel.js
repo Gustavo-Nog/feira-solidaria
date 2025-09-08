@@ -1,11 +1,9 @@
 const telefoneModel = require('../models/telefoneModel');
 
-const prisma = require('../generated/prisma');
-
-const criarTelefoneHandler = async (req, res) => {
+const adicionarTelefoneHandler = async (req, res) => {
   try {
-    const { id } = req.params; // id da pessoa
-    const novoTelefone = await telefoneModel.criarTelefone(parseInt(id), req.body);
+    const { pessoaId } = req.params;
+    const novoTelefone = await telefoneModel.adicionarTelefone(parseInt(pessoaId), req.body);
     res.status(201).json(novoTelefone);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -14,8 +12,8 @@ const criarTelefoneHandler = async (req, res) => {
 
 const listarTelefonesHandler = async (req, res) => {
   try {
-    const { id } = req.params; // id da pessoa
-    const telefones = await telefoneModel.listarTelefonesPorPessoa(parseInt(id));
+    const { pessoaId } = req.params;
+    const telefones = await telefoneModel.listarTelefonesPorPessoa(parseInt(pessoaId));
     res.status(200).json(telefones);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -24,8 +22,8 @@ const listarTelefonesHandler = async (req, res) => {
 
 const atualizarTelefoneHandler = async (req, res) => {
   try {
-    const { id } = req.params; // id do telefone
-    const telefoneAtualizado = await telefoneModel.atualizarTelefone(parseInt(id), req.body);
+    const { telefoneId } = req.params;
+    const telefoneAtualizado = await telefoneModel.atualizarTelefone(parseInt(telefoneId), req.body);
     res.status(200).json(telefoneAtualizado);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -34,8 +32,8 @@ const atualizarTelefoneHandler = async (req, res) => {
 
 const deletarTelefoneHandler = async (req, res) => {
   try {
-    const { id } = req.params; // id do telefone
-    await telefoneModel.deletarTelefone(parseInt(id));
+    const { telefoneId } = req.params;
+    await telefoneModel.deletarTelefone(parseInt(telefoneId));
     res.status(204).send();
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -43,7 +41,7 @@ const deletarTelefoneHandler = async (req, res) => {
 };
 
 module.exports = {
-  criarTelefoneHandler,
+  adicionarTelefoneHandler,
   listarTelefonesHandler,
   atualizarTelefoneHandler,
   deletarTelefoneHandler,
