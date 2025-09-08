@@ -54,6 +54,15 @@ const adicionarEnderecoPessoa = async (pessoaId, payload) => {
   }
 };
 
+const removerEnderecoPessoa = async (pessoaId, enderecoId) => {
+  try {
+    const response = await api.delete(`/api/pessoas/${Number(pessoaId)}/enderecos/${Number(enderecoId)}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Falha ao remover endereço da pessoa: ${error.message}`);
+  }
+};
+
 export default {
   listarPessoas,
   buscarPessoaPorId,
@@ -61,4 +70,5 @@ export default {
   atualizarPessoa,
   deletarPessoa,
   adicionarEnderecoPessoa,
+  removerEnderecoPessoa,
 };
