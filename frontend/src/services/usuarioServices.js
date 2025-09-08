@@ -2,8 +2,8 @@ import api from './api';
 
 const listarUsuarios = async () => {
   try {
-    const res = await api.get('/usuarios');
-    return res.data;
+    const response = await api.get('/api/usuarios');
+    return response.data;
   } catch (error) {
     throw new Error(`Falha ao listar os usuários: ${error.message}`);
   }
@@ -11,8 +11,8 @@ const listarUsuarios = async () => {
 
 const buscarUsuario = async(id) => {
   try {
-    const res = await api.get(`/usuario/${Number(id)}`);
-    return res.data;
+    const response = await api.get(`/api/usuarios/${Number(id)}`);
+    return response.data;
   } catch(error) {
     throw new Error(`Falha ao buscar o usuário: ${error.message}`);
   }
@@ -20,8 +20,8 @@ const buscarUsuario = async(id) => {
 
 const criarUsuario = async (payload) => {
   try {
-    const res = await api.post('/usuarios', payload);
-    return res.data;
+    const response = await api.post('/api/usuarios', payload);
+    return response.data;
   } catch (error) {
     throw new Error(`Falha ao criar o usuário: ${error.message}`);
   }
@@ -29,8 +29,8 @@ const criarUsuario = async (payload) => {
 
 const atualizarUsuario = async(id, payload) => {
   try {
-    const res = await api.put(`/usuario/${Number(id)}`, payload);
-    return res.data;
+    const response = await api.put(`/api/usuarios/${Number(id)}`, payload);
+    return response.data;
   } catch (error) {
     throw new Error(`Falha ao atualizar o usuário: ${error.message}`);
   }
@@ -38,8 +38,8 @@ const atualizarUsuario = async(id, payload) => {
 
 const deletarUsuario = async(id) => {
   try {
-    const res = await api.delete(`/usuario/${Number(id)}`);
-    return res.data;
+    const response = await api.delete(`/api/usuarios/${Number(id)}`);
+    return response.data;
   } catch(error) {
     throw new Error(`Falha ao deletar o usuário: ${error.message}`);
   }
