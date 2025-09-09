@@ -45,8 +45,5 @@ module.exports = {
   listarTelefonesHandler,
   atualizarTelefoneHandler,
   deletarTelefoneHandler,
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> d2692b5d85807040b709bd417f5a986b1b03a815
+
