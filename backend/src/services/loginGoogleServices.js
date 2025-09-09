@@ -1,7 +1,7 @@
 require('dotenv').config();
 const prisma = require('../generated/prisma');
 const passport = require('passport');
-/*const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -49,7 +49,7 @@ passport.use(
       }
     }
   )
-);*/
+);
 
 passport.serializeUser((usuario, done) => {
   done(null, usuario.id);
