@@ -1,6 +1,10 @@
 require('dotenv').config();
+<<<<<<< HEAD
 
 const prisma = require('../generated/prisma')
+=======
+const prisma = require('../generated/prisma');
+>>>>>>> d2692b5d85807040b709bd417f5a986b1b03a815
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 

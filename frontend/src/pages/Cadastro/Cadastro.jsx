@@ -7,7 +7,7 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
-import usuarioServices from '../../services/usuarioServices';
+import usuarioServices from '../../services/usuarioService';
 import PessoaModal from '../../components/PessoaModal/PessoaModal';
 
 import './Cadastro.css';
