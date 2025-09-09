@@ -14,7 +14,7 @@ const listarMensagens = async () => {
 };
 
 const buscarMensagemPorId = async (id) => {
-  const mensagem = await prisma.mensagem.findUnique({
+  return prisma.mensagem.findUnique({
     where: { id },
     include: {
       remetente: true,
@@ -22,12 +22,6 @@ const buscarMensagemPorId = async (id) => {
       troca: true
     }
   });
-
-  if (!mensagem) {
-    throw new Error('Mensagem não encontrada!');
-  }
-
-  return mensagem;
 };
 
 const criarMensagem = async (dadosMensagem) => {
