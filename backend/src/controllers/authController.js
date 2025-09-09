@@ -1,4 +1,7 @@
-const prisma = require('../generated/prisma');
+require('dotenv').config();
+
+const prisma = require('../generated/prisma')
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -7,14 +10,16 @@ require('../services/loginGoogleServices');
 
 
 const login = async (req, res) => {
-  const { nome_usuario, senha } = req.body;
-  if (!nome_usuario || !senha) {
+  const { nomeUsuario, senha } = req.body;
+  if (!nomeUsuario || !senha) {
     return res.status(400).json({ message: 'Nome de usuário e senha são obrigatórios.' });
   }
 
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: { nome_usuario }
+      where: { 
+        nomeUsuario 
+      }
     });
 
     if (!usuario) {

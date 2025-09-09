@@ -1,9 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Home.css';
 import imagemcentral from '../../assets/alimentos/ImagemCentral.png';
 import cesta1 from '../../assets/alimentos/Cesta1.png';
 import cesta2 from '../../assets/alimentos/Cesta2.png';
 import cesta3 from '../../assets/alimentos/Cesta3.png';
-import { Link } from 'react-router-dom';
+
+const produtosExemplo = [
+  { id: 1, imagem: cesta1, nota: 'Nota 5 ⭐⭐⭐⭐⭐' },
+  { id: 2, imagem: cesta2, nota: 'Nota 5 ⭐⭐⭐⭐⭐' },
+  { id: 3, imagem: cesta3, nota: 'Nota 4 ⭐⭐⭐⭐' },
+];
 
 function Home() {
   return (
@@ -23,32 +31,19 @@ function Home() {
       <section className="products-section">
         <h2>Conheça nossas cestas</h2>
         <div className="products-grid">
-          
-          <Link to="/item/1" className="product-card-link">
-            <div className="product-card">
-              <img src={cesta1} alt="Cesta de produtos 1" className="product-card-image" />
-              <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
-            </div>
-          </Link>
-
-          <Link to="/item/2" className="product-card-link">
-            <div className="product-card">
-              <img src={cesta2} alt="Cesta de produtos 2" className="product-card-image" />
-              <strong>Nota 5 ⭐⭐⭐⭐⭐</strong>
-            </div>
-          </Link>
-
-          <Link to="/item/3" className="product-card-link">
-            <div className="product-card">
-                <img src={cesta3} alt="Cesta de produtos 3" className="product-card-image" />
-                <strong>Nota 4 ⭐⭐⭐⭐</strong>
-            </div>
-          </Link>
+          {produtosExemplo.map(produto => (
+            <Link key={produto.id} to={`/item/${produto.id}`} className="product-card-link">
+              <div className="product-card">
+                <img src={produto.imagem} alt={`Cesta de produtos ${produto.id}`} className="product-card-image" />
+                <strong>{produto.nota}</strong>
+              </div>
+            </Link>
+          ))}
 
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 export default Home;
