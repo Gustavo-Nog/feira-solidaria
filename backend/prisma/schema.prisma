@@ -1,216 +1,193 @@
- 
-datasource db { 
-  provider = "postgresql" 
-  url      = env("DATABASE_URL") 
-} 
- 
-generator client { 
-  provider = "prisma-client-js" 
-} 
- 
-// ============== ENUMS ============== 
- 
-enum Genero { 
-  MASCULINO 
-  FEMININO 
-  OUTRO 
-} 
- 
-enum StatusTroca { 
-  PENDENTE 
-  ACEITA 
-  RECUSADA 
-  FINALIZADA 
-  CANCELADA 
-} 
- 
-enum TipoQualidade { 
-  NOVO 
-  SEMINOVO 
-  USADO 
-} 
- 
-enum TipoStatus { 
-  DISPONIVEL 
-  EM_NEGOCIACAO 
-  DOADO 
-} 
- 
-enum TipoTelefone { 
-  CELULAR 
-  FIXO 
-  COMERCIAL 
-} 
- 
-enum TipoUsuario { 
-  ADMIN 
-  COMUM 
-} 
- 
-// ============== MODELS ============== 
- 
-model Usuario { 
-  id                    Int                     @id @default(autoincrement()) 
-  email                 String                  @unique @db.VarChar(200) 
-  senha                 String                  @db.VarChar(255) // Agora para armazenar hash 
-  tipo                  TipoUsuario 
-  nomeUsuario           String                  @unique @map("nome_usuario") @db.VarChar(50) 
-  googleID String? @unique
-  acoesAdministrativas  AcaoAdministrativa[] 
-  pessoa                Pessoa? 
- 
-  @@map("usuarios") 
-} 
- 
-model Pessoa { 
-  id                    Int                 @id @default(autoincrement()) @map("id_pessoa") 
-  nome                  String              @db.VarChar(50) 
-  dataNascimento        DateTime?           @map("data_nascimento") @db.Date 
-  genero                Genero? 
-  cpf                   String?             @db.VarChar(14) 
-  usuarioId             Int                 @unique @map("usuario_id") 
-  usuario               Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade) 
-   
-  enderecos             PessoaEndereco[] 
-  telefones             Telefone[] 
-  produtos              Produto[] 
-  doacoesComoDoador     Doacao[]            @relation("Doador") 
-  doacoesComoReceptor   Doacao[]            @relation("Receptor") 
-  mensagensEnviadas     Mensagem[]          @relation("Remetente") 
-  mensagensRecebidas    Mensagem[]          @relation("Destinatario") 
-  favoritos             Favorito[] 
- 
-  @@map("pessoas") 
-} 
- 
-model AcaoAdministrativa { 
-  id             Int      @id @default(autoincrement()) @map("id_acao_admin") 
-  descricao      String?  @db.Text 
-  data           DateTime @default(now()) @db.Timestamp(0) 
-  usuarioId      Int      @map("usuario_id") 
-  usuario        Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade) 
- 
-  @@map("acoesadministrativas") 
-} 
- 
-model Endereco { 
-  id                Int              @id @default(autoincrement()) @map("id_endereco") 
-  cep               String?          @db.VarChar(10) 
-  uf                String?          @db.Char(2) 
-  cidade            String?          @db.VarChar(50) 
-  bairro            String?          @db.VarChar(50) 
-  logradouro        String?          @db.VarChar(100) // Aumentado de 10 para 100 
-  numeroResidencia  String?          @map("numero_residencia") @db.VarChar(10) 
-   
-  pessoas           PessoaEndereco[] 
- 
-  @@map("enderecos") 
-} 
- 
-model PessoaEndereco { 
-  id            Int      @id @default(autoincrement()) @map("id_pessoa_endereco") 
-  pessoaId      Int      @map("pessoa_id") 
-  enderecoId    Int      @map("endereco_id") 
-   
-  pessoa        Pessoa   @relation(fields: [pessoaId], references: [id], onDelete: Cascade, map: "fk_pessoa") 
-  endereco      Endereco @relation(fields: [enderecoId], references: [id], onDelete: Cascade, map: "fk_endereco") 
- 
-  @@map("pessoa_endereco") 
-} 
- 
-model Telefone { 
-  id        Int          @id @default(autoincrement()) @map("id_telefone") 
-  numero    String       @db.VarChar(15) 
-  tipo      TipoTelefone 
-  pessoaId  Int?         @map("pessoa_id") 
-   
-  pessoa    Pessoa?      @relation(fields: [pessoaId], references: [id]) 
- 
-  @@map("telefones") 
-} 
- 
-model Categoria { 
-  id             Int       @id @default(autoincrement()) @map("id_categoria") 
-  nomeCategoria  String    @map("nome_categoria") @db.VarChar(50) 
-  descricao      String?   @db.Text 
-   
-  produtos       Produto[] 
- 
-  @@map("categorias") 
-} 
- 
-model Produto { 
-  id             Int           @id @default(autoincrement()) @map("id_produto") 
-  nomeProduto    String        @map("nome_produto") @db.VarChar(50) 
-  descricao      String        @db.Text 
-  qualidade      TipoQualidade? 
-  imagemUrl      String        @map("imagem_url") @db.Text 
-  status         TipoStatus? 
-  dataCadastro   DateTime?     @map("data_cadastro") @db.Date 
-  quantidade     Int           @default(1) 
-   
-  categoriaId    Int           @map("categoria") 
-  categoria      Categoria     @relation(fields: [categoriaId], references: [id], map: "fk_produto_categoria") 
-   
-  pessoaId       Int?          @map("pessoa_id") 
-  pessoa         Pessoa?       @relation(fields: [pessoaId], references: [id]) 
- 
-  doacoes        Doacao[] 
-  favoritos      Favorito[] 
- 
-  @@map("produtos") 
-} 
- 
-model Doacao { 
-  id                 Int         @id @default(autoincrement()) @map("id_doacao") 
-  dataSolicitacao    DateTime?   @map("data_solicitacao") @db.Date 
-  dataEntrega        DateTime?   @map("data_entrega") @db.Timestamp(0) 
-  avaliacaoReceptor  Int?        @map("avaliacao_receptor") @db.SmallInt 
-  avaliacaoDoador    Int?        @map("avaliacao_doador") @db.SmallInt 
-  status             StatusTroca 
- 
-  receptorId         Int?        @map("receptor_id") 
-  receptor           Pessoa?     @relation("Receptor", fields: [receptorId], references: [id], onDelete: Cascade) 
- 
-  doadorId           Int?        @map("doador_id") 
-  doador             Pessoa?     @relation("Doador", fields: [doadorId], references: [id], onDelete: Cascade) 
- 
-  produtoId          Int         @map("produto_id") 
-  produto            Produto     @relation(fields: [produtoId], references: [id], onDelete: Cascade) 
-   
-  mensagens          Mensagem[] 
- 
-  @@map("doacoes") 
-} 
- 
-model Mensagem { 
-  id             Int       @id @default(autoincrement()) @map("id_mensagem") 
-  conteudo       String    @db.Text 
-  dataEnvio      DateTime? @default(now()) @map("data_envio") @db.Timestamp(0) 
-  lida           Boolean?  @default(false) 
- 
-  trocaId        Int       @map("troca_id") 
-  troca          Doacao    @relation(fields: [trocaId], references: [id], onDelete: Cascade, map: "trocas_pessoa_id_fkey") 
- 
-  remetenteId    Int       @map("remetente_id") 
-  remetente      Pessoa    @relation("Remetente", fields: [remetenteId], references: [id], onDelete: Cascade) 
- 
-  destinatarioId Int       @map("destinatario_id") 
-  destinatario   Pessoa    @relation("Destinatario", fields: [destinatarioId], references: [id], onDelete: Cascade) 
- 
-  @@map("mensagens") 
-} 
- 
-model Favorito { 
-  id          Int       @id @default(autoincrement()) @map("id_favorito") 
-  dataAdicao  DateTime? @map("data_adicao") @db.Date 
-   
-  pessoaId    Int       @map("pessoa_id") 
-  pessoa      Pessoa    @relation(fields: [pessoaId], references: [id]) 
-   
-  produtoId   Int       @map("produto_id") 
-  produto     Produto   @relation(fields: [produtoId], references: [id]) 
-   
-  @@map("favoritos") 
-} 
- 
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id                   Int                  @id @default(autoincrement())
+  email                String               @unique @db.VarChar(200)
+  senha                String               @db.VarChar(255)
+  tipo                 TipoUsuario
+  nomeUsuario          String               @unique @map("nome_usuario") @db.VarChar(50)
+  googleID             String?              @unique @map("googleID")
+  acoesAdministrativas AcaoAdministrativa[]
+  pessoa               Pessoa?
+
+  @@map("usuarios")
+}
+
+model Pessoa {
+  id                  Int              @id @default(autoincrement()) @map("id_pessoa")
+  nome                String           @db.VarChar(50)
+  dataNascimento      DateTime?        @map("data_nascimento") @db.Date
+  genero              Genero?
+  cpf                 String?          @db.VarChar(14)
+  usuarioId           Int              @unique @map("usuario_id")
+  doacoesComoDoador   Doacao[]         @relation("Doador")
+  doacoesComoReceptor Doacao[]         @relation("Receptor")
+  favoritos           Favorito[]
+  mensagensRecebidas  Mensagem[]       @relation("Destinatario")
+  mensagensEnviadas   Mensagem[]       @relation("Remetente")
+  enderecos           PessoaEndereco[]
+  usuario             Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  produtos            Produto[]
+  telefones           Telefone[]
+
+  @@map("pessoas")
+}
+
+model AcaoAdministrativa {
+  id        Int      @id @default(autoincrement()) @map("id_acao_admin")
+  descricao String?
+  data      DateTime @default(now()) @db.Timestamp(0)
+  usuarioId Int      @map("usuario_id")
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@map("acoesadministrativas")
+}
+
+model Endereco {
+  id               Int              @id @default(autoincrement()) @map("id_endereco")
+  cep              String?          @db.VarChar(10)
+  uf               String?          @db.Char(2)
+  cidade           String?          @db.VarChar(50)
+  bairro           String?          @db.VarChar(50)
+  logradouro       String?          @db.VarChar(100)
+  numeroResidencia String?          @map("numero_residencia") @db.VarChar(10)
+  pessoas          PessoaEndereco[]
+
+  @@map("enderecos")
+}
+
+model PessoaEndereco {
+  id         Int      @id @default(autoincrement()) @map("id_pessoa_endereco")
+  pessoaId   Int      @map("pessoa_id")
+  enderecoId Int      @map("endereco_id")
+  endereco   Endereco @relation(fields: [enderecoId], references: [id], onDelete: Cascade, map: "fk_endereco")
+  pessoa     Pessoa   @relation(fields: [pessoaId], references: [id], onDelete: Cascade, map: "fk_pessoa")
+
+  @@map("pessoa_endereco")
+}
+
+model Telefone {
+  id       Int          @id @default(autoincrement()) @map("id_telefone")
+  numero   String       @db.VarChar(15)
+  tipo     TipoTelefone
+  pessoaId Int?         @map("pessoa_id")
+  pessoa   Pessoa?      @relation(fields: [pessoaId], references: [id])
+
+  @@map("telefones")
+}
+
+model Categoria {
+  id            Int       @id @default(autoincrement()) @map("id_categoria")
+  nomeCategoria String    @map("nome_categoria") @db.VarChar(50)
+  descricao     String?
+  produtos      Produto[]
+
+  @@map("categorias")
+}
+
+model Produto {
+  id           Int            @id @default(autoincrement()) @map("id_produto")
+  nomeProduto  String         @map("nome_produto") @db.VarChar(50)
+  descricao    String
+  qualidade    TipoQualidade?
+  imagemUrl    String         @map("imagem_url")
+  status       TipoStatus?
+  dataCadastro DateTime?      @map("data_cadastro") @db.Date
+  quantidade   Int            @default(1)
+  categoriaId  Int            @map("categoria")
+  pessoaId     Int?           @map("pessoa_id")
+  doacoes      Doacao[]
+  favoritos    Favorito[]
+  categoria    Categoria      @relation(fields: [categoriaId], references: [id], map: "fk_produto_categoria")
+  pessoa       Pessoa?        @relation(fields: [pessoaId], references: [id])
+
+  @@map("produtos")
+}
+
+model Doacao {
+  id                Int         @id @default(autoincrement()) @map("id_doacao")
+  dataSolicitacao   DateTime?   @map("data_solicitacao") @db.Date
+  dataEntrega       DateTime?   @map("data_entrega") @db.Timestamp(0)
+  avaliacaoReceptor Int?        @map("avaliacao_receptor") @db.SmallInt
+  avaliacaoDoador   Int?        @map("avaliacao_doador") @db.SmallInt
+  status            StatusTroca
+  receptorId        Int?        @map("receptor_id")
+  doadorId          Int?        @map("doador_id")
+  produtoId         Int         @map("produto_id")
+  doador            Pessoa?     @relation("Doador", fields: [doadorId], references: [id], onDelete: Cascade)
+  produto           Produto     @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+  receptor          Pessoa?     @relation("Receptor", fields: [receptorId], references: [id], onDelete: Cascade)
+  mensagens         Mensagem[]
+
+  @@map("doacoes")
+}
+
+model Mensagem {
+  id             Int       @id @default(autoincrement()) @map("id_mensagem")
+  conteudo       String
+  dataEnvio      DateTime? @default(now()) @map("data_envio") @db.Timestamp(0)
+  lida           Boolean?  @default(false)
+  trocaId        Int       @map("troca_id")
+  remetenteId    Int       @map("remetente_id")
+  destinatarioId Int       @map("destinatario_id")
+  destinatario   Pessoa    @relation("Destinatario", fields: [destinatarioId], references: [id], onDelete: Cascade)
+  remetente      Pessoa    @relation("Remetente", fields: [remetenteId], references: [id], onDelete: Cascade)
+  troca          Doacao    @relation(fields: [trocaId], references: [id], onDelete: Cascade, map: "trocas_pessoa_id_fkey")
+
+  @@map("mensagens")
+}
+
+model Favorito {
+  id         Int       @id @default(autoincrement()) @map("id_favorito")
+  dataAdicao DateTime? @map("data_adicao") @db.Date
+  pessoaId   Int       @map("pessoa_id")
+  produtoId  Int       @map("produto_id")
+  pessoa     Pessoa    @relation(fields: [pessoaId], references: [id])
+  produto    Produto   @relation(fields: [produtoId], references: [id])
+
+  @@map("favoritos")
+}
+
+enum Genero {
+  MASCULINO
+  FEMININO
+  OUTRO
+}
+
+enum StatusTroca {
+  PENDENTE
+  ACEITA
+  RECUSADA
+  FINALIZADA
+  CANCELADA
+}
+
+enum TipoQualidade {
+  NOVO
+  SEMINOVO
+  USADO
+}
+
+enum TipoStatus {
+  DISPONIVEL
+  EM_NEGOCIACAO
+  DOADO
+}
+
+enum TipoTelefone {
+  CELULAR
+  FIXO
+  COMERCIAL
+}
+
+enum TipoUsuario {
+  ADMIN
+  COMUM
+}

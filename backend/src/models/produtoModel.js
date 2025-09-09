@@ -1,63 +1,71 @@
-const produtoModel = require('../models/produtoModel');
+const prisma = require('../generated/prisma');
 
-const listarProdutosHandler = async (req, res) => {
-  try {
-    const produtos = await produtoModel.listarProdutos(); 
-    res.status(200).json(produtos);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+const listarProdutos = async () => {
+    return prisma.produto.findMany({
+        orderBy: {
+            nomeProduto: "asc"
+        }
+    });
+}
+
+const buscarProdutoPorId = async (id) => {
+  return prisma.produto.findUnique({
+    where: { id },
+    include: {
+      categoria: true,
+      pessoa: true,
+      doacoes: true,
+      favoritos: true,
+    },
+  });
 };
 
-const buscarProdutoPorIdHandler = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const produto = await produtoModel.buscarProdutoPorId(parseInt(id));
-
-    if (!produto) {
-      return res.status(404).json({ error: 'Produto não encontrado' });
-    }
-    res.status(200).json(produto);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+const criarProduto = async (dadosProduto) => {
+  if (!dadosProduto.nomeProduto || !dadosProduto.categoriaId) {
+    throw new Error("Nome do produto e categoria são obrigatórios.");
   }
+
+  return prisma.produto.create({
+    data: dadosProduto,
+  });
 };
 
-const criarProdutoHandler = async (req, res) => {
-  try {
-    const dadosProduto = req.body;
-    const novoProduto = await produtoModel.criarProduto(dadosProduto);
-    res.status(201).json(novoProduto);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+const atualizarProduto = async (id, dadosParaAtualizar) => {
+  const produtoExistente = await prisma.produto.findUnique({
+    where: { id },
+  });
+
+  if (!produtoExistente) {
+    throw new Error("Produto não encontrado!");
   }
+
+  return prisma.produto.update({
+    where: { id },
+    data: dadosParaAtualizar,
+  });
 };
 
-const atualizarProdutoHandler = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const dadosParaAtualizar = req.body;
-    const produtoAtualizado = await produtoModel.atualizarProduto(parseInt(id), dadosParaAtualizar);
-    res.status(200).json(produtoAtualizado);
-  } catch (error) {
-    res.status(404).json({ error: error.message });
-  }
-};
+const deletarProduto = async (id) => {
+  const produtoExistente = await prisma.produto.findUnique({
+    where: { id },
+  });
 
-const deletarProdutoHandler = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await produtoModel.deletarProduto(parseInt(id));
-    res.status(204).send();
-  } catch (error) {
-    res.status(404).json({ error: error.message });
+  if (!produtoExistente) {
+    throw new Error("Produto não encontrado!");
   }
+
+  return prisma.produto.delete({
+    where: { id },
+  });
 };
 
 module.exports = {
-    listarProdutosHandler,
-    buscarProdutoPorIdHandler,
-    criarProdutoHandler,
-    atualizarProdutoHandler,
-    deletarProdutoHandler
-};
+    listarProdutos,
+    buscarProdutoPorId,
+    criarProduto,
+    atualizarProduto,
+    deletarProduto
+}
+
+
+
