@@ -1,9 +1,7 @@
 require('dotenv').config();
-<<<<<<< HEAD
 
 const bcrypt = require("bcrypt");
-=======
->>>>>>> d2692b5d85807040b709bd417f5a986b1b03a815
+
 const prisma = require('../generated/prisma');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
