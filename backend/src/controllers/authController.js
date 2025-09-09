@@ -1,5 +1,7 @@
 require('dotenv').config();
-const prisma = require('../generated/prisma');
+
+const prisma = require('../generated/prisma')
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -15,7 +17,9 @@ const login = async (req, res) => {
 
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: { nomeUsuario }
+      where: { 
+        nomeUsuario 
+      }
     });
 
     if (!usuario) {
