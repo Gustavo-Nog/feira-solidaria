@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import produtoService from '../../services/produtoService';
+import favoritoService from '../../services/favoritoServices';
 
 import Button from '../../components/Button/Button';
 import './Produto.css';
@@ -9,10 +10,25 @@ import './Produto.css';
 function Produtos() {
   const navigate = useNavigate();
   const [produtos, setProdutos] = useState([]);
+  const [favoritos, setFavoritos] = useState([]);
   const [busca, setBusca] = useState('');
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [localizacao, setLocalizacao] = useState('');
   const [qualidade, setQualidade] = useState('');
+
+  const toggleFavorito = async (produtoId) => {
+    try {
+      if (favoritos.includes(produtoId)) {
+        await favoritoService.deletarFavorito(produtoId);
+        setFavoritos(prev => prev.filter(id => id !== produtoId));
+      } else {
+        await favoritoService.criarFavorito({ produtoId });
+        setFavoritos(prev => [...prev, produtoId]);
+      }
+    } catch (error) {
+      console.error("Erro ao favoritar produto:", error.message);
+    }
+  };
 
    useEffect(() => {
     async function carregarProdutos() {
@@ -31,8 +47,8 @@ const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
 const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
 
 const produtosFiltrados = produtos.filter((produto) => {
-  const filtraNome = produto.nome.toLowerCase().includes(busca.toLowerCase());
-  const filtraCategoria = categoriaSelecionada === '' || produto.categoria === categoriaSelecionada;
+  const filtraNome = produto.nomeProduto.toLowerCase().includes(busca.toLowerCase());
+  const filtraCategoria = categoriaSelecionada === '' || produto.categoria.nome === categoriaSelecionada;
   const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
   const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
 
@@ -133,6 +149,11 @@ const produtosFiltrados = produtos.filter((produto) => {
                   <Button size="small" onClick={() => verDetalhes(produto.id)}>
                     Ver Detalhes
                   </Button>
+                   <button
+                      className={`btn-favorito ${favoritos.includes(produto.id) ? 'ativo' : ''}`}
+                       onClick={() => toggleFavorito(produto.id)}
+                       > {favoritos.includes(produto.id) ? '★' : '☆'}
+                      </button>
                 </div>
               </div>
             </div>
