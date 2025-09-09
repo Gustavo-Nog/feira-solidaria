@@ -26,6 +26,7 @@ passport.use(
           },
           include: { pessoa: true }
         });
+        
 
         if (usuario) {
           return done(null, usuario);
