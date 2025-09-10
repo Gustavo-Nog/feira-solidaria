@@ -1,13 +1,23 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import InputField from '../../components/Input/InputField';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 import './Cadastro-item.css';
 
 function CadastrarItem() {
   const methods = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log("Dados do formulário:", data);
-    alert('Item cadastrado com sucesso! Verifique o console.');
+   const onSubmit = async (data) => {
+    try {
+      const response = await api.post('/itens', data); 
+      alert('Item cadastrado com sucesso!');
+      console.log('Resposta do backend:', response.data);
+      navigate('/perfil'); 
+    } catch (error) {
+      console.error('Erro ao cadastrar item:', error);
+      alert('Erro ao cadastrar item. Verifique o console.');
+    }
   };
 
   return (
