@@ -54,7 +54,7 @@ const deletarAcaoAdm = async (id) => {
     }
 };
 
-export { 
+export default { 
     listarAcoesAdm,
     buscarAcoesAdmPorId,
     buscarAcoesPorUsuario,
