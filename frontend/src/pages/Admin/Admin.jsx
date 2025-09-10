@@ -18,7 +18,7 @@ function Admin() {
         setLoading(false);
     };
 
-return (
+  return (
     <div className="admin-container">
       <div className="admin-content">
         <h2>Painel Administrativo</h2>
