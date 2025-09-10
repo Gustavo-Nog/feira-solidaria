@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Carrinho.css';
 
-const usuarioLogado = true; 
+const usuarioLogado = true;
 
 function Carrinho() {
   const { cartItems, removerDoCarrinho, atualizarQuantidade } = useCart();
@@ -13,7 +13,6 @@ function Carrinho() {
   const handleFinalizarTroca = () => {
     if (usuarioLogado) {
       toast.success('Sucesso! Próximo passo: confirmação da troca.');
-
     } else {
       toast.warn('Você precisa fazer o login para finalizar a troca.');
       navigate('/login');
@@ -43,24 +42,29 @@ function Carrinho() {
       <h2 className="mb-4">Meu Carrinho</h2>
       <ul className="list-group shadow-sm">
         {cartItems.map((item) => (
-          <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-            <Link to={`/item/${item.id}`} className="carrinho-item-link d-flex align-items-center">
+          <li 
+            key={item.id} 
+            className="list-group-item d-flex flex-column align-items-start d-md-flex flex-md-row align-items-md-center justify-content-md-between p-3"
+          >
+            
+            <Link to={`/item/${item.id}`} className="carrinho-item-link d-flex align-items-center mb-3 mb-md-0">
               <img src={item.imagem} alt={item.nome} className="carrinho-item-img" />
               <div className="ms-3">
                 <h5 className="mb-0">{item.nome}</h5>
                 <small className="text-muted">{item.produtor.nome}</small>
               </div>
             </Link>
-            <div className="d-flex align-items-center mt-2 mt-md-0">
-              <div className="quantity-controls">
+
+            <div className="acoes-carrinho d-flex flex-column flex-md-row justify-content-md-between align-items-md-center w-100">
+              <div className="quantity-controls mb-2 mb-md-0">
                 <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDiminuir(item)}>-</button>
                 <span className="quantity-text">{item.quantity}</span>
                 <button className="btn btn-outline-secondary btn-sm" onClick={() => handleAumentar(item)}>+</button>
               </div>
-              <button className="btn btn-danger btn-sm ms-4" onClick={() => removerDoCarrinho(item.id)}>
+              <button className="btn btn-danger btn-sm" onClick={() => removerDoCarrinho(item.id)}>
                 Remover
               </button>
-            </div>
+            </div>          
           </li>
         ))}
       </ul>
