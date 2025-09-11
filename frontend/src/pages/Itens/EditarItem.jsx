@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button"; 
-import api from "../../services/api"; 
+import produtoService from "../../services/produtoService"; 
 
 export default function EditarItem() {
   const { id } = useParams(); 
@@ -15,7 +15,7 @@ export default function EditarItem() {
   });
 
   useEffect(() => {
-    api.get(`/itens/${id}`)
+    produtoService.getItem(id) 
       .then((res) => setItem(res.data))
       .catch((err) => console.error("Erro ao carregar item:", err));
   }, [id]);
@@ -27,7 +27,7 @@ export default function EditarItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put(`/itens/${id}`, item);
+      await produtoService.updateItem(id, item); 
       navigate("/meus-itens"); 
     } catch (error) {
       console.error("Erro ao atualizar item:", error);

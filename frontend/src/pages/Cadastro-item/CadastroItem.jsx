@@ -77,7 +77,13 @@ function CadastrarItem() {
               { value: 'regular', label: 'Regular' },
             ]}
           />
-
+          
+          <InputField
+              name="telefone"
+             label="Telefone:"
+             required="O telefone é obrigatório."
+            placeholder="(99) 99999-9999"
+            />
           <button type="submit" className="botao">
             Cadastrar Item
           </button>
