@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import acoesAdmServices from "../../services/acoesAdmServices";
 
 import "./AdminModal.css";
-
+//modal de Admin espelhada em pessoaModal
 function AdminModal({ isOpen, onClose, acao }) {
   const { register, handleSubmit, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   useEffect(() => {
     if (acao) {
       reset(acao);
