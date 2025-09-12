@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import InputField from '../../components/Input/InputField';
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
+import produtoService from '../../services/produtoServices';
 import './Cadastro-item.css';
 
 function CadastrarItem() {
@@ -10,9 +10,9 @@ function CadastrarItem() {
 
    const onSubmit = async (data) => {
     try {
-      const response = await api.post('/itens', data); 
+      const response = await produtoService.criarProduto(data); 
       alert('Item cadastrado com sucesso!');
-      console.log('Resposta do backend:', response.data);
+      console.log('Resposta do backend:', response);
       navigate('/perfil'); 
     } catch (error) {
       console.error('Erro ao cadastrar item:', error);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button"; 
-import produtoService from "../../services/produtoService"; 
+import produtoService from "../../services/produtoServices"; 
 
 export default function EditarItem() {
   const { id } = useParams(); 
@@ -9,14 +9,12 @@ export default function EditarItem() {
 
   const [item, setItem] = useState({
     nome: "",
-    preco: "",
-    descricao: "",
-    imagem: ""
+    descricao: ""
   });
 
   useEffect(() => {
-    produtoService.getItem(id) 
-      .then((res) => setItem(res.data))
+    produtoService.buscarProduto(id) 
+      .then((res) => setItem(res))
       .catch((err) => console.error("Erro ao carregar item:", err));
   }, [id]);
 
@@ -27,7 +25,7 @@ export default function EditarItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await produtoService.updateItem(id, item); 
+      await produtoService.atualizarProduto(id, item); 
       navigate("/meus-itens"); 
     } catch (error) {
       console.error("Erro ao atualizar item:", error);
@@ -48,29 +46,11 @@ export default function EditarItem() {
           className="w-full border p-2 rounded"
         />
 
-        <input
-          type="number"
-          name="preco"
-          value={item.preco}
-          onChange={handleChange}
-          placeholder="Preço"
-          className="w-full border p-2 rounded"
-        />
-
         <textarea
           name="descricao"
           value={item.descricao}
           onChange={handleChange}
           placeholder="Descrição"
-          className="w-full border p-2 rounded"
-        />
-
-        <input
-          type="text"
-          name="imagem"
-          value={item.imagem}
-          onChange={handleChange}
-          placeholder="URL da imagem"
           className="w-full border p-2 rounded"
         />
 
