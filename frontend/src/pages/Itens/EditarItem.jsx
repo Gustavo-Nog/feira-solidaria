@@ -1,63 +1,67 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "../../components/Button/Button"; 
-import produtoService from "../../services/produtoServices"; 
+import { useForm, FormProvider } from "react-hook-form";
+import produtoService from "../../services/produtoServices";
+import InputField from "../../components/Input/InputField";
+import Button from "../../components/Button/Button";
 
 export default function EditarItem() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
+  const methods = useForm();
 
-  const [item, setItem] = useState({
-    nome: "",
-    descricao: ""
-  });
-
+  // Carrega os dados do item e já preenche os campos
   useEffect(() => {
-    produtoService.buscarProduto(id) 
-      .then((res) => setItem(res))
-      .catch((err) => console.error("Erro ao carregar item:", err));
-  }, [id]);
+    async function carregarItem() {
+      try {
+        const item = await produtoService.buscarProduto(id);
+        methods.reset(item); // preenche o formulário
+      } catch (err) {
+        console.error("Erro ao carregar item:", err);
+      }
+    }
+    carregarItem();
+  }, [id, methods]);
 
-  const handleChange = (e) => {
-    setItem({ ...item, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
-      await produtoService.atualizarProduto(id, item); 
-      navigate("/meus-itens"); 
+      await produtoService.atualizarProduto(id, data);
+      navigate("/produtos");
     } catch (error) {
       console.error("Erro ao atualizar item:", error);
     }
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-xl font-bold mb-4">Alterar Item</h1>
+    <FormProvider {...methods}>
+      <div className="p-6 max-w-md mx-auto">
+        <h1 className="text-xl font-bold mb-4">Editar Item</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="nome"
-          value={item.nome}
-          onChange={handleChange}
-          placeholder="Nome do item"
-          className="w-full border p-2 rounded"
-        />
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
+          <InputField
+            name="nome"
+            label="Nome do Produto:"
+            required="O nome é obrigatório."
+          />
 
-        <textarea
-          name="descricao"
-          value={item.descricao}
-          onChange={handleChange}
-          placeholder="Descrição"
-          className="w-full border p-2 rounded"
-        />
+          <InputField
+            as="textarea"
+            name="descricao"
+            label="Descrição:"
+            required="A descrição é obrigatória."
+          />
 
-        <Button type="submit" className="w-full bg-blue-600 text-white">
-          Atualizar
-        </Button>
-      </form>
-    </div>
+          <InputField
+            name="imagem"
+            label="URL da Imagem:"
+            required="A imagem é obrigatória."
+          />
+
+          <Button type="submit" className="w-full bg-blue-600 text-white">
+            Atualizar
+          </Button>
+        </form>
+      </div>
+    </FormProvider>
   );
 }
