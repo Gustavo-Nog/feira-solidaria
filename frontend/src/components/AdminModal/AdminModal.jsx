@@ -1,31 +1,67 @@
-import React from 'react';
-import './AdminModal.css';
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import acoesAdmServices from "../../services/acoesAdmServices";
 
-function AdminModal({ isOpen, onClose, dados }) {
-  if (!isOpen) return false;
+import "./AdminModal.css";
+
+function AdminModal({ isOpen, onClose, acao }) {
+  const { register, handleSubmit, reset } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+    if (acao) {
+      reset(acao);
+    } else {
+      reset({ nome: "", descricao: "" });
+    }
+  }, [acao, reset]);
+
+  if (!isOpen) return null;
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      if (acao) {
+        await acoesAdmServices.atualizarAcaoAdm(acao.id, data);
+        alert("Ação atualizada com sucesso!");
+      } else {
+        await acoesAdmServices.criarAcaoAdm(data);
+        alert("Ação criada com sucesso!");
+      }
+      onClose();
+    } catch (error) {
+      console.error("Erro ao salvar ação:", error);
+      alert("Erro ao salvar ação, tente novamente!");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Painel Administrativo</h2>
-        <div className="admin-metrics">
-          <div className="metric-card">
-            <h4>Itens Cadastrados</h4>
-            <p>{dados.totalItens}</p>
-          </div>
-          <div className="metric-card">
-            <h4>Usuários Ativos</h4>
-            <p>{dados.usuariosAtivos}</p>
-          </div>
-          <div className="metric-card">
-            <h4>Doações Realizadas</h4>
-            <p>{dados.totalDoacoes}</p>
-          </div>
-        </div>
+        <h2>{acao ? "Editar Ação" : "Criar Nova Ação"}</h2>
 
-        <div className="modal-actions">
-          <button className="btn btn-primary" onClick={onClose}>Fechar</button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Nome:</label>
+            <input {...register("nome", { required: true })} />
+          </div>
+
+          <div>
+            <label>Descrição:</label>
+            <input {...register("descricao", { required: true })} />
+          </div>
+
+          <div className="modal-actions">
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Salvando..." : "Salvar"}
+            </button>
+            <button type="button" onClick={onClose}>
+              Cancelar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
