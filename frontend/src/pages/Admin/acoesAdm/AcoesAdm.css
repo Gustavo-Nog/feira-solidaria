@@ -1,0 +1,81 @@
+.acoes-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+  min-height: 100vh;
+}
+
+button {
+  padding: 6px 12px;
+  margin: 4px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.btn-success {
+  background-color: #a6e3a1;
+  color: #1b3a1a;
+}
+
+.btn-primary {
+  background-color: #fdf6a2;
+  color: #5a5a1a;
+}
+
+.btn-danger {
+  background-color: #f4a6a6;
+  color: #7a1a1a;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th {
+  background-color: #a6e3a1;
+  color: #1b3a1a;
+}
+
+.table tr:nth-child(even) {
+  background-color: #fdf6a2;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.modal-content {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.modal-content p {
+  margin-top: 10px;
+}
