@@ -1,6 +1,5 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserProvider } from './context/UserContext';
 
 import { ToastContainer } from 'react-toastify';
@@ -20,14 +19,17 @@ import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
 import Perfil from './pages/Perfil/Perfil';
 
+import AdminLayout from './layout/AdminLayout';
+import Admin from './pages/Admin/Admin';
+import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
+import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
+import ProdutosAdmin from './pages/Admin/Produtos/ProdutosAdmin';
+
 import './App.css';
 
-
 function App() {
-  {/* GoogleOAuthProvider recebe o clientId da variável de ambiente para configurar o SDK do Google */ }
 
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID} >
       <BrowserRouter>
         <ToastContainer
           position="top-right"
@@ -52,8 +54,16 @@ function App() {
             <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
             <Route path="/perfil" element={<Perfil />} />
-
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+          </Route>
+
+          <Route element={<AdminLayout />}>
+            {/* Rotas que Usam o layout de Administradores */}
+            <Route path='/admin' element={<Admin />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/usuarios' element={<UsuariosLista />} />
+            <Route path='/listar-produtos' element={<ProdutosAdmin />} />
+            {/* <Route path='/configuracoes' element={<Configuracoes />} /> */}
           </Route>
 
           {/* Rotas que NÃO usam o layout (tela cheia) */}
@@ -63,8 +73,6 @@ function App() {
           <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
         </Routes>
       </BrowserRouter>
-    </GoogleOAuthProvider >
-
   );
 }
 

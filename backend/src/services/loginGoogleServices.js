@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const bcrypt = require("bcrypt");
-
 const prisma = require('../generated/prisma');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -26,6 +25,7 @@ passport.use(
           },
           include: { pessoa: true }
         });
+        
 
         if (usuario) {
           return done(null, usuario);
