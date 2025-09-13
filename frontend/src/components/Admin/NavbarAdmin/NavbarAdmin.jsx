@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaUser, FaGear, FaBagShopping } from 'react-icons/fa6';
+import { MdDashboard } from "react-icons/md";
+
 import './NavbarAdmin.css';
 
 function NavbarAdmin() {
@@ -16,20 +19,20 @@ function NavbarAdmin() {
 					
 				</div>
 				<div className="nav flex-column nav-pills">
-					<Link to="/admin" className={`nav-link ${isActive('/admin')}`}>
-						Dashboard
+					<Link to="/dashboard" className={`nav-link ${isActive('/dashboard')} `}>
+						<MdDashboard /> Dashboard
 					</Link>
-
+ 
 					<Link to="/usuarios" className={`nav-link ${isActive('/usuarios')}`}>
-						Usuarios
+						<FaUser /> Usuarios
 					</Link>
 					
 					<Link to="/listar-produtos" className={`nav-link ${isActive('/listar-produtos')}`}>
-						Produtos
+						<FaBagShopping /> Produtos
 					</Link>
 					
 					<Link to="/configuracoes" className={`nav-link ${isActive('/configuracoes')}`}>
-						Configurações
+						<FaGear /> Configurações
 					</Link>
 				</div>
 			</div>

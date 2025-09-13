@@ -72,7 +72,6 @@ const googleCallback = (req, res, next) => {
       { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES }
     );
 
-    // Setando cookies
     res.cookie('accessToken', tokenDeAcesso, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -87,7 +86,6 @@ const googleCallback = (req, res, next) => {
       maxAge: Number(process.env.REFRESH_TOKEN_COOKIE_EXPIRES) || 24 * 60 * 60 * 1000
     });
 
-    // Redireciona para o frontend
     return res.redirect('http://localhost:5173/');
   })(req, res, next);
 };

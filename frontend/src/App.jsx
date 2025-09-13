@@ -21,9 +21,9 @@ import Perfil from './pages/Perfil/Perfil';
 
 import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
+import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
 import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
-import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
-// import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
+import ProdutosAdmin from './pages/Admin/Produtos/ProdutosAdmin';
 
 import './App.css';
 
@@ -60,6 +60,7 @@ function App() {
           <Route element={<AdminLayout />}>
             {/* Rotas que Usam o layout de Administradores */}
             <Route path='/admin' element={<Admin />} />
+            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/usuarios' element={<UsuariosLista />} />
             <Route path='/listar-produtos' element={<ProdutosAdmin />} />
             {/* <Route path='/configuracoes' element={<Configuracoes />} /> */}
