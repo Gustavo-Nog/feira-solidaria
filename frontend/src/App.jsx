@@ -23,7 +23,9 @@ import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
 import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
 import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
-import ProdutosAdmin from './pages/Admin/Produtos/ProdutosAdmin';
+import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
+import Categoria from './pages/Admin/Categoria/Categoria';
+import AcoesAdm from './pages/Admin/acoesAdm/AcoesAdm';
 
 import './App.css';
 
@@ -63,6 +65,8 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/usuarios' element={<UsuariosLista />} />
             <Route path='/listar-produtos' element={<ProdutosAdmin />} />
+            <Route path='/categorias' element={<Categoria />} />
+            <Route path='/acoes-adm' element={<AcoesAdm />} />
             {/* <Route path='/configuracoes' element={<Configuracoes />} /> */}
           </Route>
 
