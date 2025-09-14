@@ -3,11 +3,12 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import ModalAdmin from "../../../components/Admin/ModalAdmin/ModalAdmin";
 import InputField from "../../../components/Input/InputField";
+import Tabela from "../../../components/Admin/Tabela/Tabela";
 
 import categoriaServices from "../../../services/categoriaServices";
 
-import "./Categorias.css";
-
+import "./Categoria.css";
+ 
 function Categorias() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
@@ -71,7 +72,9 @@ function Categorias() {
         data
       );
       setCategorias((prev) =>
-        prev.map((cat) => (cat.id === response.id ? response : cat))
+        prev.map((categoria) =>
+          categoria.id === response.id ? response : categoria
+        )
       );
       setIsEditOpen(false);
     } catch (error) {
@@ -87,7 +90,7 @@ function Categorias() {
     try {
       await categoriaServices.deletarCategoria(categoriaSelecionada.id);
       setCategorias((prev) =>
-        prev.filter((cat) => cat.id !== categoriaSelecionada.id)
+        prev.filter((categoria) => categoria.id !== categoriaSelecionada.id)
       );
       setIsDeleteOpen(false);
     } catch (error) {
@@ -108,7 +111,8 @@ function Categorias() {
 
       {loading && <p>Carregando...</p>}
 
-      <table className="table">
+      {/* aqui usamos o componente Tabela */}
+      <Tabela>
         <thead>
           <tr>
             <th>Nome</th>
@@ -144,10 +148,9 @@ function Categorias() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Tabela>
 
       <FormProvider {...methods}>
-
         <ModalAdmin
           isOpen={isCadastroOpen}
           onClose={() => setIsCadastroOpen(false)}
