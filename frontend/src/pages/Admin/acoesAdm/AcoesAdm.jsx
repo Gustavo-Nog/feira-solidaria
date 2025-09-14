@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import ModalAdmin from "../../../components/Admin/ModalAdmin/ModalAdmin";
 import InputField from "../../../components/Input/InputField";
+import Tabela from "../../../components/Admin/Tabela/Tabela";
 
 import acoesAdmServices from "../../../services/acoesAdmServices";
 import usuarioServices from "../../../services/usuarioService";
@@ -50,17 +51,23 @@ function AcoesAdm() {
     }
   }, [isEditOpen, acaoSelecionada]);
 
-  const handleCadastro = async (data) => {
-    try {
-      const response = await acoesAdmServices.criarAcaoAdm(data);
-      setAcoes([...acoes, response]);
-      setIsCadastroOpen(false);
-    } catch (error) {
-      console.error("Erro ao cadastrar ação:", error);
-    }
+const handleCadastro = async (data) => {
+  // Converte usuarioId para número antes de enviar
+  const payload = {
+    ...data,
+    usuarioId: Number(data.usuarioId)
   };
+  console.log("Dados enviados:", payload);
+  try {
+    const response = await acoesAdmServices.criarAcaoAdm(payload);
+    setAcoes([...acoes, response]);
+    setIsCadastroOpen(false);
+  } catch (error) {
+    console.error("Erro ao cadastrar ação:", error);
+  }
+};
 
-  const handleEdit = async (data) => {
+ const handleEdit = async (data) => {
     try {
       const response = await acoesAdmServices.atualizarAcaoAdm(
         acaoSelecionada.id,
@@ -74,7 +81,7 @@ function AcoesAdm() {
       console.error("Erro ao editar ação:", error);
     }
   };
-
+  
   const handleDelete = async () => {
     try {
       await acoesAdmServices.deletarAcaoAdm(acaoSelecionada.id);
@@ -94,7 +101,7 @@ function AcoesAdm() {
 
         <div className="acoes-table">
           <h2>Lista de Ações Administrativas</h2>
-          <table className="table">
+          <Tabela>
             <thead>
               <tr>
                 <th>Descrição</th>
@@ -104,35 +111,41 @@ function AcoesAdm() {
               </tr>
             </thead>
             <tbody>
-              {acoes.map((acao) => (
-                <tr key={acao.id}>
-                  <td>{acao.descricao}</td>
-                  <td>{new Date(acao.data).toLocaleDateString()}</td>
-                  <td>{acao.usuario?.nomeUsuario}</td>
-                  <td>
-                    <button
-                      className="btn-primary"
-                      onClick={() => {
-                        setAcaoSelecionada(acao);
-                        setIsEditOpen(true);
-                      }}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="btn-danger"
-                      onClick={() => {
-                        setAcaoSelecionada(acao);
-                        setIsDeleteOpen(true);
-                      }}
-                    >
-                      Deletar
-                    </button>
-                  </td>
+              {acoes.length > 0 ? (
+                acoes.map((acao) => (
+                  <tr key={acao.id}>
+                    <td>{acao.descricao}</td>
+                    <td>{acao.data ? new Date(acao.data).toLocaleDateString() : "—"}</td>
+                    <td>{acao.usuario?.nomeUsuario || "—"}</td>
+                    <td>
+                      <button
+                        className="btn-primary"
+                        onClick={() => {
+                          setAcaoSelecionada(acao);
+                          setIsEditOpen(true);
+                        }}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn-danger"
+                        onClick={() => {
+                          setAcaoSelecionada(acao);
+                          setIsDeleteOpen(true);
+                        }}
+                      >
+                        Deletar
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4}>Nenhum registro encontrado.</td>
                 </tr>
-              ))}
+              )}
             </tbody>
-          </table>
+          </Tabela>
         </div>
 
         <FormProvider {...methods}>
@@ -145,7 +158,7 @@ function AcoesAdm() {
             confirmText="Cadastrar"
             confirmClass="btn-success"
           >
-            <InputField name="descricao" label="Descrição" required />
+            <InputField name="descricao" label="Descrição"/>
 
             <label>Usuário Responsável</label>
             <select {...methods.register("usuarioId")} required>
@@ -166,7 +179,7 @@ function AcoesAdm() {
             confirmText="Salvar"
             confirmClass="btn-primary"
           >
-            <InputField name="descricao" label="Descrição" required />
+            <InputField name="descricao" label="Descrição"/>
 
             <label>Usuário Responsável</label>
             <select {...methods.register("usuarioId")} required>

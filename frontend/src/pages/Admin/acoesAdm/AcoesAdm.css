@@ -22,6 +22,7 @@ button:hover {
 .btn-success {
   background-color: #a6e3a1;
   color: #1b3a1a;
+  float: right;
 }
 
 .btn-primary {

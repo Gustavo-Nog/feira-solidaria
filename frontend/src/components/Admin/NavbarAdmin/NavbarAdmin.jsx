@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaUser, FaGear, FaBagShopping } from 'react-icons/fa6';
 import { MdDashboard } from "react-icons/md";
+import { ImAccessibility } from "react-icons/im";
 
 import './NavbarAdmin.css';
 
@@ -31,6 +32,14 @@ function NavbarAdmin() {
 						<FaBagShopping /> Produtos
 					</Link>
 					
+					<Link to="/categorias" className={`nav-link ${isActive('/categorias')}`}>
+						<FaBagShopping /> Categorias
+					</Link>
+					
+					<Link to="/acoes-adm" className={`nav-link ${isActive('/acoes-admin')}`}>
+						<ImAccessibility /> Ações Admin
+					</Link>
+
 					<Link to="/configuracoes" className={`nav-link ${isActive('/configuracoes')}`}>
 						<FaGear /> Configurações
 					</Link>
