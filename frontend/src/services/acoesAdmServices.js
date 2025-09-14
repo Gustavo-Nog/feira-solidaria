@@ -38,7 +38,7 @@ const criarAcaoAdm = async (payload) => {
 
 const atualizarAcaoAdm = async (id, payload) => {
     try {
-        const res = await api.put(`/api/apiacoesAdm/${Number(id)}`, payload);
+        const res = await api.put(`/api/acoesAdm/${Number(id)}`, payload);
         return res.data;
     } catch (error) {
         throw new Error(`Falha ao atualizar ação: ${error.message}`);

@@ -68,19 +68,23 @@ const handleCadastro = async (data) => {
 };
 
  const handleEdit = async (data) => {
-    try {
-      const response = await acoesAdmServices.atualizarAcaoAdm(
-        acaoSelecionada.id,
-        data
-      );
-      setAcoes(
-        acoes.map((acao) => (acao.id === response.id ? response : acao))
-      );
-      setIsEditOpen(false);
-    } catch (error) {
-      console.error("Erro ao editar ação:", error);
-    }
+  const payload = {
+    ...data,
+    usuarioId: Number(data.usuarioId)
   };
+  try {
+    const response = await acoesAdmServices.atualizarAcaoAdm(
+      acaoSelecionada.id,
+      payload
+    );
+    setAcoes(
+      acoes.map((acao) => (acao.id === response.id ? response : acao))
+    );
+    setIsEditOpen(false);
+  } catch (error) {
+    console.error("Erro ao editar ação:", error);
+  }
+};
   
   const handleDelete = async () => {
     try {

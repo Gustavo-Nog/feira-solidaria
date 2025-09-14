@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaUser, FaGear, FaBagShopping } from 'react-icons/fa6';
 import { MdDashboard } from "react-icons/md";
 import { ImAccessibility } from "react-icons/im";
+import { AiFillCalendar } from "react-icons/ai";
 
 import './NavbarAdmin.css';
 
@@ -33,7 +34,7 @@ function NavbarAdmin() {
 					</Link>
 					
 					<Link to="/categorias" className={`nav-link ${isActive('/categorias')}`}>
-						<FaBagShopping /> Categorias
+						<AiFillCalendar /> Categorias
 					</Link>
 					
 					<Link to="/acoes-adm" className={`nav-link ${isActive('/acoes-admin')}`}>
