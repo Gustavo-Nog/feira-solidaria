@@ -37,6 +37,10 @@ export function CartProvider({ children }) {
   const atualizarQuantidade = (itemId, novaQuantidade) => {
     setCartItems((prevItems) => {
       if (novaQuantidade <= 0) {
+        const itemRemovido = prevItems.find(item => item.id === itemId);
+        if (itemRemovido) {
+          toast.error(`"${itemRemovido.nome}" foi removido do carrinho.`);
+        }
         return prevItems.filter(item => item.id !== itemId);
       }
       return prevItems.map(item =>
@@ -45,11 +49,17 @@ export function CartProvider({ children }) {
     });
   };
 
+  const limparCarrinho = () => {
+    setCartItems([]);
+
+  };
+
   const value = {
     cartItems,
     adicionarAoCarrinho,
     removerDoCarrinho,
     atualizarQuantidade,
+    limparCarrinho,
   };
 
   return (

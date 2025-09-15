@@ -4,9 +4,10 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [usuario, setUsuario] = useState({
-    nome: 'Nome do Usuário',
-    email: 'usuario@email.com',
-    foto: 'https://ppgquimica.propg.ufabc.edu.br/wp-content/uploads/2016/05/sem-imagem-avatar.png',
+    id: 5,
+    nomeUsuario: 'bruno_receptor',
+    email: 'bruno.receptor@email.com',
+    pessoaId: 5
   });
 
   return (

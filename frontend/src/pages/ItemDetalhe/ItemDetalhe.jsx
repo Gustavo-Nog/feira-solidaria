@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCart } from '../../context/ContextCart'; // Importa o hook do carrinho
-import produtos from '../../mocks/produtos';
+import { useCart } from '../../context/ContextCart';
+import produtoServices from '../../services/produtoService';
 
 import './ItemDetalhe.css';
 
@@ -9,12 +10,34 @@ function ItemDetalhe() {
   const navigate = useNavigate();
   const { adicionarAoCarrinho } = useCart();
 
-  const item = produtos.find((produto) => produto.id.toString() === itemId);
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const carregarItem = async () => {
+      try {
+        const dadosDoItem = await produtoServices.buscarProduto(itemId);
+        setItem(dadosDoItem);
+      } catch (error) {
+        console.error("Erro ao buscar detalhes do item:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarItem();
+  }, [itemId]);
 
   const handleAddToCart = () => {
-    adicionarAoCarrinho(item);
-    navigate('/carrinho');
+    if (item) {
+      adicionarAoCarrinho(item);
+      navigate('/carrinho');
+    }
   };
+
+  if (loading) {
+    return <div className="container my-5"><h2>A carregar item...</h2></div>;
+  }
 
   if (!item) {
     return <div className="container my-5"><h2>Item não encontrado!</h2></div>;
@@ -25,12 +48,18 @@ function ItemDetalhe() {
       <div className="card p-4 shadow-sm">
         <div className="row g-5">
           <div className="col-lg-5">
-            <img src={item.imagem} alt={item.nome} className="img-fluid rounded" />
+            <img 
+              src={item.imagemUrl || 'https://placehold.co/600x400'} 
+              alt={item.nomeProduto} 
+              className="img-fluid rounded" 
+            />
           </div>
 
           <div className="col-lg-7 d-flex flex-column">
-            <span className="badge bg-success align-self-start mb-2">{item.categoria}</span>
-            <h1 className="item-nome mb-3">{item.nome}</h1>
+            <span className="badge bg-success align-self-start mb-2">
+              {item.categoria?.nomeCategoria || 'Sem Categoria'}
+            </span>
+            <h1 className="item-nome mb-3">{item.nomeProduto}</h1>
 
             <div className="mb-4">
               <h5>Descrição</h5>
@@ -42,19 +71,15 @@ function ItemDetalhe() {
                 <h5>Qualidade</h5>
                 <p className="fw-bold">{item.qualidade}</p>
               </div>
-              <div className="col-md-6">
-                <h5>Localização</h5>
-                <p>{item.localizacao}</p>
-              </div>
             </div>
 
             <div className="mb-4">
-              <h5>Anunciante por:</h5>
-              <p>{item.produtor.nome} (Nota: {item.produtor.nota} ⭐)</p>
+              <h5>Anunciado por:</h5>
+              <p>{item.pessoa?.nome || 'Doador anónimo'} (Nota: 5 ⭐)</p>
             </div>
 
             <button className="btn btn-lg btn-success mt-auto" onClick={handleAddToCart}>
-              Tenho Interesse / Fazer Troca
+              Tenho Interesse / Adicionar ao Carrinho
             </button>
           </div>
         </div>
