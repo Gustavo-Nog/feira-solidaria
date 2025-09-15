@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ModalAdmin from '../../../components/Admin/ModalAdmin/ModalAdmin';
 import InputField from '../../../components/Input/InputField';
 import Button from '../../../components/Button/Button';
+import Tabela from "../../../components/Admin/Tabela/Tabela";
 
 import usuarioServices from '../../../services/usuarioServices';
 
@@ -66,6 +67,7 @@ function Usuarios() {
   };
 
 	const handleEdit = async (data) => {
+		if (!usuarioSelecionado) return;
 		setLoading(true);
 		try {
 			const response = await usuarioServices.atualizarUsuario(usuarioSelecionado.id, data);
@@ -80,6 +82,7 @@ function Usuarios() {
 	};
 
   const handleDelete = async () => {
+		if (!usuarioSelecionado) return;
 		setLoading(true);
 		try {
 			await usuarioServices.deletarUsuario(usuarioSelecionado.id);
@@ -99,9 +102,12 @@ function Usuarios() {
 
   return(
 		<>
-			<div>
-				<h1>Gerenciamento de Usuários</h1>
-				<div className="mb-3 d-inline">
+			<div className="container-fluid p-4 bg-light min-vh-100">
+				<div className="text-center mb-4">
+					<h2 className="fs-4 text-dark">Gerenciamento de Usuários</h2>
+				</div>
+
+				<div className="d-flex align-items-center mb-4 gap-2">
 					<input
 						className='mb-1 form-control'
 						type="text"
@@ -109,11 +115,13 @@ function Usuarios() {
 						onChange={(e) => setBusca(e.target.value)}
 						placeholder="Buscar usuário"
 					/>
-				</div>
-				<div className="mb-3">
 					<Button
 						size="sm"
-						className="btn-success mb-2"
+						className="btn-success px-4 py-2 px-3 py-1 rounded-2 fw-bold"
+						style={{ 
+							backgroundColor: "#4caf50",
+							width: "auto"
+						}}
 						onClick={() => 
 							setIsCadastroOpen(true)
 						}
@@ -121,17 +129,17 @@ function Usuarios() {
 						Cadastrar Novo Usuário
 					</Button>
 				</div>
-			</div>
 				
-			<div>
-				<h2>Lista de Usuários</h2>
-				<table className="table">
+				{loading && <p>Carregando...</p>}
+				
+				<h3 className="fs-4 text-dark">Lista de Usuários</h3>
+				<Tabela>
 					<thead>
 						<tr>
 							<th>Nome</th>
 							<th>Email</th>
 							<th>Tipo</th>
-							<th>Ações</th>
+							<th className="text-center">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -142,8 +150,11 @@ function Usuarios() {
 								<td>{usuario.tipo}</td>
 								<td>
 									<Button
-										size="md"
-										className="btn-warning mb-2"
+										size="small"
+										className=" me-2 py-2 rounded fs-0.9"
+										style = {{
+											backgroundColor: "#2196f3"
+										}}
 										onClick={() => {
 											setUsuarioSelecionado(usuario);
 											setIsEditOpen(true);
@@ -153,8 +164,11 @@ function Usuarios() {
 									</Button>
 
 									<Button
-										size="md"
-										className="btn-danger mb-2"
+										size="small"
+										className="btn-danger me-2 py-2 rounded fs-0.9"
+										style = {{
+											backgroundColor: "#f44336"
+										}}
 										onClick={() => {
 											setUsuarioSelecionado(usuario);
 												setIsDeleteOpen(true);
@@ -162,72 +176,70 @@ function Usuarios() {
 									>
 										Deletar
 									</Button>
-
 								</td>
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</Tabela>
+
+				<FormProvider {...methods}>
+					<ModalAdmin
+						isOpen={isCadastroOpen}
+						onClose={() => setIsCadastroOpen(false)}
+						title="Cadastrar Usuário"
+						onConfirm={methods.handleSubmit(handleCadastro)}
+						confirmText="Cadastrar"
+						confirmClass="btn-success"
+					>
+						<InputField name="nomeUsuario" label="Nome" required />
+						<InputField name="email" label="Email" type="email" required />
+						<InputField name="senha" label="Senha" type="password" required />
+						<InputField
+							name="tipo"
+							label="Tipo"
+							as="select"
+							required
+							options={[
+								{ value: "ADMIN", label: "Administrador" },
+								{ value: "COMUM", label: "Comum" }
+							]}
+						/>
+					</ModalAdmin>
+
+					<ModalAdmin
+						isOpen={isEditOpen}
+						onClose={() => setIsEditOpen(false)}
+						title="Editar Usuário"
+						onConfirm={methods.handleSubmit(handleEdit)}
+						confirmText="Salvar"
+						confirmClass="btn-primary"
+					>
+						<InputField name="nomeUsuario" label="Nome" />
+						<InputField name="email" label="Email" type="email" />
+						<InputField name="senha" label="Senha" type="password" />
+						<InputField
+							name="tipo"
+							label="Tipo"
+							as="select"
+							options={[
+								{ value: "ADMIN", label: "Administrador" },
+								{ value: "COMUM", label: "Comum" }
+							]}
+						/>
+					</ModalAdmin>
+
+					<ModalAdmin
+						isOpen={isDeleteOpen}
+						onClose={() => setIsDeleteOpen(false)}
+						title="Deletar Usuário"
+						onConfirm={handleDelete}
+						confirmText="Deletar"
+						confirmClass="btn-danger"
+					>
+						<p>Tem certeza que deseja deletar este usuário?</p>
+					</ModalAdmin>
+				</FormProvider>
 			</div>
-			<FormProvider {...methods}>
-				<ModalAdmin
-					isOpen={isCadastroOpen}
-					onClose={() => setIsCadastroOpen(false)}
-					title="Cadastrar Usuário"
-					onConfirm={methods.handleSubmit(handleCadastro)}
-					confirmText="Cadastrar"
-					confirmClass="btn-success"
-				>
-					<InputField name="nomeUsuario" label="Nome" required />
-					<InputField name="email" label="Email" type="email" required />
-					<InputField name="senha" label="Senha" type="password" required />
-					<InputField
-						name="tipo"
-						label="Tipo"
-						as="select"
-						required
-						options={[
-							{ value: "ADMIN", label: "Administrador" },
-							{ value: "COMUM", label: "Comum" }
-						]}
-					/>
-				</ModalAdmin>
-
-				<ModalAdmin
-					isOpen={isEditOpen}
-					onClose={() => setIsEditOpen(false)}
-					title="Editar Usuário"
-					onConfirm={methods.handleSubmit(handleEdit)}
-					confirmText="Salvar"
-					confirmClass="btn-primary"
-				>
-					<InputField name="nomeUsuario" label="Nome" />
-					<InputField name="email" label="Email" type="email" />
-					<InputField name="senha" label="Senha" type="password" />
-					<InputField
-						name="tipo"
-						label="Tipo"
-						as="select"
-						options={[
-							{ value: "ADMIN", label: "Administrador" },
-							{ value: "COMUM", label: "Comum" }
-						]}
-					/>
-				</ModalAdmin>
-
-				<ModalAdmin
-					isOpen={isDeleteOpen}
-					onClose={() => setIsDeleteOpen(false)}
-					title="Deletar Usuário"
-					onConfirm={handleDelete}
-					confirmText="Deletar"
-					confirmClass="btn-danger"
-				>
-					<p>Tem certeza que deseja deletar este usuário?</p>
-				</ModalAdmin>
-			</FormProvider>
-			
-
 		</>
 	);
 };
