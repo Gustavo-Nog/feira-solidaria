@@ -2,7 +2,7 @@ import api from './api';
 
 const solicitarDoacao = async (dadosDoacao) => {
   try {
-    const response = await api.post('/solicitar', dadosDoacao);
+    const response = await api.post('/api/solicitar', dadosDoacao);
     return response.data;
   } catch (error) {
     console.error("Erro ao solicitar doação:", error);
@@ -12,7 +12,7 @@ const solicitarDoacao = async (dadosDoacao) => {
 
 const buscarDoacaoPorId = async (id) => {
   try {
-    const response = await api.get(`/doacoes/${id}`);
+    const response = await api.get(`/api/doacoes/${id}`);
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar doação:", error);
@@ -22,7 +22,7 @@ const buscarDoacaoPorId = async (id) => {
 
 const atualizarStatusDoacao = async (id, novoStatus) => {
   try {
-    const response = await api.put(`/doacoes/${id}/status`, { status: novoStatus });
+    const response = await api.put(`/api/doacoes/${id}/status`, { status: novoStatus });
     return response.data;
   } catch (error) {
     console.error("Erro ao atualizar status da doação:", error);
