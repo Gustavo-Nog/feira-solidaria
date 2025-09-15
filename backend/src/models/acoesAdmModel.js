@@ -26,13 +26,12 @@ const buscarAcoesPorUsuario = async (idDoUsuario) => {
 };
 
 const criarAcaoAdm = async (dadosAcaoAdm) => {
-  if (!dadosAcaoAdm.descricao || !dadosAcaoAdm.usuarioId) {
-    throw new Error("Descrição e ID do usuário são obrigatórios para criar uma ação.");
+  if (!dadosAcaoAdm.usuarioId) {
+    throw new Error("ID do usuário é obrigatório para criar uma ação.");
   }
-
-    return prisma.acaoAdministrativa.create({
-        data: dadosAcaoAdm
-    });
+  return prisma.acaoAdministrativa.create({
+    data: dadosAcaoAdm
+  });
 };
 
 const atualizarAcaoAdm = async (id, dadosParaAtualizar) => {

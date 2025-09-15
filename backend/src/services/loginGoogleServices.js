@@ -1,47 +1,66 @@
+require('dotenv').config();
+
+const bcrypt = require("bcrypt");
 const prisma = require('../generated/prisma');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+console.log("ID do Cliente usado:", process.env.GOOGLE_CLIENT_ID);
+console.log("URL de Callback usada:", process.env.CALLBACK_URL);
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_SECRET_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL
     },
-    async (acessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
-        const usuario = await prisma.usuario.findFirst({
+        console.log(profile); 
+
+        let usuario = await prisma.usuario.findFirst({
           where: {
             OR: [
               { googleID: profile.id },
               { email: profile.emails[0].value }
-            ],
-          }
+            ]
+          },
+          include: { pessoa: true }
         });
+        
 
         if (usuario) {
           return done(null, usuario);
         } else {
-          const novoUsuario = await prisma.usuario.create({
+          const senhaPlaceholder = await bcrypt.hash(profile.id + Date.now(), 10);
+
+          let novoUsuario = await prisma.usuario.create({
             data: {
               googleID: profile.id,
               nomeUsuario: profile.displayName,
               email: profile.emails[0].value,
-              tipo: "COMUM",
+              senha: senhaPlaceholder,
+              tipo: "COMUM"
+            }
+          });
+
+          novoUsuario = await prisma.usuario.update({
+            where: { 
+              id: novoUsuario.id 
             },
-            include: { 
-              pessoa: True 
-            }
-          });
-          await prisma.pessoa.create({
             data: {
-              nome: profile.displayName,
-              usuarioID: novoUsuario.id
-            }
+              pessoa: { 
+                create: {
+                   nome: profile.displayName 
+                } 
+              }
+            },
+            include: { pessoa: true }
           });
+
           return done(null, novoUsuario);
         }
+
       } catch (error) {
         return done(error);
       }
@@ -56,11 +75,11 @@ passport.serializeUser((usuario, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: {
-        id: id,
+      where: { 
+        id 
       },
-      include : {
-        pessoa: True
+      include: { 
+        pessoa: true 
       }
     });
     done(null, usuario);

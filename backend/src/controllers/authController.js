@@ -1,3 +1,4 @@
+require('dotenv').config();
 const prisma = require('../generated/prisma');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -14,7 +15,9 @@ const login = async (req, res) => {
 
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: { nomeUsuario }
+      where: { 
+        nomeUsuario 
+      }
     });
 
     if (!usuario) {
@@ -53,7 +56,8 @@ const loginGoogle = passport.authenticate('google', { scope: ['profile', 'email'
 const googleCallback = (req, res, next) => {
   passport.authenticate('google', { session: false }, (erro, usuario, info) => {
     if (erro || !usuario) {
-      return res.status(401).json({ message: 'Falha no login com Google', error: erro || info });
+      console.error(erro || info);
+      return res.redirect('http://localhost:5173/login?error=google');
     }
 
     const tokenDeAcesso = jwt.sign(
@@ -68,7 +72,21 @@ const googleCallback = (req, res, next) => {
       { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES }
     );
 
-    return res.status(200).json({ message: 'Login com Google bem sucedido', tokenDeAcesso, refreshToken });
+    res.cookie('accessToken', tokenDeAcesso, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: Number(process.env.ACCESS_TOKEN_COOKIE_EXPIRES) || 24 * 60 * 60 * 1000
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: Number(process.env.REFRESH_TOKEN_COOKIE_EXPIRES) || 24 * 60 * 60 * 1000
+    });
+
+    return res.redirect('http://localhost:5173/');
   })(req, res, next);
 };
 
