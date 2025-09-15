@@ -1,11 +1,12 @@
 require('dotenv').config();
 
 const bcrypt = require("bcrypt");
-
 const prisma = require('../generated/prisma');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+console.log("ID do Cliente usado:", process.env.GOOGLE_CLIENT_ID);
+console.log("URL de Callback usada:", process.env.CALLBACK_URL);
 passport.use(
   new GoogleStrategy(
     {

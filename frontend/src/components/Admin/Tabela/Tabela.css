@@ -1,0 +1,59 @@
+.tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.tabela-admin {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-admin th,
+.tabela-admin td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabela-admin th {
+  background-color: #f1f1f1;
+  color: #333;
+  font-weight: bold;
+}
+
+.tabela-admin tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Botões dentro da tabela */
+.tabela-admin button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.tabela-admin .btn-edit {
+  background-color: #2196f3;
+  color: white;
+}
+
+.tabela-admin .btn-edit:hover {
+  background-color: #1976d2;
+}
+
+.tabela-admin .btn-delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.tabela-admin .btn-delete:hover {
+  background-color: #d32f2f;
+}
