@@ -159,7 +159,8 @@ const handleEdit = async (data) => {
     }
 
     const response = await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
-    setProdutos(produtos.map(produto => produto.id === response.id ? response : produto));
+		const listaAtualizada = await produtoServices.listarProdutos();
+		setProdutos(listaAtualizada);
     setIsEditOpen(false);
   } catch (error) {
     console.error("Erro ao atualizar produto:", error);
