@@ -3,7 +3,7 @@ import { FaUsers, FaBasketShopping } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import ModalAdmin from '../../../components/Admin/ModalAdmin/ModalAdmin';
+
 import InputField from '../../../components/Input/InputField';
 
 import usuarioServices from '../../../services/usuarioService';
