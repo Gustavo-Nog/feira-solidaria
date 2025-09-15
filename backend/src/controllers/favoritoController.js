@@ -1,29 +1,5 @@
 const favoritoModel = require('../models/favoritoModel');
 
-const listarFavoritosHandler = async (req, res) => {
-  try {
-    const favoritos = await favoritoModel.listarFavoritos();
-    res.status(200).json(favoritos);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-const buscarFavoritoPorIdHandler = async (req, res) => {
-  try {
-    const favorito = await favoritoModel.buscarFavoritoPorId(Number(req.params.id));
-
-    if (!favorito) {
-      return res.status(404).json({ error: "Favorito não encontrado" });
-    }
-
-    res.status(200).json(favorito);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-
 const criarFavoritoHandler = async (req, res) => {
   try {
     const novoFavorito = await favoritoModel.criarFavorito(req.body);
@@ -33,20 +9,29 @@ const criarFavoritoHandler = async (req, res) => {
   }
 };
 
-const atualizarFavoritoHandler = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const dadosParaAtualizar = req.body;
-    const favoritoAtualizado = await favoritoModel.atualizarFavorito(parseInt(id), dadosParaAtualizar);
-    res.status(200).json(favoritoAtualizado);
-  } catch (error) {
-    res.status(404).json({ error: error.message });
-  }
+const listarFavoritosHandler = async (req, res) => {
+    try {
+        const pessoaId = parseInt(req.query.pessoaId);
+        if (!pessoaId) {
+            return res.status(400).json({ error: 'pessoaId é obrigatório.' });
+        }
+        const favoritos = await favoritoModel.listarFavoritosPorPessoa(pessoaId);
+        res.status(200).json(favoritos);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
 const deletarFavoritoHandler = async (req, res) => {
   try {
-    await favoritoModel.deletarFavorito(Number(req.params.id));
+    const pessoaId = parseInt(req.query.pessoaId);
+    const produtoId = parseInt(req.query.produtoId);
+
+    if (!pessoaId || !produtoId) {
+        return res.status(400).json({ error: 'pessoaId e produtoId são obrigatórios.' });
+    }
+
+    await favoritoModel.deletarFavorito(pessoaId, produtoId);
     res.status(204).send();
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -54,9 +39,7 @@ const deletarFavoritoHandler = async (req, res) => {
 };
 
 module.exports = {
-    listarFavoritosHandler,
-    buscarFavoritoPorIdHandler,
-    criarFavoritoHandler,
-    atualizarFavoritoHandler,
-    deletarFavoritoHandler
+  criarFavoritoHandler,
+  listarFavoritosHandler,
+  deletarFavoritoHandler,
 };
