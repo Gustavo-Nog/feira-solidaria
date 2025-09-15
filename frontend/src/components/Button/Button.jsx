@@ -4,7 +4,7 @@ function Button({ children, loading, className = 'btn-warning', size = 'md', ...
 
   return (
     <button
-      className={`btn ${className} w-100 text-light custom-button ${size}`}
+      className={`btn ${className}  text-light custom-button ${size}`}
       disabled={loading}
       {...props}
     >

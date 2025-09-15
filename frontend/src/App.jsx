@@ -23,7 +23,7 @@ import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
 import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
 import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
-import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
+import ProdutosAdmin from './pages/Admin/ProdutosAdmin/ProdutosAdmin';
 import Categoria from './pages/Admin/Categoria/Categoria';
 import AcoesAdm from './pages/Admin/acoesAdm/AcoesAdm';
 

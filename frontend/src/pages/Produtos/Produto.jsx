@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import produtoService from '../../services/produtoService';
+import produtoService from '../../services/produtoServices';
 import favoritoService from '../../services/favoritoServices';
 
 import Button from '../../components/Button/Button';
@@ -42,18 +42,18 @@ function Produtos() {
     carregarProdutos();
   }, []);
 
-const categorias = [...new Set(produtos.map(produto => produto.categoria.nome))];
-const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
-const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
+	const categorias = [...new Set(produtos.map(produto => produto.categoria.nome))];
+	const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
+	const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
 
-const produtosFiltrados = produtos.filter((produto) => {
-  const filtraNome = produto.nomeProduto.toLowerCase().includes(busca.toLowerCase());
-  const filtraCategoria = categoriaSelecionada === '' || produto.categoria.nome === categoriaSelecionada;
-  const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
-  const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
+	const produtosFiltrados = produtos.filter((produto) => {
+		const filtraNome = produto.nomeProduto.toLowerCase().includes(busca.toLowerCase());
+		const filtraCategoria = categoriaSelecionada === '' || produto.categoria.nome === categoriaSelecionada;
+		const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
+		const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
 
-  return filtraNome && filtraCategoria && filtraLocalizacao && filtraQualidade;
-});
+		return filtraNome && filtraCategoria && filtraLocalizacao && filtraQualidade;
+	});
 
   const verDetalhes = (id) => {
     navigate(`/item/${id}`);
