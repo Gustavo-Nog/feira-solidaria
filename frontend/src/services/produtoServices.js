@@ -28,10 +28,18 @@ const buscarProduto = async (id) => {
   }
 };
 
-const criarProduto = async (payload) => {
+const criarProduto = async (formData) => {
   try {
+<<<<<<< Updated upstream
 <<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.post("/api/produtos", payload);
+=======
+    const response = await api.post("/api/produtos",  formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+>>>>>>> Stashed changes
     return response.data;
 =======
     const res = await api.post("/api/produtos", payload);
@@ -42,10 +50,18 @@ const criarProduto = async (payload) => {
   }
 };
 
-const atualizarProduto = async (id, payload) => {
+const atualizarProduto = async (id, formData) => {
   try {
+<<<<<<< Updated upstream
 <<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.put(`/api/produtos/${Number(id)}`, payload);
+=======
+    const response = await api.put(`/api/produtos/${Number(id)}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+>>>>>>> Stashed changes
     return response.data;
 =======
     const res = await api.put(`/api/produtos/${Number(id)}`, payload);
