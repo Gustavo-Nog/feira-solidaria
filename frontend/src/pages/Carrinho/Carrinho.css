@@ -1,6 +1,5 @@
-/* --- ESTILO GERAL DA PÁGINA --- */
 .carrinho-fundo {
-  background-color: #f4f7f6; /* Um cinza muito claro e suave */
+  background-color: #f4f7f6;
   min-height: 100vh;
   padding: 1rem;
 }
@@ -9,7 +8,7 @@
   max-width: 1200px;
   margin: 2rem auto;
   display: flex;
-  flex-direction: column; /* Layout de coluna para mobile */
+  flex-direction: column;
   gap: 2rem;
 }
 
@@ -20,7 +19,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* --- LISTA DE ITENS --- */
 .carrinho-lista {
   background-color: #fff;
   border-radius: 12px;
@@ -29,7 +27,7 @@
 
 .carrinho-item {
   display: flex;
-  flex-direction: column; /* Empilhado no mobile */
+  flex-direction: column;
   padding: 1.5rem;
   border-bottom: 1px solid #eef0f2;
 }
@@ -78,10 +76,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 1rem; /* Espaço entre a info e as ações no mobile */
+  margin-top: 1rem;
 }
 
-/* --- CONTROLOS DE QUANTIDADE E BOTÃO REMOVER --- */
 .quantity-controls {
   display: flex;
   align-items: center;
@@ -114,7 +111,6 @@
   padding: 0.5rem;
 }
 
-/* --- SUMÁRIO DA TROCA --- */
 .carrinho-sumario {
   background-color: #fff;
   border-radius: 12px;
@@ -153,18 +149,17 @@
   background-color: #229954;
 }
 
-/* --- MEDIA QUERY PARA DESKTOP --- */
 @media (min-width: 992px) {
   .carrinho-container {
     flex-direction: row;
     align-items: flex-start;
   }
   .carrinho-coluna-principal {
-    flex: 2; /* Ocupa 2/3 do espaço */
+    flex: 2;
   }
   .carrinho-coluna-sumario {
-    flex: 1; /* Ocupa 1/3 do espaço */
-    position: sticky; /* Fica fixo ao rolar a página */
+    flex: 1;
+    position: sticky;
     top: 2rem;
   }
   .carrinho-item {
