@@ -1,7 +1,6 @@
 const prisma = require('../generated/prisma');
 
 const listarProdutos = async () => {
-<<<<<<< Updated upstream
     return prisma.produto.findMany({
         orderBy: {
             nomeProduto: "asc"
@@ -16,18 +15,6 @@ const listarProdutos = async () => {
         }
     });
 }
-=======
-  return prisma.produto.findMany({
-    orderBy: {
-        nomeProduto: "asc"
-    },
-    include: {
-      pessoa: true, 
-      categoria: true  
-    }
-  });
-};
->>>>>>> Stashed changes
 
 const buscarProdutoPorId = async (id) => {
   return prisma.produto.findUnique({
@@ -65,13 +52,19 @@ const atualizarProduto = async (id, dadosParaAtualizar) => {
     where: { id },
   });
 
-  if (!produtoExistente) {
+   if (!produtoExistente) {
     throw new Error("Produto não encontrado!");
   }
 
   return prisma.produto.update({
     where: { id },
     data: dadosParaAtualizar,
+    include: {
+      categoria: true,
+      pessoa: {
+        select: { nome: true }
+      }
+    }
   });
 };
 
