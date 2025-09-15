@@ -1,23 +1,13 @@
 const prisma = require('../generated/prisma');
 
-const listarFavoritos = async () => {
+const listarFavoritosPorPessoa = async (pessoaId) => {
   return prisma.favorito.findMany({
+    where: { pessoaId: pessoaId },
     include: {
-      pessoa: true,
       produto: true
     },
     orderBy: {
       dataAdicao: "desc"
-    }
-  });
-};
-
-const buscarFavoritoPorId = async (id) => {
-  return prisma.favorito.findUnique({
-    where: { id },
-    include: {
-      pessoa: true,
-      produto: true
     }
   });
 };
@@ -27,49 +17,34 @@ const criarFavorito = async (dadosFavorito) => {
     throw new Error("PessoaId e ProdutoId são obrigatórios para criar um favorito.");
   }
   return prisma.favorito.create({
-  data: {
-    ...dadosFavorito,
-    dataAdicao: new Date()
-  },
-  include: {
-    pessoa: true,
-    produto: true
+    data: {
+      ...dadosFavorito,
+      dataAdicao: new Date()
     }
   });
 };
 
-const atualizarFavorito = async (id, dadosParaAtualizar) => {
-  const favoritoExistente = await prisma.favorito.findUnique({ where: { id } });
+const deletarFavorito = async (pessoaId, produtoId) => {
+  const favoritoExistente = await prisma.favorito.findFirst({
+    where: {
+      pessoaId: pessoaId,
+      produtoId: produtoId,
+    },
+  });
 
   if (!favoritoExistente) {
-    throw new Error("Favorito não encontrado!");
+    throw new Error('Favorito não encontrado para este utilizador.');
   }
 
-  return prisma.favorito.update({
-    where: { id },
-    data: dadosParaAtualizar,
-    include: {
-      pessoa: true,
-      produto: true
-    }
+  return prisma.favorito.delete({
+    where: {
+      id: favoritoExistente.id,
+    },
   });
 };
-
-const deletarFavorito = async (id) => {
-  const favoritoExistente = await prisma.favorito.findUnique({ where: { id } });
-
-  if (!favoritoExistente) {
-    throw new Error("Favorito não encontrado!");
-  }
-
-  return prisma.favorito.delete({ where: { id } });
-};
-
 
 module.exports = {
-    listarFavoritos,
-    buscarFavoritoPorId,
+    listarFavoritosPorPessoa,
     criarFavorito,
-    atualizarFavorito,
     deletarFavorito
 };

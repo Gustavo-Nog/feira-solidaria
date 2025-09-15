@@ -1,20 +1,11 @@
 import api from './api';
 
-const listarFavoritos = async () => {
+const listarFavoritos = async (pessoaId) => {
   try {
-    const response = await api.get('/api/favoritos');
+    const response = await api.get(`/api/favoritos?pessoaId=${pessoaId}`);
     return response.data;
   } catch (error) {
     throw new Error(`Falha ao listar os favoritos: ${error.message}`);
-  }
-};
-
-const buscarFavorito = async (id) => {
-  try {
-    const response = await api.get(`/api/favoritos/${Number(id)}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(`Falha ao buscar o favorito: ${error.message}`);
   }
 };
 
@@ -27,18 +18,9 @@ const criarFavorito = async (payload) => {
   }
 };
 
-const atualizarFavorito = async (id, payload) => {
+const deletarFavorito = async (pessoaId, produtoId) => {
   try {
-    const response = await api.put(`/api/favoritos/${Number(id)}`, payload);
-    return response.data;
-  } catch (error) {
-    throw new Error(`Falha ao atualizar o favorito: ${error.message}`);
-  }
-};
-
-const deletarFavorito = async (id) => {
-  try {
-    const response = await api.delete(`/api/favoritos/${Number(id)}`);
+    const response = await api.delete(`/api/favoritos?pessoaId=${pessoaId}&produtoId=${produtoId}`);
     return response.data;
   } catch (error) {
     throw new Error(`Falha ao deletar o favorito: ${error.message}`);
@@ -47,8 +29,6 @@ const deletarFavorito = async (id) => {
 
 export default {
   listarFavoritos,
-  buscarFavorito,
   criarFavorito,
-  atualizarFavorito,
-  deletarFavorito
+  deletarFavorito,
 };
