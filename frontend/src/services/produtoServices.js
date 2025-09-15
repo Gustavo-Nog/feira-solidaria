@@ -2,13 +2,8 @@ import api from "./api";
 
 const listarProdutos = async () => {
   try {
-<<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.get("/api/produtos");   
     return response.data;
-=======
-    const res = await api.get("/api/produtos");   
-    return res.data;
->>>>>>> developer:frontend/src/services/produtoService.js
   } catch (error) {
     throw new Error(`Falha ao listar produtos: ${error.message}`);
   }
@@ -16,57 +11,26 @@ const listarProdutos = async () => {
 
 const buscarProduto = async (id) => {
   try {
-<<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.get(`/api/produtos/${Number(id)}`); 
     return response.data;
-=======
-    const res = await api.get(`/api/produtos/${Number(id)}`); 
-    return res.data;
->>>>>>> developer:frontend/src/services/produtoService.js
   } catch (error) {
     throw new Error(`Falha ao buscar produto: ${error.message}`);
   }
 };
 
-const criarProduto = async (formData) => {
+const criarProduto = async (payload) => {
   try {
-<<<<<<< Updated upstream
-<<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.post("/api/produtos", payload);
-=======
-    const response = await api.post("/api/produtos",  formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
->>>>>>> Stashed changes
     return response.data;
-=======
-    const res = await api.post("/api/produtos", payload);
-    return res.data;
->>>>>>> developer:frontend/src/services/produtoService.js
   } catch (error) {
     throw new Error(`Falha ao criar produto: ${error.message}`);
   }
 };
 
-const atualizarProduto = async (id, formData) => {
+const atualizarProduto = async (id, payload) => {
   try {
-<<<<<<< Updated upstream
-<<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.put(`/api/produtos/${Number(id)}`, payload);
-=======
-    const response = await api.put(`/api/produtos/${Number(id)}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
->>>>>>> Stashed changes
     return response.data;
-=======
-    const res = await api.put(`/api/produtos/${Number(id)}`, payload);
-    return res.data;
->>>>>>> developer:frontend/src/services/produtoService.js
   } catch (error) {
     throw new Error(`Falha ao atualizar produto: ${error.message}`);
   }
@@ -74,13 +38,8 @@ const atualizarProduto = async (id, formData) => {
 
 const deletarProduto = async (id) => {
   try {
-<<<<<<< HEAD:frontend/src/services/produtoServices.js
     const response = await api.delete(`/api/produtos/${Number(id)}`);
     return response.data;
-=======
-    const res = await api.delete(`/api/produtos/${Number(id)}`);
-    return res.data;
->>>>>>> developer:frontend/src/services/produtoService.js
   } catch (error) {
     throw new Error(`Falha ao deletar produto: ${error.message}`);
   }
