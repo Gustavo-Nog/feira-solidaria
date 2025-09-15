@@ -4,6 +4,14 @@ const listarProdutos = async () => {
     return prisma.produto.findMany({
         orderBy: {
             nomeProduto: "asc"
+        },
+        include: {
+          categoria: true,
+          pessoa: {
+            select: {
+              nome: true
+            }
+          }
         }
     });
 }
@@ -13,9 +21,18 @@ const buscarProdutoPorId = async (id) => {
     where: { id },
     include: {
       categoria: true,
-      pessoa: true,
       doacoes: true,
       favoritos: true,
+      pessoa: {
+        include: {
+          enderecos: {
+            include: {
+              endereco: true,
+            }
+          },
+          telefones: true,
+        }
+      }
     },
   });
 };
@@ -66,6 +83,3 @@ module.exports = {
     atualizarProduto,
     deletarProduto
 }
-
-
-
