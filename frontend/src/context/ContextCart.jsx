@@ -11,14 +11,19 @@ export function CartProvider({ children }) {
       const itemExistente = prevItems.find(cartItem => cartItem.id === item.id);
 
       if (itemExistente) {
-        toast.info(`Mais um "${item.nome}" foi adicionado ao carrinho!`);
+        if (itemExistente.quantity >= item.quantidade) {
+          toast.warn(`Você já atingiu o limite de estoque para "${item.nomeProduto}".`);
+          return prevItems;
+        }
+        
+        toast.info(`Mais um "${item.nomeProduto}" foi adicionado ao carrinho!`);
         return prevItems.map(cartItem =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
       } else {
-        toast.success(`"${item.nome}" foi adicionado ao seu carrinho!`);
+        toast.success(`"${item.nomeProduto}" foi adicionado ao seu carrinho!`);
         return [...prevItems, { ...item, quantity: 1 }];
       }
     });
@@ -28,7 +33,7 @@ export function CartProvider({ children }) {
     setCartItems((prevItems) => {
       const itemRemovido = prevItems.find(item => item.id === itemId);
       if (itemRemovido) {
-        toast.error(`"${itemRemovido.nome}" foi removido do carrinho.`);
+        toast.error(`"${itemRemovido.nomeProduto}" foi removido do carrinho.`);
       }
       return prevItems.filter(item => item.id !== itemId);
     });
@@ -37,12 +42,27 @@ export function CartProvider({ children }) {
   const atualizarQuantidade = (itemId, novaQuantidade) => {
     setCartItems((prevItems) => {
       if (novaQuantidade <= 0) {
+        const itemRemovido = prevItems.find(item => item.id === itemId);
+        if (itemRemovido) {
+          toast.error(`"${itemRemovido.nomeProduto}" foi removido do carrinho.`);
+        }
         return prevItems.filter(item => item.id !== itemId);
       }
+
+      const itemParaAtualizar = prevItems.find(item => item.id === itemId);
+      if (itemParaAtualizar && novaQuantidade > itemParaAtualizar.quantidade) {
+        toast.warn(`O limite de estoque para "${itemParaAtualizar.nomeProduto}" é ${itemParaAtualizar.quantidade}.`);
+        return prevItems;
+      }
+
       return prevItems.map(item =>
         item.id === itemId ? { ...item, quantity: novaQuantidade } : item
       );
     });
+  };
+
+  const limparCarrinho = () => {
+    setCartItems([]);
   };
 
   const value = {
@@ -50,6 +70,7 @@ export function CartProvider({ children }) {
     adicionarAoCarrinho,
     removerDoCarrinho,
     atualizarQuantidade,
+    limparCarrinho,
   };
 
   return (
