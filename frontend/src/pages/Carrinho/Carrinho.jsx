@@ -3,9 +3,7 @@ import { useCart } from '../../context/ContextCart';
 import { useUser } from '../../context/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import doacaoServices from '../../services/doacaoService';
-
 import './Carrinho.css';
 
 function Carrinho() {
@@ -19,7 +17,6 @@ function Carrinho() {
       navigate('/login');
       return;
     }
-
     try {
       const promessasDeDoacao = cartItems.map(item => {
         const payload = {
@@ -28,19 +25,15 @@ function Carrinho() {
         };
         return doacaoServices.solicitarDoacao(payload);
       });
-
       await Promise.all(promessasDeDoacao);
-
       toast.success('Solicitações de troca enviadas com sucesso!');
       limparCarrinho();
       navigate('/perfil');
-
     } catch (error) {
       console.error("Erro ao finalizar a troca:", error);
       toast.error('Ocorreu um erro ao enviar as solicitações. Tente novamente.');
     }
   };
-
   const handleDiminuir = (item) => {
     atualizarQuantidade(item.id, item.quantity - 1);
   };
@@ -51,48 +44,64 @@ function Carrinho() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="container text-center my-5">
-        <h2>Seu carrinho está vazio.</h2>
-        <p>Explore nossos produtos e encontre algo que te interesse!</p>
-        <Link to="/produtos" className="btn btn-success">Ver Produtos</Link>
-      </div>
+        <div className="container text-center my-5">
+            <h2>Seu carrinho está vazio.</h2>
+            <p>Explore nossos produtos e encontre algo que te interesse!</p>
+            <Link to="/produtos" className="btn btn-success">Ver Produtos</Link>
+        </div>
     );
   }
 
-  return (
-    <div className="container my-5">
-      <h2 className="mb-4">Meu Carrinho</h2>
-      <ul className="list-group shadow-sm">
-        {cartItems.map((item) => (
-          <li
-            key={item.id}
-            className="list-group-item d-flex flex-column align-items-start d-md-flex flex-md-row align-items-md-center justify-content-md-between p-3"
-          >
-            <Link to={`/item/${item.id}`} className="carrinho-item-link d-flex align-items-center mb-3 mb-md-0">
-              <img src={item.imagem} alt={item.nome} className="carrinho-item-img" />
-              <div className="ms-3">
-                <h5 className="mb-0">{item.nome}</h5>
-                <small className="text-muted">{item.produtor?.nome || 'Doador'}</small>
-              </div>
-            </Link>
+  const totalItens = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-            <div className="d-flex align-items-center mt-3 mt-md-0 w-100 w-md-auto justify-content-between justify-content-md-end">
-              <div className="quantity-controls">
-                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDiminuir(item)}>-</button>
-                <span className="quantity-text">{item.quantity}</span>
-                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleAumentar(item)}>+</button>
+  return (
+    <div className="carrinho-fundo">
+      <div className="carrinho-container">
+        <div className="carrinho-coluna-principal">
+          <h2 className="carrinho-titulo">Meu Carrinho</h2>
+          <div className="carrinho-lista">
+            {cartItems.map((item) => (
+              <div key={item.id} className="carrinho-item">
+                <div className="carrinho-item-info">
+                  <Link to={`/item/${item.id}`}>
+                    <img src={item.imagemUrl || 'https://placehold.co/80x80'} alt={item.nomeProduto} className="carrinho-item-img" />
+                  </Link>
+                  <div className="carrinho-item-detalhes">
+                    <Link to={`/item/${item.id}`} className="carrinho-item-link">
+                      <h5 className="item-nome">{item.nomeProduto}</h5>
+                    </Link>
+                    <small className="item-doador">Doador: {item.pessoa?.nome || 'Anónimo'}</small>
+                  </div>
+                </div>
+
+                <div className="carrinho-item-acoes">
+                  <div className="quantity-controls">
+                    <button onClick={() => handleDiminuir(item)}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => handleAumentar(item)}>+</button>
+                  </div>
+                  <button className="btn-remover" onClick={() => removerDoCarrinho(item.id)}>
+                    Remover
+                  </button>
+                </div>
               </div>
-              <button className="btn btn-danger btn-sm ms-auto ms-md-4" onClick={() => removerDoCarrinho(item.id)}>
-                Remover
-              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="carrinho-coluna-sumario">
+          <div className="carrinho-sumario">
+            <h3>Resumo da Troca</h3>
+            <div className="sumario-linha">
+              <span>Total de Itens</span>
+              <span>{totalItens}</span>
             </div>
-          </li>
-        ))}
-      </ul>
-      <div className="text-end mt-4">
-        <button className="btn btn-lg btn-success" onClick={handleFinalizarTroca}>
-          Finalizar Doação
-        </button>
+            <hr />
+            <button className="btn-finalizar" onClick={handleFinalizarTroca}>
+              Finalizar Doação
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -15,8 +15,15 @@ function ItemDetalhe() {
 
   useEffect(() => {
     const carregarItem = async () => {
+      const idNumerico = parseInt(itemId, 10);
+      if (isNaN(idNumerico)) {
+        setLoading(false);
+        return;
+      }
+      
       try {
-        const dadosDoItem = await produtoServices.buscarProduto(itemId);
+        const dadosDoItem = await produtoServices.buscarProduto(idNumerico);
+        console.log("Dados recebidos da API:", dadosDoItem);
         setItem(dadosDoItem);
       } catch (error) {
         console.error("Erro ao buscar detalhes do item:", error);
@@ -42,6 +49,16 @@ function ItemDetalhe() {
   if (!item) {
     return <div className="container my-5"><h2>Item não encontrado!</h2></div>;
   }
+
+  const primeiroEndereco = item.pessoa?.enderecos?.[0]?.endereco;
+  const localizacao = primeiroEndereco 
+    ? `${primeiroEndereco.cidade} - ${primeiroEndereco.uf}` 
+    : 'Não informada';
+
+  const primeiroTelefone = item.pessoa?.telefones?.[0];
+  const telefone = primeiroTelefone 
+    ? primeiroTelefone.numero 
+    : 'Não informado';
 
   return (
     <div className="container my-5">
@@ -71,11 +88,18 @@ function ItemDetalhe() {
                 <h5>Qualidade</h5>
                 <p className="fw-bold">{item.qualidade}</p>
               </div>
+              
+              <div className="col-md-6">
+                <h5>Localização</h5>
+                <p>{localizacao}</p>
+              </div>
             </div>
 
             <div className="mb-4">
               <h5>Anunciado por:</h5>
-              <p>{item.pessoa?.nome || 'Doador anónimo'} (Nota: 5 ⭐)</p>
+              <p className="mb-1">{item.pessoa?.nome || 'Doador anónimo'} (Nota: 5 ⭐)</p>
+
+              <p className="text-muted" style={{ fontSize: '0.9rem' }}>Contato: {telefone}</p>
             </div>
 
             <button className="btn btn-lg btn-success mt-auto" onClick={handleAddToCart}>

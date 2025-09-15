@@ -18,9 +18,9 @@ const buscarDoacaoPorId = async (id) => {
   }
 };
 
-const atualizarStatusDoacao = async (id, novoStatus) => {
+const atualizarStatusDoacao = async (id, novoStatus, usuarioQueAtualizaId) => {
   try {
-    const payload = { novoStatus: novoStatus };
+    const payload = { novoStatus, usuarioQueAtualizaId };
     const response = await api.put(`/doacoes/${id}/status`, payload);
     return response.data;
   } catch (error) {
