@@ -18,6 +18,7 @@ import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
 import Perfil from './pages/Perfil/Perfil';
+import Chat from './pages/Chat/chat';
 
 import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
@@ -56,6 +57,7 @@ function App() {
             <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
             <Route path="/perfil" element={<Perfil />} />
+            <Route path="/chat" element={<Chat usuarioId={1} />} />
             {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
           </Route>
 
