@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import produtoService from '../../services/produtoService';
 import favoritoService from '../../services/favoritoServices';
+import categoriaServices from '../../services/categoriaServices';
 
 import Button from '../../components/Button/Button';
 import './Produto.css';
-
 
 function Produtos() {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function Produtos() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [localizacao, setLocalizacao] = useState('');
   const [qualidade, setQualidade] = useState('');
+  const [categorias, setCategorias] = useState([]);
 
   const toggleFavorito = async (produtoId) => {
     try {
@@ -30,7 +31,7 @@ function Produtos() {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     async function carregarProdutos() {
       try {
         const lista = await produtoService.listarProdutos();
@@ -42,18 +43,29 @@ function Produtos() {
     carregarProdutos();
   }, []);
 
-const categorias = [...new Set(produtos.map(produto => produto.categoria.nome))];
-const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))]
-const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
+  useEffect(() => {
+    async function carregarCategorias() {
+      try { 
+        const lista = await categoriaServices.listarCategorias();
+        setCategorias(lista);
+      } catch (err) {
+        console.error('Erro ao carregar categorias:', err.message);
+      }
+    }
+    carregarCategorias();
+  }, []);
 
-const produtosFiltrados = produtos.filter((produto) => {
-  const filtraNome = produto.nomeProduto.toLowerCase().includes(busca.toLowerCase());
-  const filtraCategoria = categoriaSelecionada === '' || produto.categoria.nome === categoriaSelecionada;
-  const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
-  const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
+  const localizacoes = [...new Set(produtos.map(produto => produto.localizacao))];
+  const qualidades = [...new Set(produtos.map(produto => produto.qualidade))];
 
-  return filtraNome && filtraCategoria && filtraLocalizacao && filtraQualidade;
-});
+  const produtosFiltrados = produtos.filter((produto) => {
+    const filtraNome = produto.nomeProduto.toLowerCase().includes(busca.toLowerCase());
+    const filtraCategoria = categoriaSelecionada === '' || produto.categoria.nome === categoriaSelecionada;
+    const filtraLocalizacao = localizacao === '' || produto.localizacao === localizacao;
+    const filtraQualidade = qualidade === '' || produto.qualidade === qualidade;
+
+    return filtraNome && filtraCategoria && filtraLocalizacao && filtraQualidade;
+  });
 
   const verDetalhes = (id) => {
     navigate(`/item/${id}`);
@@ -85,8 +97,8 @@ const produtosFiltrados = produtos.filter((produto) => {
             onChange={(e) => setCategoriaSelecionada(e.target.value)}
           >
             <option value="">Todas as categorias</option>
-            {categorias.map((categoria, index) => (
-              <option key={index} value={categoria}>{categoria}</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.nome}>{categoria.nome}</option>
             ))}
           </select>
         </div>
