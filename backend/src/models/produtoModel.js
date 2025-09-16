@@ -52,13 +52,19 @@ const atualizarProduto = async (id, dadosParaAtualizar) => {
     where: { id },
   });
 
-  if (!produtoExistente) {
+   if (!produtoExistente) {
     throw new Error("Produto não encontrado!");
   }
 
   return prisma.produto.update({
     where: { id },
     data: dadosParaAtualizar,
+    include: {
+      categoria: true,
+      pessoa: {
+        select: { nome: true }
+      }
+    }
   });
 };
 
