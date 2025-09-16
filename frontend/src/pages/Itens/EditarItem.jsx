@@ -18,6 +18,7 @@ export default function EditarItem() {
         methods.reset(item); // preenche o formulário
       } catch (err) {
         console.error("Erro ao carregar item:", err);
+        alert("Não foi possível carregar os dados do item.");
       }
     }
     carregarItem();
@@ -41,20 +42,20 @@ export default function EditarItem() {
           <InputField
             name="nome"
             label="Nome do Produto:"
-            required="O nome é obrigatório."
+            required
           />
 
           <InputField
             as="textarea"
             name="descricao"
             label="Descrição:"
-            required="A descrição é obrigatória."
+            required
           />
 
           <InputField
             name="imagem"
             label="URL da Imagem:"
-            required="A imagem é obrigatória."
+            required
           />
 
           <Button type="submit" className="w-full bg-blue-600 text-white">

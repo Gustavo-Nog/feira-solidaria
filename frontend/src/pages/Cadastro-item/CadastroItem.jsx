@@ -30,7 +30,7 @@ function CadastrarItem() {
           <InputField
             name="nome"
             label="Nome do Produto:"
-            required="O nome do produto é obrigatório."
+            required
           />
 
           {/* Categoria */}
@@ -38,7 +38,7 @@ function CadastrarItem() {
             as="select"
             name="categoria"
             label="Categoria:"
-            required="Selecione uma categoria."
+            required
             options={[
 
               { value: 'Folha', label: 'Folha' },
@@ -52,7 +52,7 @@ function CadastrarItem() {
           <InputField
             name="localizacao"
             label="Localização (Bairro ou Cidade):"
-            required="A localização é obrigatória."
+            required
           />
 
           {/* Descrição */}
@@ -60,7 +60,7 @@ function CadastrarItem() {
             as="textarea"
             name="descricao"
             label="Descrição:"
-            required="A descrição é obrigatória."
+            required
             rows={3}
           />
 
@@ -69,7 +69,7 @@ function CadastrarItem() {
             as="select"
             name="qualidade"
             label="Qualidade:"
-            required="Selecione a qualidade."
+            required
             options={[
 
               { value: 'otima', label: 'Ótima' },
@@ -78,6 +78,7 @@ function CadastrarItem() {
             ]}
           />
           
+          {/* Telefone */}
           <InputField
               name="telefone"
              label="Telefone:"
