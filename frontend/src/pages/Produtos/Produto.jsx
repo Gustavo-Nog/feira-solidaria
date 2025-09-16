@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
-import produtoServices from '../../services/produtoService';
+import produtoServices from '../../services/produtoServices';
 import favoritoService from '../../services/favoritoServices';
 
 import Button from '../../components/Button/Button';
