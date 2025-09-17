@@ -4,8 +4,6 @@ import { MdCategory } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import ModalAdmin from '../../../components/Admin/ModalAdmin/ModalAdmin';
-import InputField from '../../../components/Input/InputField';
 
 import usuarioServices from '../../../services/usuarioServices';
 
@@ -16,11 +14,9 @@ function Dashboard() {
 
 	return (
 	<>
-		<div className="container h-100 ">
-			{/* Linha 1: Cards Usuários e Produtos */}
+		<div className="container h-100 m-0 p-0" style={{backgroundColor: "#b3ffa5ff"}}>
 			<div className="row h-50 g-3">
 				
-				{/* Card Usuários */}
 				<div className="col-12 col-md-6 h5 border border-white d-flex align-items-center justify-content-center"
 						style={{ backgroundColor: "#5ba263ff" }}>
 					<Link
@@ -39,7 +35,6 @@ function Dashboard() {
 					</Link>
 				</div>
 
-				{/* Card Produtos */}
 				<div className="col-12 col-md-6 h5 border border-white d-flex align-items-center justify-content-center"
 						style={{ backgroundColor: "#5ba263ff" }}>
 					<Link
@@ -60,7 +55,6 @@ function Dashboard() {
 
 			</div>
 
-			{/* Linha 2: Categorias, Doações e Outro dado */}
 			<div className="row h-50 g-3" style={{ backgroundColor: "#5ba263ff" }}> 
 				<div className="col-12 col-md-4 border border-white text-center d-flex flex-column justify-content-center align-items-center p-3">
 					<Link
