@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ModalAdmin from "../../../components/Admin/ModalAdmin/ModalAdmin";
 import InputField from "../../../components/Input/InputField";
 import Tabela from "../../../components/Admin/Tabela/Tabela";
+import Button from '../../../components/Button/Button';
 
 import categoriaServices from "../../../services/categoriaServices";
 
@@ -104,9 +105,14 @@ function Categorias() {
     <div className="categorias-container">
       <div className="categorias-header">
         <h2>Lista de Categorias</h2>
-        <button onClick={() => setIsCadastroOpen(true)}>
+        <Button 
+            className="btn-success" 
+            onClick={() => 
+                setIsCadastroOpen(true)
+            }
+        >
           Cadastrar Categoria
-        </button>
+        </Button>
       </div>
 
       {loading && <p>Carregando...</p>}
@@ -126,7 +132,7 @@ function Categorias() {
               <td>{categoria.nomeCategoria}</td>
               <td>{categoria.descricao || "Sem descrição"}</td>
               <td>
-                <button
+                <Button
                   className="btn-edit"
                   onClick={() => {
                     setCategoriaSelecionada(categoria);
@@ -134,8 +140,8 @@ function Categorias() {
                   }}
                 >
                   Editar
-                </button>
-                <button
+                </Button>
+                <Button
                   className="btn-delete"
                   onClick={() => {
                     setCategoriaSelecionada(categoria);
@@ -143,7 +149,7 @@ function Categorias() {
                   }}
                 >
                   Deletar
-                </button>
+                </Button>
               </td>
             </tr>
           ))}

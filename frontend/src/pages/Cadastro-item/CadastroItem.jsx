@@ -1,13 +1,23 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import InputField from '../../components/Input/InputField';
+import { useNavigate } from 'react-router-dom';
+import produtoService from '../../services/produtoServices';
 import './Cadastro-item.css';
 
 function CadastrarItem() {
   const methods = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log("Dados do formulário:", data);
-    alert('Item cadastrado com sucesso! Verifique o console.');
+   const onSubmit = async (data) => {
+    try {
+      const response = await produtoService.criarProduto(data); 
+      alert('Item cadastrado com sucesso!');
+      console.log('Resposta do backend:', response);
+      navigate('/perfil'); 
+    } catch (error) {
+      console.error('Erro ao cadastrar item:', error);
+      alert('Erro ao cadastrar item. Verifique o console.');
+    }
   };
 
   return (
@@ -20,7 +30,7 @@ function CadastrarItem() {
           <InputField
             name="nome"
             label="Nome do Produto:"
-            required="O nome do produto é obrigatório."
+            required
           />
 
           {/* Categoria */}
@@ -28,7 +38,7 @@ function CadastrarItem() {
             as="select"
             name="categoria"
             label="Categoria:"
-            required="Selecione uma categoria."
+            required
             options={[
 
               { value: 'Folha', label: 'Folha' },
@@ -42,7 +52,7 @@ function CadastrarItem() {
           <InputField
             name="localizacao"
             label="Localização (Bairro ou Cidade):"
-            required="A localização é obrigatória."
+            required
           />
 
           {/* Descrição */}
@@ -50,7 +60,7 @@ function CadastrarItem() {
             as="textarea"
             name="descricao"
             label="Descrição:"
-            required="A descrição é obrigatória."
+            required
             rows={3}
           />
 
@@ -59,7 +69,7 @@ function CadastrarItem() {
             as="select"
             name="qualidade"
             label="Qualidade:"
-            required="Selecione a qualidade."
+            required
             options={[
 
               { value: 'otima', label: 'Ótima' },
@@ -67,7 +77,14 @@ function CadastrarItem() {
               { value: 'regular', label: 'Regular' },
             ]}
           />
-
+          
+          {/* Telefone */}
+          <InputField
+              name="telefone"
+             label="Telefone:"
+             required="O telefone é obrigatório."
+            placeholder="(99) 99999-9999"
+            />
           <button type="submit" className="botao">
             Cadastrar Item
           </button>
