@@ -6,11 +6,11 @@ function AdminLayout() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <nav className="col-3 col-md-2 bg-green vh-100 p-3">
+        <nav className="col-1 col-md-2 bg-green vh-100 p-3">
           <NavbarAdmin />
         </nav>
 
-        <main className="col-9 col-md-10 p-4">
+        <main className="col-11 col-md-10 p-4">
           <Outlet />
         </main>
       </div>
