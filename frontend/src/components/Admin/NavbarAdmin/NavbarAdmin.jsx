@@ -37,7 +37,7 @@ function NavbarAdmin() {
 						<AiFillCalendar /> Categorias
 					</Link>
 					
-					<Link to="/acoes-adm" className={`nav-link ${isActive('/acoes-admin')}`}>
+					<Link to="/acoes-adm" className={`nav-link ${isActive('/acoes-adm')}`}>
 						<ImAccessibility /> Ações Admin
 					</Link>
 
