@@ -18,12 +18,13 @@ import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
 import Perfil from './pages/Perfil/Perfil';
+import EditarItem from "./pages/Itens/EditarItem";
 
 import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
 import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
 import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
-import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
+import ProdutosAdmin from './pages/Admin/ProdutosAdmin/ProdutosAdmin';
 import Categoria from './pages/Admin/Categoria/Categoria';
 import AcoesAdm from './pages/Admin/acoesAdm/AcoesAdm';
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
+            <Route path="/editar-item/:id" element={<EditarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/carrinho" element={<Carrinho />} />

@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ModalAdmin from "../../../components/Admin/ModalAdmin/ModalAdmin";
 import InputField from "../../../components/Input/InputField";
 import Tabela from "../../../components/Admin/Tabela/Tabela";
+import Button from '../../../components/Button/Button';
 
 import categoriaServices from "../../../services/categoriaServices";
 
@@ -104,14 +105,23 @@ function Categorias() {
     <div className="categorias-container">
       <div className="categorias-header">
         <h2>Lista de Categorias</h2>
-        <button onClick={() => setIsCadastroOpen(true)}>
+        <Button 
+            size="sm"
+            className="btn-success px-4 py-2 px-3 py-1 rounded-2 fw-bold"
+            style={{ 
+                backgroundColor: "#4caf50",
+                width: "auto"
+            }}
+            onClick={() => 
+                setIsCadastroOpen(true)
+            }
+        >
           Cadastrar Categoria
-        </button>
+        </Button>
       </div>
 
       {loading && <p>Carregando...</p>}
 
-      {/* aqui usamos o componente Tabela */}
       <Tabela>
         <thead>
           <tr>
@@ -126,24 +136,32 @@ function Categorias() {
               <td>{categoria.nomeCategoria}</td>
               <td>{categoria.descricao || "Sem descrição"}</td>
               <td>
-                <button
-                  className="btn-edit"
+                <Button
+                  size="small"
+                  className=" me-2 py-2 rounded fs-0.9"
+                  style={{
+                      backgroundColor: "#2196f3"
+                  }}
                   onClick={() => {
                     setCategoriaSelecionada(categoria);
                     setIsEditOpen(true);
                   }}
                 >
                   Editar
-                </button>
-                <button
-                  className="btn-delete"
+                </Button>
+                <Button
+                  size="small"
+                  className="btn-danger me-2 py-2 rounded fs-0.9"
+                  style={{
+                      backgroundColor: "#f44336"
+                  }}
                   onClick={() => {
                     setCategoriaSelecionada(categoria);
                     setIsDeleteOpen(true);
                   }}
                 >
                   Deletar
-                </button>
+                </Button>
               </td>
             </tr>
           ))}

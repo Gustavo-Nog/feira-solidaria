@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import InputField from '../../../components/Input/InputField';
 
-import usuarioServices from '../../../services/usuarioService';
+import usuarioServices from '../../../services/usuarioServices';
 
 function Dashboard() {
 

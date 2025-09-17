@@ -6,7 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import Tabela from "../../../components/Admin/Tabela/Tabela";
 
 import acoesAdmServices from "../../../services/acoesAdmServices";
-import usuarioServices from "../../../services/usuarioService";
+import usuarioServices from "../../../services/usuarioServices";
 
 import './AcoesAdm.css';
 

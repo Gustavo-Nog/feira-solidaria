@@ -7,7 +7,7 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
-import usuarioServices from '../../services/usuarioService';
+import usuarioServices from '../../services/usuarioServices';
 import PessoaModal from '../../components/PessoaModal/PessoaModal';
 
 import './Cadastro.css';
@@ -96,13 +96,15 @@ function Cadastro() {
                     Cadastrar
                   </Button>
 
+                  <GoogleLoginButton />
+
                   <div className="my-3 d-flex align-items-center">
                     <hr className="flex-grow-1" />
                     <span className="mx-2 text-white text-uppercase small">ou</span>
                     <hr className="flex-grow-1" />
                   </div>
 
-                  <GoogleLoginButton />
+
                 </div>
               </form>
             </FormProvider>
