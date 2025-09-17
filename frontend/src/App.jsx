@@ -18,6 +18,7 @@ import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
 import Perfil from './pages/Perfil/Perfil';
+import EditarItem from "./pages/Itens/EditarItem";
 
 import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
@@ -51,6 +52,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cadastrar-itens" element={<CadastrarItem />} />
+            <Route path="/editar-item/:id" element={<EditarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/carrinho" element={<Carrinho />} />

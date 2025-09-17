@@ -79,6 +79,25 @@ const Perfil = () => {
           <Link to="/cadastrar-itens" className="d-block w-100 mt-2">
             <Button className="btn-success">Cadastrar Novo Item</Button>
           </Link>
+            <div className="meus-itens mt-4">
+            <h3>Meus Itens</h3>
+            <ul>
+              {usuario.itens && usuario.itens.length > 0 ? (
+                usuario.itens.map((item) => (
+                  <li key={item.id} className="item-card">
+                    <strong>{item.nome}</strong> - {item.categoria}
+                    <p>{item.descricao}</p>
+
+                    <Link to={`/editar-item/${item.id}`}>
+                      <Button className="btn-warning mt-2">Editar Item</Button>
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <p>Você ainda não cadastrou nenhum item.</p>
+              )}
+            </ul>
+          </div>
         </>
       )}
     </div>
@@ -86,3 +105,4 @@ const Perfil = () => {
 };
 
 export default Perfil;
+   
