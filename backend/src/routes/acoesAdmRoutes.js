@@ -9,5 +9,6 @@ router.get('/usuario/:usuarioId', acoesAdmController.buscarAcoesAdmPorUsuarioHan
 router.post('/', acoesAdmController.criarAcaoAdmHandler);
 router.put('/:id', acoesAdmController.atualizarAcaoAdmHandler);
 router.delete('/:id', acoesAdmController.deletarAcaoAdmHandler);
+router.get('/total-acoesAdm', acoesAdmController.totalAcoesAdmHandler);
 
 module.exports = router;

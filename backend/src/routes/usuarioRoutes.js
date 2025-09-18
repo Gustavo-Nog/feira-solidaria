@@ -8,5 +8,6 @@ router.get('/:id', usuarioController.buscarUsuarioPorIdHandler);
 router.post('/', usuarioController.criarUsuarioHandler);
 router.put('/:id', usuarioController.atualizarUsuarioHandler);
 router.delete('/:id', usuarioController.deletarUsuarioHandler);
+router.get('/total-usuarios', usuarioController.totalUsuariosHandler);
 
 module.exports = router;

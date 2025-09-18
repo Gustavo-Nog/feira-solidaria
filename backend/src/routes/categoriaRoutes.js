@@ -8,5 +8,6 @@ router.get('/:id', categoriaController.buscarCategoriaPorIdHandler);
 router.post('/', categoriaController.criarCategoriaHandler);
 router.put('/:id', categoriaController.atualizarCategoriaHandler);
 router.delete('/:id', categoriaController.deletarCategoriaHandler);
+router.get('/total-categorias', categoriaController.totalCategoriasHandler);
 
 module.exports = router;
