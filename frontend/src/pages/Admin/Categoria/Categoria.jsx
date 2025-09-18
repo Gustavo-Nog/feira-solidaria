@@ -103,7 +103,6 @@ function Categorias() {
     }
   };
 
-  // <<< filtro das categorias
   const categoriasFiltradas = categorias.filter(categoria =>
     categoria.nomeCategoria.toLowerCase().includes(busca.toLowerCase())
   );

@@ -21,7 +21,7 @@ function AcoesAdm() {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [busca, setBusca] = useState(""); // Campo de pesquisa
+  const [busca, setBusca] = useState("");
 
   const methods = useForm({
     defaultValues: {
@@ -30,16 +30,13 @@ function AcoesAdm() {
     },
   });
 
-  // Filtrando apenas usuários ADMIN
   const usuariosAdmin = usuarios.filter(u => u.tipo === "ADMIN");
 
-  // Options do select do modal (somente ADMIN)
   const usuariosOptions = usuariosAdmin.map(usuario => ({
     value: usuario.id,
     label: usuario.nomeUsuario
   }));
 
-  // Filtrando apenas ações de usuários ADMIN + filtro de busca
   const acoesFiltradas = acoes.filter(
     acao =>
       acao.usuario?.tipo === "ADMIN" &&
@@ -55,7 +52,6 @@ function AcoesAdm() {
           usuarioServices.listarUsuarios(),
         ]);
 
-        // Mapear cada ação para incluir o usuário completo com tipo
         const acoesComUsuarios = acoesData.map(acao => {
           const usuario = usuariosData.find(u => u.id === acao.usuarioId);
           return { ...acao, usuario };
@@ -90,7 +86,6 @@ function AcoesAdm() {
     try {
       const response = await acoesAdmServices.criarAcaoAdm(payload);
 
-      // Adicionar usuário completo para exibir na tabela
       const usuario = usuariosAdmin.find(u => u.id === response.usuarioId);
       const acaoComUsuario = { ...response, usuario };
 
@@ -118,7 +113,6 @@ function AcoesAdm() {
 
       const listaAtualizada = await acoesAdmServices.listarAcoesAdm();
 
-      // Mapear novamente para incluir tipo de usuário
       const acoesComUsuarios = listaAtualizada.map(acao => {
         const usuario = usuarios.find(u => u.id === acao.usuarioId);
         return { ...acao, usuario };
@@ -150,7 +144,6 @@ function AcoesAdm() {
 
   return (
     <div className="acoes-container">
-      {/* Campo de pesquisa + botão de cadastrar */}
       <div className="acoes-header d-flex align-items-center mb-4 gap-2">
         <input
           className="form-control"
@@ -245,7 +238,7 @@ function AcoesAdm() {
                 name="usuarioId"
                 label="Usuário Responsável"
                 as="select"
-                options={usuariosOptions} // SOMENTE ADMIN
+                options={usuariosOptions}
             />
           </div>
         </ModalAdmin>
@@ -264,7 +257,7 @@ function AcoesAdm() {
               name="usuarioId"
               label="Usuário Responsável"
               as="select"
-              options={usuariosOptions} // SOMENTE ADMIN
+              options={usuariosOptions}
             />
           </div>
         </ModalAdmin>
