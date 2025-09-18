@@ -34,7 +34,8 @@ const criarMensagem = async (payload) => {
 
 const atualizarMensagem = async (id, payload) => {
   try {
-    const response = await api.put(`/api/mensagens/${id},${payload}`);
+    const response = await api.put(`/api/mensagens/${id}`, payload);
+
     return response.data;
   } catch (error) {
     console.error("Erro ao atualizar mensagem:", error);

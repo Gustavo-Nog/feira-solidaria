@@ -64,6 +64,7 @@ function App() {
                 <Route path="/carrinho" element={<Carrinho />} />
                 <Route path="/editar-item/:id" element={<EditarItem />} />
                 <Route path="/perfil" element={<Perfil />} />
+                <Route path="/chat" element={<Chat />} />
                 {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
               </Route>
             </Route>
