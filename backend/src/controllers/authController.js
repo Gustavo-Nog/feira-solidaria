@@ -100,8 +100,6 @@ const googleCallback = (req, res, next) => {
         usuarioId: usuarioCompleto.id,
         pessoaId: usuarioCompleto.pessoa?.id
       };
-      
-      console.log('[authController] Payload FINAL do token do Google:', payload);
 
       const tokenDeAcesso = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_SECRET_EXPIRES });
       const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_TOKEN, { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES });

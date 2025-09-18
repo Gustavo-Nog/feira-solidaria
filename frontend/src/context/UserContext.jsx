@@ -12,16 +12,13 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     async function carregarSessao() {
       try {
-         console.log('[UserContext] A iniciar verificação de sessão...');
         const { usuario: dadosDoUsuario } = await authServices.verificarToken();
 
-        console.log('[UserContext] SESSÃO VÁLIDA. Utilizador definido:', dadosDoUsuario);
         setUsuario(dadosDoUsuario);
         setIsAuthenticated(true);
 
       } catch (error) {
 
-        console.error("Nenhuma sessão ativa encontrada ou token inválido:", error.message);
         setIsAuthenticated(false);
         setUsuario(null);
       } finally {
@@ -33,7 +30,6 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const login = (dadosDaResposta) => {
-    console.log('[UserContext] Função LOGIN chamada com:', dadosDaResposta);
     localStorage.setItem('accessToken', dadosDaResposta.tokenDeAcesso);
     api.defaults.headers.common['Authorization'] = `Bearer ${dadosDaResposta.tokenDeAcesso}`;
     setUsuario(dadosDaResposta.usuario);

@@ -3,8 +3,6 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-console.log('[app.js] A configurar middlewares...');
-
 app.use(cookieParser());
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -13,7 +11,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-console.log('[app.js] Middlewares configurados. A registar rotas...');
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
@@ -44,5 +41,4 @@ app.get('/', (req, res) => {
     res.send("feira-solidaria");
 });
 
-console.log('[app.js] Rotas registadas.');
 module.exports = app;

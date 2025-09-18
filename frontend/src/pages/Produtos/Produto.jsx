@@ -12,7 +12,6 @@
     const navigate = useNavigate();
 
     const { usuario, loading: authLoading } = useUser();
-    console.log('[Produtos.jsx] RENDERIZANDO. Estado atual -> authLoading:', authLoading, '| usuario:', usuario);
 
     const [produtos, setProdutos] = useState([]);
     const [favoritos, setFavoritos] = useState(new Set());
@@ -24,15 +23,12 @@
 
     useEffect(() => {
       async function carregarDados() {
-        console.log('[Produtos.jsx] useEffect ATIVADO. authLoading:', authLoading);
         if (authLoading) {
-          console.log('[Produtos.jsx] useEffect: A aguardar o fim da autenticação...');
           return;
         }
 
         setLoadingProdutos(true);
         try {
-          console.log(`[Produtos.jsx] useEffect: A buscar favoritos para pessoaId: ${usuario?.pessoaId}`);
           const [listaProdutos, listaFavoritos] = await Promise.all([
             produtoServices.listarProdutos(),
             usuario ? favoritoService.listarFavoritos(usuario.id) : Promise.resolve([])
@@ -49,7 +45,7 @@
         }
       }
       carregarDados();
-    }, [usuario, authLoading]); // 4. O useEffect agora depende do 'authLoading'
+    }, [usuario, authLoading]);
 
     const toggleFavorito = async (produtoId) => {
       if (!usuario || !usuario.id) {
@@ -91,7 +87,6 @@
 
     const verDetalhes = (id) => navigate(`/item/${id}`);
 
-    // 5. O estado de loading da página agora depende dos dois loadings
     if (authLoading || loadingProdutos) {
       return (
         <div className="container py-5 text-center">
