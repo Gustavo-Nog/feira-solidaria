@@ -77,39 +77,53 @@ const buscarPerfil = async (req, res) => {
 
 const loginGoogle = passport.authenticate('google', { scope: ['profile', 'email'] });
 const googleCallback = (req, res, next) => {
-  passport.authenticate('google', { session: false }, (erro, usuario, info) => {
-    if (erro || !usuario) {
+  passport.authenticate('google', { session: false }, async (erro, usuarioPassport, info) => {
+    if (erro || !usuarioPassport) {
       console.error(erro || info);
       return res.redirect('http://localhost:5173/login?error=google');
     }
 
-    const tokenDeAcesso = jwt.sign(
-      { id: usuario.id },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_SECRET_EXPIRES }
-    );
+    try {
 
-    const refreshToken = jwt.sign(
-      { id: usuario.id },
-      process.env.JWT_REFRESH_TOKEN,
-      { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES }
-    );
+      const usuarioCompleto = await prisma.usuario.findUnique({
+        where: { id: usuarioPassport.id },
+        include: { pessoa: true }
+      });
 
-    res.cookie('accessToken', tokenDeAcesso, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: Number(process.env.ACCESS_TOKEN_COOKIE_EXPIRES) || 24 * 60 * 60 * 1000
-    });
+      if (!usuarioCompleto) {
+        return res.redirect('http://localhost:5173/login?error=usuario_nao_encontrado');
+      }
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: Number(process.env.REFRESH_TOKEN_COOKIE_EXPIRES) || 24 * 60 * 60 * 1000
-    });
+      const payload = {
+        usuarioId: usuarioCompleto.id,
+        pessoaId: usuarioCompleto.pessoa?.id
+      };
+      
+      console.log('[authController] Payload FINAL do token do Google:', payload);
 
-    return res.redirect('http://localhost:5173/');
+      const tokenDeAcesso = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_SECRET_EXPIRES });
+      const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_TOKEN, { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES });
+
+      res.cookie('accessToken', tokenDeAcesso, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 3600000
+      });
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 604800000
+      });
+      
+      return res.redirect('http://localhost:5173/');
+
+    } catch (dbError) {
+      console.error("Erro ao re-buscar utilizador no callback do Google:", dbError);
+      return res.redirect('http://localhost:5173/login?error=bd');
+    }
+
   })(req, res, next);
 };
 
