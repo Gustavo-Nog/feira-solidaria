@@ -5,6 +5,8 @@ import { UserProvider } from './context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import ProtectedRoute from './components/ProtectedRoute/protectedRoute';
+
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
@@ -51,14 +53,16 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/cadastrar-itens" element={<CadastrarItem />} />
-            <Route path="/editar-item/:id" element={<EditarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
-            <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
-            <Route path="/perfil" element={<Perfil />} />
-            {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cadastrar-itens" element={<CadastrarItem />} />
+              <Route path="/carrinho" element={<Carrinho />} />
+              <Route path="/editar-item/:id" element={<EditarItem />} />
+              <Route path="/perfil" element={<Perfil />} />
+              {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+            </Route>
           </Route>
 
           <Route element={<AdminLayout />}>
