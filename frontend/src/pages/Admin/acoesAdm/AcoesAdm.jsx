@@ -179,7 +179,7 @@ function AcoesAdm() {
           <tr>
             <th>Descrição</th>
             <th>Data</th>
-            <th>Usuário</th>
+            <th>Administrador</th>
             <th>Ações</th>
           </tr>
         </thead>
