@@ -65,10 +65,15 @@ const deletarCategoria = async (id) => {
     });
 };
 
+const totalCategorias = async () => {
+    return prisma.categoria.count();
+};
+
 module.exports = { 
-listarCategorias,
-buscarCategoriaPorId,
-criarCategoria,
-atualizarCategoria,
-deletarCategoria
+  listarCategorias,
+  buscarCategoriaPorId,
+  criarCategoria,
+  atualizarCategoria,
+  deletarCategoria,
+  totalCategorias
 };
