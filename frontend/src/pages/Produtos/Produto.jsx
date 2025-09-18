@@ -16,7 +16,6 @@ function Produtos() {
   const [favoritos, setFavoritos] = useState(new Set());
   const [loading, setLoading] = useState(true);
 
-  // Estados para os filtros
   const [busca, setBusca] = useState('');
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [qualidade, setQualidade] = useState('');

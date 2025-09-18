@@ -1,16 +1,14 @@
-/* --- CSS Final e Definitivo da Navbar --- */
-
 .navbar-container {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   height: 70px;
-  padding: 0 1.5rem; /* Espaçamento nas laterais */
+  padding: 0 1.5rem; 
 }
 
 .navbar-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* ESSENCIAL: Joga um item para cada lado */
+  justify-content: space-between; 
   height: 100%;
   max-width: 1300px;
   margin: 0 auto;
@@ -23,11 +21,10 @@
   text-decoration: none;
 }
 
-/* --- ESTILOS PARA DESKTOP (Telas grandes) --- */
 .nav-desktop {
   display: flex;
   gap: 1.5rem;
-  margin: 0 auto; /* Centraliza os links de navegação */
+  margin: 0 auto; 
 }
 
 .nav-link-item {
@@ -55,7 +52,7 @@
 
 .profile-actions {
   display: flex;
-  flex-direction: column; /* Coloca um abaixo do outro */
+  flex-direction: column; 
   align-items: flex-start;
   line-height: 1.2;
 }
@@ -68,23 +65,19 @@
 }
 
 .profile-actions span {
-  display: none; /* Esconde a barrinha "/" */
+  display: none;
 }
 
-/* Esconde os elementos de mobile no desktop */
 .menu-toggle, .nav-mobile {
   display: none;
 }
 
 
-/* --- ESTILOS PARA MOBILE (Telas pequenas) --- */
 @media (max-width: 992px) {
-  /* Esconde os elementos de desktop no mobile */
   .nav-desktop, .profile-area-desktop {
     display: none;
   }
 
-  /* Mostra o botão de menu */
   .menu-toggle {
     display: block;
     background: none;
@@ -100,13 +93,9 @@
   gap: 1rem;
   }
   
-  /* Faz o logo ficar no meio quando o menu está fechado */
   .navbar-content {
     justify-content: space-between;
   }
-
-  /* Estiliza o menu que abre */
-  /* DENTRO de @media (max-width: 992px) */
 
   .nav-mobile {
   display: flex;
@@ -114,23 +103,22 @@
   align-items: center;
   gap: 1.5rem;
   
-  /* --- MUDANÇAS PRINCIPAIS AQUI --- */
-  position: fixed;        /* 1. Fica fixo na tela, não rola com a página */
-  top: 0;                 /* 2. Alinhado ao topo da tela */
+  position: fixed;        
+  top: 0;                 
   left: 0;
   width: 100%;
-  height: 100%;           /* 3. Ocupa 100% da altura da tela (100vh) */
+  height: 100%;           
   background-color: white;
   z-index: 1000;
-  padding: 80px 1rem 2rem 1rem; /* Espaço interno (topo, lados, fundo) */
-  overflow-y: auto;       /* 4. ADICIONA SCROLL (rolagem) SE necessário */
+  padding: 80px 1rem 2rem 1rem;
+  overflow-y: auto;       
   
-  transform: translateY(-100%); /* Começa escondido em cima */
+  transform: translateY(-100%); 
   transition: transform 0.3s ease-in-out;
   }
   
   .nav-mobile.open {
-    transform: translateY(0); /* Desce para a posição correta */
+    transform: translateY(0); 
   }
   
   .nav-mobile a {
