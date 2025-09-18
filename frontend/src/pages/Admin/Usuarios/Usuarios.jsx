@@ -14,7 +14,7 @@ function Usuarios() {
 	const [busca, setBusca] = useState('');
 
 	const [isCadastroOpen, setIsCadastroOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 	const [isEditOpen, setIsEditOpen] = useState(false);
 
 	const [loading, setLoading] = useState(false);
