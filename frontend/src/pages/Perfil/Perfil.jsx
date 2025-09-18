@@ -20,7 +20,7 @@ const Perfil = () => {
     }
     try {
       setLoading(true);
-      const dados = await pessoaServices.buscarPessoaPorId(usuario.pessoaId);
+      const dados = await pessoaServices.buscarPessoaPorId(usuario.id);
       setPerfil(dados);
       setForm(dados);
     } catch (error) {

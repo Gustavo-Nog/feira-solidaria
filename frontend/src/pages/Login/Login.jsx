@@ -29,7 +29,11 @@ function Login() {
 			if (response.tokenDeAcesso) {
 				login(response);
 
-				navigate("/");
+				  if (response.usuario.usuario.tipo === "ADMIN") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
 			} else {
 			}
     } catch (error) {

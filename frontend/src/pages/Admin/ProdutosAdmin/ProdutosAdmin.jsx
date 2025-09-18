@@ -105,8 +105,8 @@ function ProdutosAdmin() {
   }, [isEditOpen, produtoSelecionado, isCadastroOpen]);
 
 	const handleImagem = (e) => {
-		setImagem(e.target.files[0]); // armazena o File
-		methods.setValue('imagemUrl', e.target.files); // atualiza react-hook-form
+		setImagem(e.target.files[0]); 
+		methods.setValue('imagemUrl', e.target.files); 
 	};
 
   const handleCadastro = async (data) => {
@@ -138,36 +138,36 @@ function ProdutosAdmin() {
     }
   };
 
-const handleEdit = async (data) => {
-  if (!produtoSelecionado) return;
-  setLoading(true);
-  try {
-    const formData = new FormData();
+	const handleEdit = async (data) => {
+		if (!produtoSelecionado) return;
+		setLoading(true);
+		try {
+			const formData = new FormData();
 
-    formData.append('dados', JSON.stringify({
-      nomeProduto: data.nomeProduto,
-      descricao: data.descricao,
-      categoriaId: Number(data.categoriaId),
-      pessoaId: Number(data.pessoaId),
-      quantidade: Number(data.quantidade),
-      qualidade: data.qualidade?.toUpperCase(),
-      status: data.status?.toUpperCase()
-    }));
+			formData.append('dados', JSON.stringify({
+				nomeProduto: data.nomeProduto,
+				descricao: data.descricao,
+				categoriaId: Number(data.categoriaId),
+				pessoaId: Number(data.pessoaId),
+				quantidade: Number(data.quantidade),
+				qualidade: data.qualidade?.toUpperCase(),
+				status: data.status?.toUpperCase()
+			}));
 
-    if (data.imagemUrl && data.imagemUrl[0]) {
-      formData.append('imagem', data.imagemUrl[0]);
-    }
+			if (data.imagemUrl && data.imagemUrl[0]) {
+				formData.append('imagem', data.imagemUrl[0]);
+			}
 
-    const response = await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
-		const listaAtualizada = await produtoServices.listarProdutos();
-		setProdutos(listaAtualizada);
-    setIsEditOpen(false);
-  } catch (error) {
-    console.error("Erro ao atualizar produto:", error);
-  } finally {
-    setLoading(false);
-  }
-};
+			const response = await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
+			const listaAtualizada = await produtoServices.listarProdutos();
+			setProdutos(listaAtualizada);
+			setIsEditOpen(false);
+		} catch (error) {
+			console.error("Erro ao atualizar produto:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
   const handleDelete = async () => {
     if (!produtoSelecionado) return;
@@ -199,7 +199,7 @@ const handleEdit = async (data) => {
 
   return (
     <>
-      <div className="container-fluid p-4 bg-light min-vh-100">
+      <div className="container-fluid p-4 bg-light h-100 flex-grow-1 overflow-x-auto">
         <div className="text-center mb-4">
           <h2 className="fs-4 text-dark">Gerenciamento de Produtos</h2>
         </div>
