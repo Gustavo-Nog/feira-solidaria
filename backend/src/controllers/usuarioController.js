@@ -1,6 +1,5 @@
 const usuarioModel = require('../models/usuarioModel');
 
-// Listar todos os usuários
 const listarUsuariosHandler = async (req, res) => {
     try {
         const usuarios = await usuarioModel.listarUsuarios();
@@ -56,10 +55,20 @@ const deletarUsuarioHandler = async (req, res) => {
     }
 };
 
+const totalUsuariosHandler = async (req, res) => {
+    try {
+      const total = await usuarioModel.totalUsuarios();
+      res.status(200).json(total);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     listarUsuariosHandler,
     buscarUsuarioPorIdHandler,
     criarUsuarioHandler,
     atualizarUsuarioHandler,
-    deletarUsuarioHandler
+    deletarUsuarioHandler,
+    totalUsuariosHandler
 };

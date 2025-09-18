@@ -74,10 +74,20 @@ const deletarProdutoHandler = async (req, res) => {
   }
 };
 
+const totalProdutosHandler = async(req, res) => {
+  try {
+    const total = await produtoModel.totalProdutos();
+    res.status(200).json({ total });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   listarProdutosHandler,
   buscarProdutoPorIdHandler,
   criarProdutoHandler,
+  totalProdutosHandler,
   atualizarProdutoHandler,
   deletarProdutoHandler
 };
