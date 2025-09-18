@@ -52,12 +52,11 @@ function AcoesAdm() {
   }, [isEditOpen, acaoSelecionada]);
 
 const handleCadastro = async (data) => {
-  // Converte usuarioId para número antes de enviar(aqui cria uma ação, porém só se tiver descrição)
   const payload = {
     ...data,
     usuarioId: Number(data.usuarioId)
   };
-  console.log("Dados enviados:", payload);
+
   try {
     const response = await acoesAdmServices.criarAcaoAdm(payload);
     setAcoes([...acoes, response]);

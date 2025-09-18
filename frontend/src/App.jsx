@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ProtectedRoute from './components/ProtectedRoute/protectedRoute';
+import AdminRoute from './components/AdminRoute/adminRoute';
 
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -37,52 +38,56 @@ function App() {
 
   return (
       <BrowserRouter>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        <Routes>
-          {/* Rotas que USAM o layout principal (com Navbar e Footer) */}
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/contato" element={<Contato />} />
-            <Route path="/produtos" element={<Produtos />} />
-            <Route path="/item/:itemId" element={<ItemDetalhe />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/cadastrar-itens" element={<CadastrarItem />} />
-              <Route path="/carrinho" element={<Carrinho />} />
-              <Route path="/editar-item/:id" element={<EditarItem />} />
-              <Route path="/perfil" element={<Perfil />} />
-              {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+        <UserProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <Routes>
+            {/* Rotas que USAM o layout principal (com Navbar e Footer) */}
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/sobre-nos" element={<SobreNos />} />
+              <Route path="/contato" element={<Contato />} />
+              <Route path="/produtos" element={<Produtos />} />
+              <Route path="/item/:itemId" element={<ItemDetalhe />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/cadastrar-itens" element={<CadastrarItem />} />
+                <Route path="/carrinho" element={<Carrinho />} />
+                <Route path="/editar-item/:id" element={<EditarItem />} />
+                <Route path="/perfil" element={<Perfil />} />
+                {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+              </Route>
             </Route>
-          </Route>
 
-          <Route element={<AdminLayout />}>
-            {/* Rotas que Usam o layout de Administradores */}
-            <Route path='/admin' element={<Admin />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/usuarios' element={<UsuariosLista />} />
-            <Route path='/listar-produtos' element={<ProdutosAdmin />} />
-            <Route path='/categorias' element={<Categoria />} />
-            <Route path='/acoes-adm' element={<AcoesAdm />} />
-            {/* <Route path='/configuracoes' element={<Configuracoes />} /> */}
-          </Route>
-
-          {/* Rotas que NÃO usam o layout (tela cheia) */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/redefinir-senha" element={<RedefinirSenha />} />
-          <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
-        </Routes>
+            <Route element={<AdminRoute />}>
+              <Route element={<AdminLayout />}>
+                {/* Rotas que Usam o layout de Administradores */}
+                <Route path='/admin' element={<Admin />} />
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/usuarios' element={<UsuariosLista />} />
+                <Route path='/listar-produtos' element={<ProdutosAdmin />} />
+                <Route path='/categorias' element={<Categoria />} />
+                <Route path='/acoes-adm' element={<AcoesAdm />} />
+                {/* <Route path='/configuracoes' element={<Configuracoes />} /> */}
+              </Route>
+            </Route>
+            
+            {/* Rotas que NÃO usam o layout (tela cheia) */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+            <Route path="/redefinir-senha-nova" element={<NovaSenha />} />
+          </Routes>
+        </UserProvider>
       </BrowserRouter>
   );
 }
