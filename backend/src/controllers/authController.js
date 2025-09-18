@@ -39,11 +39,13 @@ const login = async (req, res) => {
     const tokenDeAcesso = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_SECRET_EXPIRES });
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_TOKEN, { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES });
 
+    const dadosCompletosDaPessoa = await pessoaModel.buscarPessoaPorId(usuario.pessoa.id);
+
     return res.status(200).json({
       message: 'Login bem sucedido',
       tokenDeAcesso,
       refreshToken,
-      usuario: payload 
+      usuario: dadosCompletosDaPessoa,
     });
 
   } catch (error) {
