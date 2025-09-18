@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { FormProvider, useForm } from "react-hook-form";
 
 import ModalAdmin from "../../../components/Admin/ModalAdmin/ModalAdmin";
@@ -13,6 +13,8 @@ import "./Categoria.css";
 function Categorias() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+
+  const [busca, setBusca] = useState("");
 
   const [isCadastroOpen, setIsCadastroOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -101,10 +103,21 @@ function Categorias() {
     }
   };
 
+  // <<< filtro das categorias
+  const categoriasFiltradas = categorias.filter(categoria =>
+    categoria.nomeCategoria.toLowerCase().includes(busca.toLowerCase())
+  );
+
   return (
     <div className="categorias-container">
-      <div className="categorias-header">
-        <h2>Lista de Categorias</h2>
+      <div className="categorias-header d-flex align-items-center mb-4 gap-2">
+        <input
+          className="form-control"
+          type="text"
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          placeholder="Buscar categoria"
+        />
         <Button 
             size="sm"
             className="btn-success px-4 py-2 px-3 py-1 rounded-2 fw-bold"
@@ -122,6 +135,7 @@ function Categorias() {
 
       {loading && <p>Carregando...</p>}
 
+      <h3 className="fs-4 text-dark">Lista de Categorias</h3>
       <Tabela>
         <thead>
           <tr>
@@ -131,7 +145,7 @@ function Categorias() {
           </tr>
         </thead>
         <tbody>
-          {categorias.map((categoria) => (
+          {categoriasFiltradas.map((categoria) => (
             <tr key={categoria.id}>
               <td>{categoria.nomeCategoria}</td>
               <td>{categoria.descricao || "Sem descrição"}</td>
