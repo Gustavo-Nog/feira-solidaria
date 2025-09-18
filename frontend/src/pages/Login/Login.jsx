@@ -1,6 +1,7 @@
-import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 
 import Button from '../../components/Button/Button';
 import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
@@ -9,19 +10,31 @@ import feiraLogo from '../../assets/logo-feira.jpg';
 
 import './Login.css';
 
+import loginServices from '../../services/authServices';
+
 function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { login } = useUser();
   const methods = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    if (data.nomeUsuario === 'Feira' && data.senha === '123456') {
-      alert('Login bem-sucedido!');
-      navigate('/');
-    } else {
-      alert('Credenciais inválidas.');
-    }
+  const onSubmit = async (data) => {
+    try {
+	    console.log(data);
+      const response = await loginServices.login({
+				nomeUsuario: data.nomeUsuario,
+				senha: data.senha
+			});
+
+			if (response.tokenDeAcesso) {
+				login(response);
+
+				navigate("/");
+			} else {
+			}
+    } catch (error) {
+			console.error('Erro ao fazer o login:', error.message);
+    }    
   };
 
   return (
@@ -37,7 +50,6 @@ function Login() {
             Ainda não tem uma conta? <Link to="/cadastro" className="text-warning">Criar conta</Link>
           </p>
 
-          {/* FormProvider permite usar useFormContext nos filhos */}
           <FormProvider {...methods}>
             <form noValidate onSubmit={methods.handleSubmit(onSubmit)}>
 

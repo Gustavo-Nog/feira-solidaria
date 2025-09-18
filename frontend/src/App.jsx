@@ -5,6 +5,8 @@ import { UserProvider } from './context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import ProtectedRoute from './components/ProtectedRoute/protectedRoute';
+
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
@@ -18,12 +20,13 @@ import ItemDetalhe from './pages/ItemDetalhe/ItemDetalhe';
 import Produtos from './pages/Produtos/Produto';
 import Carrinho from './pages/Carrinho/Carrinho';
 import Perfil from './pages/Perfil/Perfil';
+import EditarItem from "./pages/Itens/EditarItem";
 
 import AdminLayout from './layout/AdminLayout';
 import Admin from './pages/Admin/Admin';
 import Dashboard from './pages/Admin/Dashboard/AdminDashboard';
 import UsuariosLista from './pages/Admin/Usuarios/Usuarios';
-import ProdutosAdmin from './pages/Admin/Produtos/Produtos';
+import ProdutosAdmin from './pages/Admin/ProdutosAdmin/ProdutosAdmin';
 import Categoria from './pages/Admin/Categoria/Categoria';
 import AcoesAdm from './pages/Admin/acoesAdm/AcoesAdm';
 
@@ -50,13 +53,16 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/cadastrar-itens" element={<CadastrarItem />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<Produtos />} />
-            <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/item/:itemId" element={<ItemDetalhe />} />
-            <Route path="/perfil" element={<Perfil />} />
-            {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cadastrar-itens" element={<CadastrarItem />} />
+              <Route path="/carrinho" element={<Carrinho />} />
+              <Route path="/editar-item/:id" element={<EditarItem />} />
+              <Route path="/perfil" element={<Perfil />} />
+              {/* Se tivesse outras páginas com o mesmo layout, elas viriam aqui */}
+            </Route>
           </Route>
 
           <Route element={<AdminLayout />}>

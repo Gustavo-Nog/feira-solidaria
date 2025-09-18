@@ -4,6 +4,14 @@ const listarProdutos = async () => {
     return prisma.produto.findMany({
         orderBy: {
             nomeProduto: "asc"
+        },
+        include: {
+          categoria: true,
+          pessoa: {
+            select: {
+              nome: true
+            }
+          }
         }
     });
 }
@@ -13,9 +21,18 @@ const buscarProdutoPorId = async (id) => {
     where: { id },
     include: {
       categoria: true,
-      pessoa: true,
       doacoes: true,
       favoritos: true,
+      pessoa: {
+        include: {
+          enderecos: {
+            include: {
+              endereco: true,
+            }
+          },
+          telefones: true,
+        }
+      }
     },
   });
 };
@@ -35,13 +52,19 @@ const atualizarProduto = async (id, dadosParaAtualizar) => {
     where: { id },
   });
 
-  if (!produtoExistente) {
+   if (!produtoExistente) {
     throw new Error("Produto não encontrado!");
   }
 
   return prisma.produto.update({
     where: { id },
     data: dadosParaAtualizar,
+    include: {
+      categoria: true,
+      pessoa: {
+        select: { nome: true }
+      }
+    }
   });
 };
 
@@ -66,6 +89,3 @@ module.exports = {
     atualizarProduto,
     deletarProduto
 }
-
-
-
