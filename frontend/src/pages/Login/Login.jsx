@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 
 import Button from '../../components/Button/Button';
 import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
@@ -14,6 +15,7 @@ import loginServices from '../../services/authServices';
 function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { login } = useUser();
   const methods = useForm();
 
   const onSubmit = async (data) => {
@@ -25,17 +27,13 @@ function Login() {
 			});
 
 			if (response.tokenDeAcesso) {
-				localStorage.setItem("accessToken", response.tokenDeAcesso);
-				localStorage.setItem("refreshToken", response.refreshToken);
+				login(response);
 
-				alert("Login bem-sucedido!");
 				navigate("/");
 			} else {
-				alert("Erro: resposta inesperada do servidor.");
 			}
     } catch (error) {
 			console.error('Erro ao fazer o login:', error.message);
-      alert(`Erro ao fazer login, senha ou nome de Usuário invalidos`);
     }    
   };
 
