@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 
 function AdminLayout() {
   return (
+<<<<<<< HEAD
     <div className="d-flex flex-column min-vh-100">
       <div className="d-md-none">
         <NavbarAdmin variant="mobile" />
@@ -21,6 +22,16 @@ function AdminLayout() {
           <div className="container-fluid flex-grow-1 d-flex flex-column">
             <Outlet />
           </div>
+=======
+    <div className="container-fluid">
+      <div className="row">
+        <nav className="col-1 col-md-2 bg-green vh-100 p-3">
+          <NavbarAdmin />
+        </nav>
+
+        <main className="col-11 col-md-10 p-4">
+          <Outlet />
+>>>>>>> b871ec5b9f581cf3bc2b5142d68be9ad4549eca7
         </main>
       </div>
 

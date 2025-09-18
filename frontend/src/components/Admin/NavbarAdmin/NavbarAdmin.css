@@ -32,47 +32,28 @@
   border: none;
   color: #2A6441;
   cursor: pointer;
+  margin: 1rem;
   z-index: 1100;
 }
 
+.nav-mobile-admin {
+  display: none;
+}
 
-@media (max-width: 768px) {
   .nav-mobile-admin {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 75%;
     height: 100vh;
     background-color: #ffffff;
     padding: 2rem 1.5rem;
     z-index: 1050;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    overflow: hidden;
   }
-  .nav-mobile-admin.open { 
-    transform: translateX(0); 
-  }
-}
 
   .nav-mobile-admin.open {
     transform: translateX(0);
-  }
-
-  .nav-mobile-admin .nav-link {
-    font-size: 1.1rem;
-    color: #2A6441;
-  }
-
-  .nav-mobile-admin .navbar-brand a {
-    color: #2A6441;
-    text-decoration: none;
   }
 
