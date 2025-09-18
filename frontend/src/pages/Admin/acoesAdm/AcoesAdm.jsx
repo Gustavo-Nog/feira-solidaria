@@ -22,6 +22,11 @@ function AcoesAdm() {
 
   const [loading, setLoading] = useState(false);
 
+  const usuariosOptions = usuarios.map(usuario => ({
+		value: usuario.id,
+		label: usuario.nomeUsuario
+	}));
+
   const methods = useForm({
     defaultValues: {
       descricao: acaoSelecionada?.descricao || "",
@@ -86,9 +91,9 @@ function AcoesAdm() {
         acaoSelecionada.id,
         payload
       );
-      setAcoes(
-        acoes.map((acao) => (acao.id === response.id ? response : acao))
-      );
+      
+      const listaAtualizada = await acoesAdmServices.listarAcoesAdm();
+      setAcoes(listaAtualizada);
       setIsEditOpen(false);
     } catch (error) {
       console.error("Erro ao editar ação:", error);
@@ -146,7 +151,7 @@ function AcoesAdm() {
               <tr key={acao.id}>
                 <td>{acao.descricao}</td>
                 <td>{acao.data ? new Date(acao.data).toLocaleDateString() : "—"}</td>
-                <td>{acao.usuario?.nomeUsuario || "—"}</td>
+                <td>{acao.usuario?.nomeUsuario || acao.usuarioId}</td>
                 <td>
                   <Button
                     size="small"
@@ -187,64 +192,58 @@ function AcoesAdm() {
 
       <FormProvider {...methods}>
        <ModalAdmin
-    isOpen={isCadastroOpen}
-    onClose={() => setIsCadastroOpen(false)}
-    title="Cadastrar Ação"
-    onConfirm={methods.handleSubmit(handleCadastro)}
-    confirmText="Cadastrar"
-    confirmClass="btn-success"
->
-    <InputField name="descricao" label="Descrição" />
-
-    {/* Adicionando as classes do InputField */}
-    <div className="input-wrapper campo mb-3">
-        <label className="form-label">Usuário Responsável</label>
-        <select {...methods.register("usuarioId")} required className="form-select">
-            <option value="">Selecione um usuário</option>
-            {usuarios.map((usuario) => (
-                <option key={usuario.id} value={usuario.id}>
-                    {usuario.nomeUsuario}
-                </option>
-            ))}
-        </select>
-    </div>
-        </ModalAdmin>
-
-        <ModalAdmin
-    isOpen={isEditOpen}
-    onClose={() => setIsEditOpen(false)}
-    title="Editar Ação"
-    onConfirm={methods.handleSubmit(handleEdit)}
-    confirmText="Salvar"
-    confirmClass="btn-primary"
->
-    <InputField name="descricao" label="Descrição" />
-
-    {/* Adicionando as classes do InputField */}
-    <div className="input-wrapper campo mb-3">
-        <label className="form-label">Usuário Responsável</label>
-        <select {...methods.register("usuarioId")} required className="form-select">
-            <option value="">Selecione um usuário</option>
-            {usuarios.map((usuario) => (
-                <option key={usuario.id} value={usuario.id}>
-                    {usuario.nomeUsuario}
-                </option>
-            ))}
-        </select>
-    </div>
-        </ModalAdmin>
-
-        <ModalAdmin
-          isOpen={isDeleteOpen}
-          onClose={() => {
-            setIsDeleteOpen(false);
-            methods.reset();
-          }}
-          title="Deletar Ação"
-          onConfirm={handleDelete}
-          confirmText="Deletar"
-          confirmClass="btn-danger"
+            isOpen={isCadastroOpen}
+            onClose={() => setIsCadastroOpen(false)}
+            title="Cadastrar Ação"
+            onConfirm={methods.handleSubmit(handleCadastro)}
+            confirmText="Cadastrar"
+            confirmClass="btn-success"
         >
+        <InputField name="descricao" label="Descrição" />
+
+        {/* Adicionando as classes do InputField */}
+        <div className="input-wrapper campo mb-3">
+          <InputField
+              name="usuarioId"
+              label="Usuário Responsável"
+              as="select"
+              options={usuariosOptions}
+          />
+        </div>
+            </ModalAdmin>
+
+            <ModalAdmin
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        title="Editar Ação"
+        onConfirm={methods.handleSubmit(handleEdit)}
+        confirmText="Salvar"
+        confirmClass="btn-primary"
+    >
+        <InputField name="descricao" label="Descrição" />
+
+        {/* Adicionando as classes do InputField */}
+        <div className="input-wrapper campo mb-3">
+            <InputField
+              name="usuarioId"
+              label="Usuário Responsável"
+              as="select"
+              options={usuariosOptions}
+          />
+        </div>
+            </ModalAdmin>
+
+            <ModalAdmin
+              isOpen={isDeleteOpen}
+              onClose={() => {
+                setIsDeleteOpen(false);
+                methods.reset();
+              }}
+              title="Deletar Ação"
+              onConfirm={handleDelete}
+              confirmText="Deletar"
+              confirmClass="btn-danger"
+            >
           <p>Tem certeza que deseja deletar esta ação administrativa?</p>
         </ModalAdmin>
       </FormProvider>
