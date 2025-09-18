@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaUser, FaGear, FaBagShopping, FaBars, FaTimes } from 'react-icons/fa6';
+import { FaUser, FaGear, FaBagShopping, FaBars } from 'react-icons/fa6';
+import { FaTimes } from 'react-icons/fa';
 import { MdDashboard } from "react-icons/md";
 import { ImAccessibility } from "react-icons/im";
 import './NavbarAdmin.css';
@@ -11,6 +12,8 @@ function NavbarAdmin({ variant = 'desktop' }) {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const isActive = (path) => location.pathname === path ? "active" : "";
 
   return (
     <>
@@ -41,6 +44,10 @@ function NavbarAdmin({ variant = 'desktop' }) {
             <ImAccessibility /> Ações Admin
           </Link>
           <Link to="/configuracoes" onClick={variant === 'mobile' ? closeMenu : undefined} className={`nav-link ${isActive('/configuracoes')}`}>
+            <FaGear /> Configurações
+          </Link>
+        </div>
+      </div>
 
       <div className="navbar-admin-desktop d-none d-md-flex flex-column p-3">
         <div className="navbar-brand fs-3 fw-bold mb-3">
@@ -69,7 +76,6 @@ function NavbarAdmin({ variant = 'desktop' }) {
           </Link>
 
           <Link to="/configuracoes" className={`nav-link ${isActive('/configuracoes')}`}>
-
             <FaGear /> Configurações
           </Link>
         </div>

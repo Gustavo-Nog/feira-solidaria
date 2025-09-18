@@ -20,7 +20,7 @@ const logout = async () => {
 
 const verificarToken = async () => {
   try {
-    const response = await api.get('/auth/verificar-token');
+    const response = await api.get('/api/auth/verificar-token');
     return response.data;
   } catch (error) {
     throw new Error(`Falha na verificação do token: ${error.message}`);

@@ -29,16 +29,11 @@ function Login() {
 			if (response.tokenDeAcesso) {
 				login(response);
 
-<<<<<<< Updated upstream
-				navigate("/");
-=======
-				alert("Login bem-sucedido!");
-				if (data.usuario.tipo === "ADMIN") {
-					navigate("/dashboard");
-				} else {
-					navigate("/");
-				}
->>>>>>> Stashed changes
+				  if (response.usuario.usuario.tipo === "ADMIN") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
 			} else {
 			}
     } catch (error) {

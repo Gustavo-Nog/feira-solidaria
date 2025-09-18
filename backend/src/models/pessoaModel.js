@@ -28,7 +28,8 @@ const buscarPessoaPorId = async (id) => {
       usuario: {
         select: {
           email: true,
-          nomeUsuario: true
+          nomeUsuario: true,
+          tipo: true
         }
       }
     }
