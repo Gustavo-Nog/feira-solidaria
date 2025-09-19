@@ -1,14 +1,24 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
+import { useUser } from '../../context/UserContext'; // 1. Importe o useUser!
 import './Navbar.css';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const usuarioLogado = false;
+  // 2. Pegue os dados de autenticação do contexto
+  const { usuario, isAuthenticated, logout } = useUser();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  // 3. Crie uma função de logout para ser usada nos botões
+  const handleLogout = () => {
+    closeMenu(); // Fecha o menu mobile, se estiver aberto
+    logout();    // Chama a função de logout do contexto
+    navigate('/login'); // Redireciona para a página de login
+  };
 
   return (
     <header className="navbar-container sticky-top">
@@ -29,13 +39,21 @@ function Navbar() {
         <div className="profile-area-desktop">
           <Link to="/perfil">
             <div className="profile-icon">
-              <FaUserCircle className="default-user-icon" />
+              {isAuthenticated && usuario?.foto ? (
+                <img src={usuario.foto} alt={`Foto de ${usuario.nome}`} className="profile-photo" />
+              ) : (
+                <FaUserCircle className="default-user-icon" />
+              )}
             </div>
           </Link>
 
           <div className="profile-actions">
-            {usuarioLogado ? (
-              <Link to="/perfil">Meu Perfil</Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/perfil">{usuario?.nome || 'Meu Perfil'}</Link>
+                <span>/</span>
+                <button onClick={handleLogout} className="logout-button">Sair</button>
+              </>
             ) : (
               <>
                 <Link to="/cadastro">Cadastrar</Link>
@@ -50,18 +68,17 @@ function Navbar() {
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
+        {/* --- MENU MOBILE ATUALIZADO --- */}
         <div className={isMenuOpen ? "nav-mobile open" : "nav-mobile"}>
           <Link to="/" onClick={closeMenu}>Início</Link>
           <Link to="/produtos" onClick={closeMenu}>Produtos</Link>
-          <Link to="/contato" onClick={closeMenu}>Contato</Link>
-          <Link to="/sobre-nos" onClick={closeMenu}>Sobre nós</Link>
           <Link to="/carrinho" onClick={closeMenu}>Carrinho</Link>
           <Link to="/perfil" onClick={closeMenu}>Seu Perfil</Link>
-
+          
           <div className="separator"></div>
 
-          {usuarioLogado ? (
-            null
+          {isAuthenticated ? (
+            <button onClick={handleLogout} className="logout-button-mobile">Sair</button>
           ) : (
             <div className="nav-mobile-profile-actions">
               <Link to="/cadastro" onClick={closeMenu}>Cadastrar</Link>

@@ -5,7 +5,7 @@ import { useUser } from '../../context/UserContext';
 
 import Button from '../../components/Button/Button';
 import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
-import InputField from '../../components/Input/InputField'; // caminho do seu novo InputField
+import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
 import './Login.css';
@@ -29,12 +29,11 @@ function Login() {
 			if (response.tokenDeAcesso) {
 				login(response);
 
-				alert("Login bem-sucedido!");
-				if (data.usuario.tipo === "ADMIN") {
-					navigate("/dashboard");
-				} else {
-					navigate("/");
-				}
+		    if (response.usuario.usuario.tipo === "ADMIN") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
 			} else {
 			}
     } catch (error) {
@@ -71,30 +70,22 @@ function Login() {
                 required="Senha é obrigatória"
               />
 
-              <div className="form-check mb-3">
-                <input className="form-check-input" type="checkbox" id="logado" />
-                <label className="form-check-label" htmlFor="logado">
-                  Mantenha-me logado
-                </label>
-              </div>
-
               <div className="form-link">
                 <Link to="/redefinir-senha" className="text-warning text-decoration-underlin">
                   Esqueci a senha
                 </Link>
               </div>
-
+              
+              <GoogleLoginButton />
               <Button type="submit" loading={loading} size="large">
                 Entrar
               </Button>
 
               <div className="my-3 d-flex align-items-center">
                 <hr className="flex-grow-1" />
-                <span className="mx-2 text-white text-uppercase small">ou</span>
                 <hr className="flex-grow-1" />
               </div>
 
-              <GoogleLoginButton />
             </form>
           </FormProvider>
         </div>

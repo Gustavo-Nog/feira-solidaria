@@ -1,6 +1,6 @@
 const acoesAdmModel = require('../models/acoesAdmModel');
 
-const listarAcoesAdmHandler = async (req, res) => {
+const listarAcoesAdmHandler = async (req, res) => {  
     try {
         const acoesAdm = await acoesAdmModel.listarAcoesAdm();
         res.status(200).json(acoesAdm);

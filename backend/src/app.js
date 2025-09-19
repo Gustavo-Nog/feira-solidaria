@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
+app.use(cookieParser());
 app.use(cors({
   origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
-
 app.use(express.json());
+
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
@@ -33,7 +36,6 @@ app.use('/api/favoritos', favoritoRoutes);
 app.use('/api/pessoas', pessoaRoutes);
 app.use('/api/telefones', telefoneRoutes);
 app.use('/api/mensagens', mensagemRoutes);
-
 
 app.get('/', (req, res) => {
     res.send("feira-solidaria");

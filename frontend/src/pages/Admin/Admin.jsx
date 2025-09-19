@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
-import AdminModal from '../../components/AdminModal/AdminModal';
 
 import './Admin.css';
 

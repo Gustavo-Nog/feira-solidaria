@@ -12,7 +12,7 @@ function Carrinho() {
   const navigate = useNavigate();
 
   const handleFinalizarTroca = async () => {
-    if (!usuario || !usuario.pessoaId) {
+    if (!usuario || !usuario.id) {
       toast.warn('Você precisa fazer o login para finalizar a doação.');
       navigate('/login');
       return;
@@ -20,7 +20,7 @@ function Carrinho() {
     try {
       const promessasDeDoacao = cartItems.map(item => {
         const payload = {
-          receptorId: usuario.pessoaId,
+          receptorId: usuario.id,
           produtoId: item.id,
         };
         return doacaoServices.solicitarDoacao(payload);

@@ -14,21 +14,19 @@ export const UserProvider = ({ children }) => {
       const token = localStorage.getItem('accessToken');
       if (token) {
         try {
+          const { usuario: dadosDoUsuario } = await authServices.verificarToken(token);
 
           api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-          const { usuario: dadosDoUsuario } = await authServices.verificarToken();
-
+          
           setUsuario(dadosDoUsuario);
           setIsAuthenticated(true);
         } catch (error) {
-          console.error("Sessão inválida, limpando token:", error);
+          console.error("Sessão inválida, limpando token:", error.message);
           localStorage.removeItem('accessToken');
         }
       }
       setLoading(false);
-    }
-    
+    } 
     carregarSessao();
   }, []);
 
@@ -42,11 +40,16 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     delete api.defaults.headers.common['Authorization'];
+
     setUsuario(null);
     setIsAuthenticated(false);
   };
 
   const value = { usuario, isAuthenticated, login, logout, loading };
+
+  if (loading) {
+    return <div>A verificar sessão...</div>;
+  }
 
   return (
     <UserContext.Provider value={value}>
