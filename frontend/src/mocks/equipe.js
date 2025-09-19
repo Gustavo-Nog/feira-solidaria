@@ -3,7 +3,7 @@ import gabrielFoto from "../assets/equipe/gabriel.png";
 import gustavoFoto from "../assets/equipe/gustavo.jpg";
 //  import henriqueFoto from "../assets/equipe/henrique.jpg";
 // import hudsonFoto from "../assets/equipe/hudson.jpg";
-//  import mariannaFoto from "../assets/equipe/marianne.jpg";
+import mariannaFoto from "../assets/equipe/marianna.jpg";
 import thierryFoto from "../assets/equipe/thierry.jpg";
 
 const placeholder = "https://via.placeholder.com/150";
@@ -45,7 +45,7 @@ const membrosEquipe = [
     funcao: 'Fullstack',
     linkedin: 'https://www.linkedin.com/in/marianna-onofre-08039a338/',
     github: 'https://github.com/Marionofree',
-    foto: placeholder
+    foto: mariannaFoto
   },
   {
     nome: 'Thierry',
