@@ -82,18 +82,17 @@ function Login() {
                   Esqueci a senha
                 </Link>
               </div>
-
+              
+              <GoogleLoginButton />
               <Button type="submit" loading={loading} size="large">
                 Entrar
               </Button>
 
               <div className="my-3 d-flex align-items-center">
                 <hr className="flex-grow-1" />
-                <span className="mx-2 text-white text-uppercase small">ou</span>
                 <hr className="flex-grow-1" />
               </div>
 
-              <GoogleLoginButton />
             </form>
           </FormProvider>
         </div>
