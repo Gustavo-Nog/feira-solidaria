@@ -91,16 +91,14 @@ function Cadastro() {
                     required="Confirmação de senha é obrigatória"
                     className='mb-1'
                   />
+                  <GoogleLoginButton />
 
                   <Button type="submit" loading={isSubmitting} size="large">
                     Cadastrar
                   </Button>
-
-                  <GoogleLoginButton />
-
+                  
                   <div className="my-3 d-flex align-items-center">
                     <hr className="flex-grow-1" />
-                    <span className="mx-2 text-white text-uppercase small">ou</span>
                     <hr className="flex-grow-1" />
                   </div>
 
