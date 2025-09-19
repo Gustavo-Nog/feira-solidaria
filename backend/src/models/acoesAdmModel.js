@@ -80,11 +80,16 @@ const deletarAcaoAdm = async (id) => {
     });
 };
 
+const totalAcoesAdm = async () => {
+    return prisma.acaoAdministrativa.count({});
+};
+
 module.exports = {
     listarAcoesAdm,
     buscarAcoesAdmPorId,
     buscarAcoesPorUsuario,
     criarAcaoAdm,
     atualizarAcaoAdm,
-    deletarAcaoAdm
+    deletarAcaoAdm,
+    totalAcoesAdm
 };

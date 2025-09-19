@@ -29,7 +29,7 @@ function Login() {
 			if (response.tokenDeAcesso) {
 				login(response);
 
-				  if (response.usuario.usuario.tipo === "ADMIN") {
+		    if (response.usuario.usuario.tipo === "ADMIN") {
             navigate("/dashboard");
           } else {
             navigate("/");

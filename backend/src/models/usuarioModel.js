@@ -2,19 +2,19 @@ const prisma = require('../generated/prisma');
 const bcrypt = require('bcryptjs');
 
 const listarUsuarios = async () => {
-    return prisma.usuario.findMany({
-        orderBy: { 
-          id: 'asc' 
-        }
-    });
+  return prisma.usuario.findMany({
+    orderBy: {
+      id: 'asc' 
+    }
+  });
 };
 
 const buscarUsuarioPorId = async (id) => {
-    return prisma.usuario.findUnique({
-        where: { 
-          id 
-        }
-    });
+  return prisma.usuario.findUnique({
+      where: { 
+        id 
+      }
+  });
 };
 
 const criarUsuario = async (dadosUsuario) => {
@@ -24,13 +24,11 @@ const criarUsuario = async (dadosUsuario) => {
 
     const senhaHash = await bcrypt.hash(dadosUsuario.senha, 10);
 
-    const tipo = (dadosUsuario.email === "feirasolidaria@email.com") ? "ADMIN" : "COMUM";
-
     return prisma.usuario.create({
         data: {
             email: dadosUsuario.email,
             senha: senhaHash,
-            tipo,
+            tipo: "COMUM",
             nomeUsuario: dadosUsuario.nomeUsuario
         }
     });
@@ -79,10 +77,15 @@ const deletarUsuario = async (id) => {
     return prisma.usuario.delete({ where: { id } });
 };
 
+const totalUsuarios = async () => { 
+  return Usuarios = await prisma.usuario.count();
+}
+
 module.exports = {
     listarUsuarios,
     buscarUsuarioPorId,
     criarUsuario,
     atualizarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    totalUsuarios
 };

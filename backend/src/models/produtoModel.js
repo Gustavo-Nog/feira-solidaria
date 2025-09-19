@@ -1,20 +1,20 @@
 const prisma = require('../generated/prisma');
 
 const listarProdutos = async () => {
-    return prisma.produto.findMany({
-        orderBy: {
-            nomeProduto: "asc"
-        },
-        include: {
-          categoria: true,
-          pessoa: {
-            select: {
-              nome: true
-            }
+  return prisma.produto.findMany({
+      orderBy: {
+          nomeProduto: "asc"
+      },
+      include: {
+        categoria: true,
+        pessoa: {
+          select: {
+            nome: true
           }
         }
-    });
-}
+      }
+  });
+};
 
 const buscarProdutoPorId = async (id) => {
   return prisma.produto.findUnique({
@@ -82,10 +82,15 @@ const deletarProduto = async (id) => {
   });
 };
 
+const totalProdutos = async () => {
+  return prisma.produto.count({});
+};
+
 module.exports = {
     listarProdutos,
     buscarProdutoPorId,
     criarProduto,
     atualizarProduto,
-    deletarProduto
+    deletarProduto,
+    totalProdutos
 }
