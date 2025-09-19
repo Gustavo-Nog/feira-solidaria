@@ -10,6 +10,7 @@ import './NavbarAdmin.css';
 function NavbarAdmin({ variant = 'desktop' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
   const isActive = (path) => location.pathname === path ? 'active' : '';
@@ -26,8 +27,10 @@ function NavbarAdmin({ variant = 'desktop' }) {
   return (
     <>
       {variant === 'mobile' && (
-        <button className="menu-toggle-admin d-md-none" onClick={toggleMenu} aria-label="Abrir menu">
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        <button 
+            className="menu-toggle-admin d-md-none"
+            onClick={toggleMenu} aria-label="Abrir menu">
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       )}
 
@@ -47,7 +50,11 @@ function NavbarAdmin({ variant = 'desktop' }) {
       )}
 
       {variant === 'mobile' && (
-        <div className={isMenuOpen ? "nav-mobile-admin open" : "nav-mobile-admin"} role="dialog" aria-modal="true">
+        <div 
+            className={isMenuOpen ? "nav-mobile-admin open" : "nav-mobile-admin"} 
+            role="dialog" 
+            aria-modal="true"
+        >
           <div className="navbar-brand fs-4 fw-bold mb-4">
             <Link to="/admin" onClick={closeMenu}>Feira Solidária</Link>
           </div>
