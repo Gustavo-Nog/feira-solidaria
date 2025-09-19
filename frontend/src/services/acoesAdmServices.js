@@ -54,11 +54,22 @@ const deletarAcaoAdm = async (id) => {
     }
 };
 
+const totalAcoesAdm = async () => {
+    try {
+        const response = await api.get('/api/acoesAdm/total-acoesAdm');
+        return response.data;
+    } catch (error) {
+        throw new Error(`Falha ao obter o total de ações: ${error.message}`);
+    }
+};
+
+
 export default { 
     listarAcoesAdm,
     buscarAcoesAdmPorId,
     buscarAcoesPorUsuario,
     criarAcaoAdm,
     atualizarAcaoAdm,
-    deletarAcaoAdm
- };
+    deletarAcaoAdm,
+    totalAcoesAdm
+};

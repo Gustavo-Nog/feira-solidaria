@@ -47,7 +47,7 @@ const deletarProduto = async (id) => {
 
 const totalProdutos = async () => {
   try { 
-    const response = await api.get('/api/total-produtos');
+    const response = await api.get('/api/produtos/total-produtos');
     return response.data;
   } catch (error) {
     throw new Error(`Falha ao obter o total de produtos: ${error.message}`);
