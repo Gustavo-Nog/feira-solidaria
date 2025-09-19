@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ModalAdmin from '../../../components/Admin/ModalAdmin/ModalAdmin';
 import InputField from '../../../components/Input/InputField';
 import Button from '../../../components/Button/Button';
-import Tabela from "../../../components/Admin/Tabela/Tabela";
+import Tabela from '../../../components/Admin/Tabela/Tabela';
 
 import usuarioServices from '../../../services/usuarioServices';
 
@@ -32,7 +32,7 @@ function Usuarios() {
 		const fetchUsuarios = async () => {
 			try {
 				const data = await usuarioServices.listarUsuarios();
-				setUsuarios(data);
+				setUsuarios(data.usuarios);
 			} catch (error) {
 				console.error("Erro ao buscar usuários:", error);
 			}
