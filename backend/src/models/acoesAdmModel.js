@@ -72,7 +72,7 @@ const deletarAcaoAdm = async (id) => {
 };
 
 const totalAcoesAdm = async () => {
-    return prisma.acaoAdministrativa.count();
+    return prisma.acaoAdministrativa.count({});
 };
 
 module.exports = {

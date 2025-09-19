@@ -54,10 +54,10 @@ const deletarCategoriaHandler = async (req, res) => {
     }
 };
 
-totalCategoriasHandler = async (req, res) => {
+const totalCategoriasHandler = async (req, res) => {
     try {
-        const totalCategorias = await categoriaModel.listarCategorias();
-        res.status(200).json(totalCategorias);
+        const total = await categoriaModel.totalCategorias();
+        res.status(200).json({ totalCategorias: total });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

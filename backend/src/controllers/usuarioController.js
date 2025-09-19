@@ -58,7 +58,7 @@ const deletarUsuarioHandler = async (req, res) => {
 const totalUsuariosHandler = async (req, res) => {
     try {
       const total = await usuarioModel.totalUsuarios();
-      res.status(200).json(total);
+      res.status(200).json({ totalDeUsuarios: total });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

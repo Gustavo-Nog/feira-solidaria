@@ -83,7 +83,7 @@ const deletarProduto = async (id) => {
 };
 
 const totalProdutos = async () => {
-  return prisma.produto.count();
+  return prisma.produto.count({});
 };
 
 module.exports = {

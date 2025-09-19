@@ -66,7 +66,7 @@ const deletarCategoria = async (id) => {
 };
 
 const totalCategorias = async () => {
-    return prisma.categoria.count();
+    return prisma.categoria.count({});
 };
 
 module.exports = { 

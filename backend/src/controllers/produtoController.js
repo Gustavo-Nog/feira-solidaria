@@ -77,7 +77,7 @@ const deletarProdutoHandler = async (req, res) => {
 const totalProdutosHandler = async(req, res) => {
   try {
     const total = await produtoModel.totalProdutos();
-    res.status(200).json({ total });
+    res.status(200).json({ totalProdutos: total });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
