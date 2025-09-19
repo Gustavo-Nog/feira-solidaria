@@ -1,21 +1,38 @@
 const prisma = require('../generated/prisma');
 
 const listarProdutos = async () => {
-    return prisma.produto.findMany({
-        orderBy: {
-            nomeProduto: "asc"
+  return prisma.produto.findMany({
+      orderBy: {
+          nomeProduto: "asc"
+      },
+      include: {
+        categoria: true,
+        pessoa: {
+          select: {
+            nome: true
+          }
         }
-    });
-}
+      }
+  });
+};
 
 const buscarProdutoPorId = async (id) => {
   return prisma.produto.findUnique({
     where: { id },
     include: {
       categoria: true,
-      pessoa: true,
       doacoes: true,
       favoritos: true,
+      pessoa: {
+        include: {
+          enderecos: {
+            include: {
+              endereco: true,
+            }
+          },
+          telefones: true,
+        }
+      }
     },
   });
 };
@@ -35,13 +52,19 @@ const atualizarProduto = async (id, dadosParaAtualizar) => {
     where: { id },
   });
 
-  if (!produtoExistente) {
+   if (!produtoExistente) {
     throw new Error("Produto não encontrado!");
   }
 
   return prisma.produto.update({
     where: { id },
     data: dadosParaAtualizar,
+    include: {
+      categoria: true,
+      pessoa: {
+        select: { nome: true }
+      }
+    }
   });
 };
 
@@ -59,13 +82,15 @@ const deletarProduto = async (id) => {
   });
 };
 
+const totalProdutos = async () => {
+  return prisma.produto.count({});
+};
+
 module.exports = {
     listarProdutos,
     buscarProdutoPorId,
     criarProduto,
     atualizarProduto,
-    deletarProduto
+    deletarProduto,
+    totalProdutos
 }
-
-
-

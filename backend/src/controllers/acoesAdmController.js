@@ -1,6 +1,6 @@
 const acoesAdmModel = require('../models/acoesAdmModel');
 
-const listarAcoesAdmHandler = async (req, res) => {
+const listarAcoesAdmHandler = async (req, res) => {  
     try {
         const acoesAdm = await acoesAdmModel.listarAcoesAdm();
         res.status(200).json(acoesAdm);
@@ -68,10 +68,20 @@ const deletarAcaoAdmHandler = async (req, res) => {
     }
 };
 
+const totalAcoesAdmHandler = async (req, res) => {
+    try { 
+        const total = await acoesAdmModel.totalAcoesAdm();
+        res.status(200).json({ totalAcoesAdm: total });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     listarAcoesAdmHandler,
     buscarAcoesAdmPorIdHandler,
     buscarAcoesAdmPorUsuarioHandler,
+    totalAcoesAdmHandler,
     criarAcaoAdmHandler,
     atualizarAcaoAdmHandler,
     deletarAcaoAdmHandler

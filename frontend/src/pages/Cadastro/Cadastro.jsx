@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
 import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
-import usuarioServices from '../../services/usuarioService';
+import usuarioServices from '../../services/usuarioServices';
 import PessoaModal from '../../components/PessoaModal/PessoaModal';
 
 import './Cadastro.css';
@@ -91,18 +91,18 @@ function Cadastro() {
                     required="Confirmação de senha é obrigatória"
                     className='mb-1'
                   />
+                  <GoogleLoginButton />
 
                   <Button type="submit" loading={isSubmitting} size="large">
                     Cadastrar
                   </Button>
-
+                  
                   <div className="my-3 d-flex align-items-center">
                     <hr className="flex-grow-1" />
-                    <span className="mx-2 text-white text-uppercase small">ou</span>
                     <hr className="flex-grow-1" />
                   </div>
 
-                  <GoogleLoginButton />
+
                 </div>
               </form>
             </FormProvider>

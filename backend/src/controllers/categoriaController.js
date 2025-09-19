@@ -54,4 +54,20 @@ const deletarCategoriaHandler = async (req, res) => {
     }
 };
 
-module.exports = { listarCategoriasHandler, buscarCategoriaPorIdHandler, criarCategoriaHandler, atualizarCategoriaHandler, deletarCategoriaHandler };
+const totalCategoriasHandler = async (req, res) => {
+    try {
+        const total = await categoriaModel.totalCategorias();
+        res.status(200).json({ totalCategorias: total });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+};
+
+module.exports = {
+   listarCategoriasHandler, 
+   buscarCategoriaPorIdHandler, 
+   criarCategoriaHandler, 
+   atualizarCategoriaHandler, 
+   deletarCategoriaHandler, 
+   totalCategoriasHandler
+};

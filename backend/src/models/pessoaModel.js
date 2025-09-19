@@ -11,13 +11,25 @@ const listarPessoas = async () => {
 const buscarPessoaPorId = async (id) => {
   return prisma.pessoa.findUnique({
     where: {
-      id
+      id: id
     },
     include: {
       telefones: true,
       enderecos: {
         include: {
           endereco: true
+        }
+      },
+      produtos: {
+        include: {
+          categoria: true
+        }
+      },
+      usuario: {
+        select: {
+          email: true,
+          nomeUsuario: true,
+          tipo: true
         }
       }
     }
@@ -45,7 +57,7 @@ const atualizarPessoa = async (id, dadosParaAtualizar) => {
 
   return prisma.pessoa.update({
     where: {
-      id
+      id: id
     },
     data: dadosParaAtualizar
   });
@@ -62,7 +74,7 @@ const deletarPessoa = async (id) => {
 
   return prisma.pessoa.delete({
     where: {
-      id
+      id: id
     },
   });
 };

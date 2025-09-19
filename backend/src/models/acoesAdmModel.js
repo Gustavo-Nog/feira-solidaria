@@ -4,7 +4,10 @@ const listarAcoesAdm = async () => {
     return prisma.acaoAdministrativa.findMany({
         orderBy: {
             id: "desc"
-        }   
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
+        }
     })
 
 };
@@ -13,26 +16,31 @@ const buscarAcoesAdmPorId = async (id) => {
     return prisma.acaoAdministrativa.findUnique({
         where: {
             id
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
         }
     });
 };
 
-const buscarAcoesPorUsuario = async (idDoUsuario) => {
+const buscarAcoesPorUsuario = async (usuarioId) => {
     return prisma.acaoAdministrativa.findMany({
         where: {
-            usuarioId: idDoUsuario
-        }
+            usuarioId: usuarioId
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
+        }   
     });
 };
 
 const criarAcaoAdm = async (dadosAcaoAdm) => {
-  if (!dadosAcaoAdm.descricao || !dadosAcaoAdm.usuarioId) {
-    throw new Error("Descrição e ID do usuário são obrigatórios para criar uma ação.");
+  if (!dadosAcaoAdm.usuarioId) {
+    throw new Error("ID do usuário é obrigatório para criar uma ação.");
   }
-
-    return prisma.acaoAdministrativa.create({
-        data: dadosAcaoAdm
-    });
+  return prisma.acaoAdministrativa.create({
+    data: dadosAcaoAdm
+  });
 };
 
 const atualizarAcaoAdm = async (id, dadosParaAtualizar) => {
@@ -72,11 +80,16 @@ const deletarAcaoAdm = async (id) => {
     });
 };
 
+const totalAcoesAdm = async () => {
+    return prisma.acaoAdministrativa.count({});
+};
+
 module.exports = {
     listarAcoesAdm,
     buscarAcoesAdmPorId,
     buscarAcoesPorUsuario,
     criarAcaoAdm,
     atualizarAcaoAdm,
-    deletarAcaoAdm
+    deletarAcaoAdm,
+    totalAcoesAdm
 };

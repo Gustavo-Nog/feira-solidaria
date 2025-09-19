@@ -1,76 +1,92 @@
-import { useForm, FormProvider } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
-import InputField from '../../components/Input/InputField'; 
 
-import './Admin.css';   
+import './Admin.css';
 
 function Admin() {
-    const methods = useForm();
-    const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dados, setDados] = useState({
+    totalProdutos: 0,
+    usuariosAtivos: 0,
+    usuariosLogados: 0,
+    totalDoacoes: 0,
+  });
 
-    const onSubmit = (data) => {
-        setLoading(true);
-        console.log("Dados do formulário:", data);
+  // Simulação de busca de dados do backend
+  const fetchDados = async () => {
+    setLoading(true);
+    try {
+      // Aqui você faria fetch para sua API
+      // Exemplo:
+      // const produtosRes = await fetch('/api/produtos/count');
+      // const usuariosRes = await fetch('/api/usuarios/ativos');
+      // const logadosRes = await fetch('/api/usuarios/logados');
+      // const doacoesRes = await fetch('/api/doacoes/count');
 
-        //adiciona aqui a lógica para enviar os dados para o backend (api)
+      // Dados simulados
+      setDados({
+        totalProdutos: 55,
+        usuariosAtivos: 120,
+        usuariosLogados: 35,
+        totalDoacoes: 30,
+      });
+    } catch (err) {
+      console.error('Erro ao buscar dados:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setLoading(false);
-    };
+  useEffect(() => {
+    fetchDados();
+  }, []);
 
-return (
+  return (
     <div className="admin-container">
       <div className="admin-content">
         <h2>Painel Administrativo</h2>
         <div className="admin-layout">
-          {/* Formulário de Administração */}
-          <div className="admin-form-section">
-            <h3>Gerenciar Itens</h3>
-            <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <InputField
-                  name="nomeItem"
-                  label="Nome do Item"
-                  placeholder="Ex: Novo Produto"
-                  rules={{ required: "Este campo é obrigatório" }}
-                />
-                
-                <InputField
-                  name="valor"
-                  label="Valor"
-                  type="number"
-                  placeholder="Ex: 99.99"
-                  rules={{ 
-                    required: "O valor é obrigatório",
-                    min: { value: 0.01, message: "O valor deve ser positivo" }
-                  }}
-                />
-
-                <Button type="submit" loading={loading} className="btn-success">
-                  Salvar
-                </Button>
-              </form>
-            </FormProvider>
+          {/* Botão para abrir a modal */}
+          <div className="admin-actions">
+            <Button onClick={() => setIsModalOpen(true)} className="btn-success">
+              Abrir Painel Administrativo
+            </Button>
           </div>
-          
+
           {/* Dashboard com Métricas */}
           <div className="admin-dashboard-section">
             <h3>Métricas do Sistema</h3>
             <div className="dashboard-card">
-              <h4>Vendas Totais</h4>
-              <p className="metric-value">R$ 15.000,00</p>
+              <h4>Trocas Realizadas</h4>
+              <p className="metric-value">{dados.totalDoacoes}</p>
             </div>
             <div className="dashboard-card">
               <h4>Usuários Ativos</h4>
-              <p className="metric-value">120</p>
+              <p className="metric-value">{dados.usuariosAtivos}</p>
             </div>
             <div className="dashboard-card">
-              <h4>Itens Cadastrados</h4>
-              <p className="metric-value">55</p>
+              <h4>Usuários Logados</h4>
+              <p className="metric-value">{dados.usuariosLogados}</p>
+            </div>
+            <div className="dashboard-card">
+              <h4>Produtos Cadastrados</h4>
+              <p className="metric-value">{dados.totalProdutos}</p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal do Admin */}
+      <AdminModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        dados={{
+          totalItens: dados.totalProdutos,
+          usuariosAtivos: dados.usuariosAtivos,
+          totalDoacoes: dados.totalDoacoes,
+        }}
+      />
     </div>
   );
 }
