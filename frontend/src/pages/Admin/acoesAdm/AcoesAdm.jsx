@@ -77,26 +77,20 @@ function AcoesAdm() {
     }
   }, [isEditOpen, acaoSelecionada, methods]);
 
-  const handleCadastro = async (data) => {
-    setLoading(true);
-    const payload = {
-      ...data,
-      usuarioId: Number(data.usuarioId)
-    };
-    try {
-      const response = await acoesAdmServices.criarAcaoAdm(payload);
-
-      const usuario = usuariosAdmin.find(u => u.id === response.usuarioId);
-      const acaoComUsuario = { ...response, usuario };
-
-      setAcoes([...acoes, acaoComUsuario]);
-      setIsCadastroOpen(false);
-    } catch (error) {
-      console.error("Erro ao cadastrar ação:", error);
-    } finally {
-      setLoading(false);
-    }
+const handleCadastro = async (data) => {
+  const payload = {
+    ...data,
+    usuarioId: Number(data.usuarioId)
   };
+
+  try {
+    const response = await acoesAdmServices.criarAcaoAdm(payload);
+    setAcoes([...acoes, response]);
+    setIsCadastroOpen(false);
+  } catch (error) {
+    console.error("Erro ao cadastrar ação:", error);
+  }
+};
 
   const handleEdit = async (data) => {
     if (!acaoSelecionada) return;
