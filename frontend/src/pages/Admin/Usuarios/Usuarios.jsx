@@ -32,7 +32,7 @@ function Usuarios() {
 		const fetchUsuarios = async () => {
 			try {
 				const data = await usuarioServices.listarUsuarios();
-				setUsuarios(data.usuarios);
+				setUsuarios(data);
 			} catch (error) {
 				console.error("Erro ao buscar usuários:", error);
 			}
