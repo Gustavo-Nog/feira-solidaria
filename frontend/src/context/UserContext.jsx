@@ -11,21 +11,22 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     async function carregarSessao() {
-      try {
-        const { usuario: dadosDoUsuario } = await authServices.verificarToken();
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        try {
+          const { usuario: dadosDoUsuario } = await authServices.verificarToken(token);
 
-        setUsuario(dadosDoUsuario);
-        setIsAuthenticated(true);
-
-      } catch (error) {
-
-        setIsAuthenticated(false);
-        setUsuario(null);
-      } finally {
-        setLoading(false);
+          api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          
+          setUsuario(dadosDoUsuario);
+          setIsAuthenticated(true);
+        } catch (error) {
+          console.error("Sessão inválida, limpando token:", error.message);
+          localStorage.removeItem('accessToken');
+        }
       }
-    }
-    
+      setLoading(false);
+    } 
     carregarSessao();
   }, []);
 

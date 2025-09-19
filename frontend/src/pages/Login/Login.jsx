@@ -5,7 +5,7 @@ import { useUser } from '../../context/UserContext';
 
 import Button from '../../components/Button/Button';
 import GoogleLoginButton from '../../components/LoginGoogle/GoogleLoginButton';
-import InputField from '../../components/Input/InputField'; // caminho do seu novo InputField
+import InputField from '../../components/Input/InputField';
 import feiraLogo from '../../assets/logo-feira.jpg';
 
 import './Login.css';
@@ -69,13 +69,6 @@ function Login() {
                 type="password"
                 required="Senha é obrigatória"
               />
-
-              <div className="form-check mb-3">
-                <input className="form-check-input" type="checkbox" id="logado" />
-                <label className="form-check-label" htmlFor="logado">
-                  Mantenha-me logado
-                </label>
-              </div>
 
               <div className="form-link">
                 <Link to="/redefinir-senha" className="text-warning text-decoration-underlin">
