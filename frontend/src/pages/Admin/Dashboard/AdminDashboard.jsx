@@ -1,12 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUsers, FaBasketShopping, FaHandshake } from 'react-icons/fa6';
 import { MdCategory } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
-
 import usuarioServices from '../../../services/usuarioServices';
+import produtoServices from '../../../services/produtoServices';
+import categoriaServices from '../../../services/categoriaServices';
+import acoesAdmServices from '../../../services/acoesAdmServices'
 
 function Dashboard() {
+
+	const [totalDeUsuarios, setTotalUsuarios] = useState(0);
+	const [totalDeProdutos, setTotalProdutos] = useState(0);
+	const [totalDeCategorias, setTotalCategorias] = useState(0);
+	const [totalDeAcoesAdm, setTotalAcoesAdm] = useState(0);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const usuariosData = await usuarioServices.totalUsuarios();
+				const produtosData = await produtoServices.totalProdutos();
+				const categoriasData = await categoriaServices.totalCategorias();
+				const acoesAdmData = await acoesAdmServices.totalAcoesAdm();
+
+				setTotalUsuarios(usuariosData.totalDeUsuarios);
+				setTotalProdutos(produtosData.totalProdutos);
+				setTotalCategorias(categoriasData.totalCategorias);
+				setTotalAcoesAdm(acoesAdmData.totalAcoesAdm);
+			} catch (error) {
+				console.error("Erro ao buscar dados:", error);
+			}
+ 	 	};
+
+			fetchData();
+		}, []);
+
 
 	return (
 		<>
@@ -19,13 +47,13 @@ function Dashboard() {
 										to="/usuarios"
 										className="text-decoration-none w-100 h-100 d-flex flex-column text-white"
 								>
-										<h2 className="text-center mt-2 fw-bold">Total de usuários</h2>
+										<h2 className="text-center mt-2 fw-bold text-uppercase">Total de usuários</h2>
 										<div className="d-flex flex-grow-1 align-items-center">
 												<div className="flex-shrink-0 ms-3">
 														<FaUsers size={100} color="white" />
 												</div>
 												<div className="flex-grow-1 d-flex justify-content-center">
-														<span className="display-4">0</span>
+														<span className="display-4">{totalDeUsuarios}</span>
 												</div>
 										</div>
 								</Link>
@@ -37,13 +65,13 @@ function Dashboard() {
 										to="/listar-produtos"
 										className="text-decoration-none w-100 h-100 d-flex flex-column text-white"
 								>
-										<h2 className="text-center mt-2 fw-bold">Total de produtos</h2>
+										<h2 className="text-center mt-2 fw-bold text-uppercase">Total de produtos</h2>
 										<div className="d-flex flex-grow-1 align-items-center">
 												<div className="flex-shrink-0 ms-3">
 														<FaBasketShopping size={100} color="white" />
 												</div>
 												<div className="flex-grow-1 d-flex justify-content-center">
-														<span className="display-4">0</span>
+														<span className="display-4">{totalDeProdutos}</span>
 												</div>
 										</div>
 								</Link>
@@ -57,13 +85,13 @@ function Dashboard() {
 										to="/categorias"
 										className="text-decoration-none w-100 h-100 d-flex flex-column text-white"
 								> 
-										<h5 className="text-center mt-2 fw-bold">Categorias</h5>
+										<h5 className="text-center mt-2 fw-bold text-uppercase">Categorias</h5>
 										<div className="d-flex flex-grow-1 align-items-center">
 												<div className="flex-shrink-0 ms-3">
 														<MdCategory size={100} color="white" />
 												</div>
 												<div className="flex-grow-1 d-flex justify-content-center">
-														<span className="display-4">0</span>
+														<span className="display-4">{totalDeCategorias}</span>
 												</div>
 										</div>					
 								</Link>
@@ -74,13 +102,13 @@ function Dashboard() {
 										to="/acoes-adm"
 										className="text-decoration-none w-100 h-100 d-flex flex-column text-white"
 								>
-										<h5 className="text-center mt-2 fw-bold">Acões Administrativas</h5>
+										<h5 className="text-center mt-2 fw-bold text-uppercase">Ações Administrativas</h5>
 										<div className="d-flex flex-grow-1 align-items-center">
 												<div className="flex-shrink-0 ms-3">
 														<FaHandshake size={100} color="white" />
 												</div>
 												<div className="flex-grow-1 d-flex justify-content-center">
-														<span className="display-6">25</span>
+														<span className="display-6">{totalDeAcoesAdm}</span>
 												</div>	
 										</div>
 								</Link>
@@ -90,13 +118,13 @@ function Dashboard() {
 										to="/"
 										className="text-decoration-none w-100 h-100 d-flex flex-column text-white"
 								>
-										<h5 className="text-center mt-2 fw-bold">Novos cadastros</h5>
+										<h5 className="text-center mt-2 fw-bold text-uppercase">Doações</h5>
 										<div className="d-flex flex-grow-1 align-items-center">
 												<div className="flex-shrink-0 ms-3">
 														<FaHandshake size={100} color="white" />
 												</div>
 												<div className="flex-grow-1 d-flex justify-content-center">
-														<span className="display-6">5</span>
+														<span className="display-6">0</span>
 												</div>	
 										</div>
 								</Link>
