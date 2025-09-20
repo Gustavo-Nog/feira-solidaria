@@ -25,27 +25,19 @@ function Login() {
         nomeUsuario: data.nomeUsuario,
         senha: data.senha
       });
-
-      // ### CORREÇÃO APLICADA AQUI ###
-      // Se a chamada à API não deu erro e a resposta tem o objeto 'usuario',
-      // o login foi um sucesso.
       if (response.usuario) {
-        // 1. Atualiza o estado global da aplicação
         login(response);
 
-        // 2. Redireciona o usuário para a página correta
         if (response.usuario.usuario?.tipo === "ADMIN") {
             navigate("/dashboard");
         } else {
             navigate("/");
         }
       } else {
-        // Isso pode acontecer se a API retornar 200 OK mas sem os dados do usuário
         console.error('Erro: Resposta do login não continha os dados do usuário.');
       }
     } catch (error) {
       console.error('Erro ao fazer o login:', error.message);
-      // Aqui você pode adicionar um alerta de "usuário ou senha inválidos" para o usuário
     } finally {
       setLoading(false);
     }
