@@ -19,26 +19,36 @@ function Login() {
   const methods = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-	    console.log(data);
       const response = await loginServices.login({
-				nomeUsuario: data.nomeUsuario,
-				senha: data.senha
-			});
+        nomeUsuario: data.nomeUsuario,
+        senha: data.senha
+      });
 
-			if (response.tokenDeAcesso) {
-				login(response);
+      // ### CORREÇÃO APLICADA AQUI ###
+      // Se a chamada à API não deu erro e a resposta tem o objeto 'usuario',
+      // o login foi um sucesso.
+      if (response.usuario) {
+        // 1. Atualiza o estado global da aplicação
+        login(response);
 
-		    if (response.usuario.usuario.tipo === "ADMIN") {
+        // 2. Redireciona o usuário para a página correta
+        if (response.usuario.usuario?.tipo === "ADMIN") {
             navigate("/dashboard");
-          } else {
+        } else {
             navigate("/");
-          }
-			} else {
-			}
+        }
+      } else {
+        // Isso pode acontecer se a API retornar 200 OK mas sem os dados do usuário
+        console.error('Erro: Resposta do login não continha os dados do usuário.');
+      }
     } catch (error) {
-			console.error('Erro ao fazer o login:', error.message);
-    }    
+      console.error('Erro ao fazer o login:', error.message);
+      // Aqui você pode adicionar um alerta de "usuário ou senha inválidos" para o usuário
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
