@@ -19,25 +19,28 @@ function Login() {
   const methods = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      console.log(data);
       const response = await loginServices.login({
         nomeUsuario: data.nomeUsuario,
         senha: data.senha
       });
-
-      if (response.tokenDeAcesso) {
+      if (response.usuario) {
         login(response);
 
-        if (response.usuario.usuario.tipo === "ADMIN") {
-          navigate("/dashboard");
+        if (response.usuario.usuario?.tipo === "ADMIN") {
+            navigate("/dashboard");
         } else {
-          navigate("/");
+            navigate("/");
         }
+      } else {
+        console.error('Erro: Resposta do login não continha os dados do usuário.');
       }
     } catch (error) {
       console.error('Erro ao fazer o login:', error.message);
-    }    
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
