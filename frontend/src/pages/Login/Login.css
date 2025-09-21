@@ -168,3 +168,19 @@ a.text-warning {
     display: none;
   }
 }
+/* Container que envolve os botões */
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* espaçamento entre os botões */
+  margin-top: 1rem;
+}
+
+/* Estilo para os botões dentro do container */
+.login-buttons button,
+.login-buttons .google-login-button {
+  width: 100%; /* ocupa toda a largura do form-wrapper */
+  max-width: 350px; /* opcional: define largura máxima */
+  text-align: center;
+}

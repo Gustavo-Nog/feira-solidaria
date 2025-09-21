@@ -20,24 +20,23 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-	    console.log(data);
+      console.log(data);
       const response = await loginServices.login({
-				nomeUsuario: data.nomeUsuario,
-				senha: data.senha
-			});
+        nomeUsuario: data.nomeUsuario,
+        senha: data.senha
+      });
 
-			if (response.tokenDeAcesso) {
-				login(response);
+      if (response.tokenDeAcesso) {
+        login(response);
 
-		    if (response.usuario.usuario.tipo === "ADMIN") {
-            navigate("/dashboard");
-          } else {
-            navigate("/");
-          }
-			} else {
-			}
+        if (response.usuario.usuario.tipo === "ADMIN") {
+          navigate("/dashboard");
+        } else {
+          navigate("/");
+        }
+      }
     } catch (error) {
-			console.error('Erro ao fazer o login:', error.message);
+      console.error('Erro ao fazer o login:', error.message);
     }    
   };
 
@@ -76,10 +75,13 @@ function Login() {
                 </Link>
               </div>
               
-              <GoogleLoginButton />
-              <Button type="submit" loading={loading} size="large">
-                Entrar
-              </Button>
+              {/* Container para centralizar e alinhar os botões */}
+              <div className="login-buttons">
+                <GoogleLoginButton />
+                <Button type="submit" loading={loading} size="large">
+                  Entrar
+                </Button>
+              </div>
 
               <div className="my-3 d-flex align-items-center">
                 <hr className="flex-grow-1" />
