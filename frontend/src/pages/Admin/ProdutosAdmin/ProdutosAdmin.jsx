@@ -10,13 +10,13 @@ import produtoServices from '../../../services/produtoServices';
 import categoriaServices from '../../../services/categoriaServices';
 import pessoaServices from '../../../services/pessoaServices';
 
-const qualidadeOptions = [
+export const qualidadeOptions = [
 	{ value: 'NOVO', label: 'Novo' },
 	{ value: 'USADO', label: 'Usado' },
 	{ value: 'SEMINOVO', label: 'Seminovo' }
 ];
 
-const statusOptions = [
+export const statusOptions = [
 	{ value: 'DISPONIVEL', label: 'Disponível' },
 	{ value: 'EM_NEGOCIACAO', label: 'Em negociação' },
 	{ value: 'DOADO', label: 'Doado' }
@@ -127,7 +127,7 @@ function ProdutosAdmin() {
 			if (data.imagemUrl && data.imagemUrl[0]) {
 				formData.append('imagem', data.imagemUrl[0]);
 			};
-			console.log("payload enviado ao backend", formData);
+
       const response = await produtoServices.criarProduto(formData);
       setProdutos([...produtos, response]);
       setIsCadastroOpen(false);
