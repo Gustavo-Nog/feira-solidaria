@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ import './Cadastro.css';
 function Cadastro() {
   const navigate = useNavigate();
   const methods = useForm();
-  const { handleSubmit, watch, formState: { isSubmitting, errors } } = methods;
+  const { handleSubmit, formState: { isSubmitting } } = methods;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUserId, setNewUserId] = useState(null);
@@ -91,18 +91,19 @@ function Cadastro() {
                     required="Confirmação de senha é obrigatória"
                     className='mb-1'
                   />
-                  <GoogleLoginButton />
 
-                  <Button type="submit" loading={isSubmitting} size="large">
-                    Cadastrar
-                  </Button>
-                  
+                  <div className="form-buttons">
+                    <Button type="submit" loading={isSubmitting} size="large">
+                      Cadastrar
+                    </Button>
+
+                    <GoogleLoginButton />
+                  </div>
+
                   <div className="my-3 d-flex align-items-center">
                     <hr className="flex-grow-1" />
                     <hr className="flex-grow-1" />
                   </div>
-
-
                 </div>
               </form>
             </FormProvider>

@@ -2,7 +2,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import InputField from '../../components/Input/InputField'; // caminho do seu novo InputField
+import InputField from '../../components/Input/InputField';
 
 import './NovaSenha.css';
 
@@ -11,18 +11,14 @@ function RedefinirSenhaNova() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
-  // Pega o token da URL (query string)
   const queryParams = new URLSearchParams(location.search);
   const tokenUrl = queryParams.get('token');
 
-  // Pega o token salvo no localStorage
   const tokenSaved = localStorage.getItem('resetToken');
 
-  // Inicializa o react-hook-form com FormProvider
   const methods = useForm();
   const { handleSubmit, formState: { errors } } = methods;
 
-  // Se o token não existir ou não bater com o token salvo, mostra mensagem de erro
   if (!tokenUrl || tokenUrl !== tokenSaved) {
     return (
       <div className="reset-container">

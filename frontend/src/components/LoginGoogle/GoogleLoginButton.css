@@ -1,12 +1,20 @@
-.google-login-wrapper {
+.google-login-button {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #fff;
+  color: #444;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 20px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Estilo extra para telas pequenas */
-@media (max-width: 768px) {
-  .google-login-wrapper>div {
-    transform: scale(1);
-    /* Reduz o tamanho do botão */
-  }
+.google-login-button:hover {
+  background-color: #f0f0f0;
 }

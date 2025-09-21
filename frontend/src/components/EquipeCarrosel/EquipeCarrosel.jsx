@@ -8,12 +8,12 @@ import "./EquipeCarrosel.css";
 function EquipeCarrosel() {
   const settings = {
     className: "center",
-    centerMode: true, // Ativa o modo em que o item do meio fica centralizado no carrossel
-    infinite: true,   // Faz o carrossel "loopar" infinitamente
-    centerPadding: "60px", // Define o "espaço" visível nas laterais dos slides
-    slidesToShow: 3, // Quantos cards mostrar ao mesmo tempo (3 no desktop, 1 no mobile)
-    speed: 500, // speed	Tempo da transição entre slides (500ms)
-    responsive: [ // responsive	Quando a tela for menor que 768px, mostrar 1 card e menos padding
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500, 
+    responsive: [
       {
         breakpoint: 768,
         settings: {

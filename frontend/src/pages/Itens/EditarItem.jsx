@@ -10,12 +10,11 @@ export default function EditarItem() {
   const navigate = useNavigate();
   const methods = useForm();
 
-  // Carrega os dados do item e já preenche os campos
   useEffect(() => {
     async function carregarItem() {
       try {
         const item = await produtoService.buscarProduto(id);
-        methods.reset(item); // preenche o formulário
+        methods.reset(item);
       } catch (err) {
         console.error("Erro ao carregar item:", err);
         alert("Não foi possível carregar os dados do item.");

@@ -32,7 +32,7 @@ function RedefinirSenha() {
 
   return (
     <div className="reset-container">
-      <div className="overlay"></div> {/* Aqui é a opacidade */}
+      <div className="overlay"></div>
       <div className="reset-form-container">
         <img src={feiraLogo} alt="Feira de Trocas" className="logo" />
         <h2>Redefinir Senha</h2>
