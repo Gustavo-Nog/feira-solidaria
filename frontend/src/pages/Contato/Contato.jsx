@@ -19,7 +19,7 @@ function Contato() {
   return (
     <section className="container mt-3 mb-3 contato-section shadow p-4 rounded-4">
       <div className="row align-items-center">
-        {/* Coluna do formulário */}
+      
         <div className="col-md-6">
           <div className="d-flex align-items-center mb-4">
             <img src={Solidarize} alt="Ícone de Alerta" width={30} height={30} className="me-2" />
@@ -84,7 +84,6 @@ function Contato() {
           </FormProvider>
         </div>
 
-        {/* Coluna da imagem */}
         <div className="col-md-6 d-none d-md-block text-center">
           <img src={suporte} alt="Imagem de Contato" className="img-fluid rounded-4 shadow" />
         </div>

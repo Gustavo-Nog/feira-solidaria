@@ -75,7 +75,6 @@ function Login() {
                 </Link>
               </div>
               
-              {/* Container para centralizar e alinhar os botões */}
               <div className="login-buttons">
                 <GoogleLoginButton />
                 <Button type="submit" loading={loading} size="large">

@@ -92,7 +92,6 @@ function Cadastro() {
                     className='mb-1'
                   />
 
-                  {/* Botões centralizados e do mesmo tamanho */}
                   <div className="form-buttons">
                     <Button type="submit" loading={isSubmitting} size="large">
                       Cadastrar

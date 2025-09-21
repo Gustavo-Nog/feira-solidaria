@@ -36,7 +36,6 @@
   color: #000;
 }
 
-/* Estilo personalizado direto na classe */
 .custom-input {
   width: 100%;
   padding: 0.5rem;
@@ -53,7 +52,6 @@
   outline: none !important;
 }
 
-/* Remove o fundo verde dos inputs válidos/inválidos */
 .custom-input:valid,
 .custom-input:invalid {
   background-color: #fff !important;
@@ -61,7 +59,6 @@
   outline: none !important;
 }
 
-/* Foco estilizado */
 .custom-input:focus {
   outline: 2px solid #4caf50;
   box-shadow: none !important;
@@ -80,7 +77,6 @@ a.text-warning {
   text-decoration: underline !important;
 }
 
-/* Imagem lateral visível apenas no desktop */
 .image-section {
   flex: 1;
   display: none;
@@ -102,7 +98,6 @@ a.text-warning {
   }
 }
 
-/* Estilo para telas até 769px (MOBILE) */
 @media (max-width: 769px) {
   .login-container {
     display: flex;
@@ -168,19 +163,18 @@ a.text-warning {
     display: none;
   }
 }
-/* Container que envolve os botões */
+
 .login-buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem; /* espaçamento entre os botões */
+  gap: 1rem;
   margin-top: 1rem;
 }
 
-/* Estilo para os botões dentro do container */
 .login-buttons button,
 .login-buttons .google-login-button {
-  width: 100%; /* ocupa toda a largura do form-wrapper */
-  max-width: 350px; /* opcional: define largura máxima */
+  width: 100%;
+  max-width: 350px;
   text-align: center;
 }

@@ -321,11 +321,10 @@
   }
 }
 
-/* NOVO: botões centralizados e iguais */
 .form-buttons {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* espaço entre os botões */
+  gap: 1rem; 
   align-items: center;
 }
 
