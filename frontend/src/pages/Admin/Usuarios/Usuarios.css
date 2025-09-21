@@ -1,22 +1,22 @@
-.acoes-container {
+.usuarios-container {
     padding: 20px;
     background-color: #f9f9f9;
     min-height: 100vh;
 }
 
-.acoes-header {
+.usuarios-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.acoes-header h2 {
+.usuarios-header h2 {
     font-size: 1.5rem;
     color: #333;
 }
 
-.acoes-header button {
+.usuarios-header button {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
@@ -27,7 +27,7 @@
     transition: background 0.2s ease-in-out;
 }
 
-.acoes-header button:hover {
+.usuarios-header button:hover {
     background-color: #45a049;
 }
 

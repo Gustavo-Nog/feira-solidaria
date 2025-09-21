@@ -13,7 +13,7 @@ const Perfil = () => {
   const [loading, setLoading] = useState(true);
   const [editando, setEditando] = useState(false);
   const [form, setForm] = useState({});
-
+  const [saving, setSaving] = useState(false);
   const carregarPerfil = useCallback(async () => {
     if (authLoading || !usuario) {
       return;
@@ -36,16 +36,24 @@ const Perfil = () => {
 
 
   const handleSalvar = async (e) => {
-    e.preventDefault();
-    try {
-      const perfilAtualizado = await pessoaServices.atualizarPessoa(perfil.id, form);
-      setPerfil(perfilAtualizado);
-      setEditando(false);
-      alert("Perfil atualizado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao salvar o perfil:", error);
-      alert("Não foi possível salvar as alterações.");
-    }
+  e.preventDefault();
+  try {
+    setSaving(true);
+    const payload = {
+      nome: form.nome,
+      foto: form.foto,
+    };
+    await pessoaServices.atualizarPessoa(perfil.id, payload);
+    await carregarPerfil();
+
+    setEditando(false);
+    alert("Perfil atualizado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao salvar o perfil:", error);
+    alert("Não foi possível salvar as alterações.");
+  } finally {
+    setSaving(false);
+  }
   };
   
   const handleChange = (e) => {
@@ -87,13 +95,15 @@ const Perfil = () => {
             className="perfil-input" required
           />
           <input
-            type="email" name="email" value={perfil.usuario.email}
-            readOnly className="perfil-input-readonly"
+            type="email" name="email"
+            value={form.usuario?.email ?? perfil.usuario?.email}
+            readOnly
+            className="perfil-input-readonly"
             title="O email não pode ser alterado."
           />
           <input type="file" accept="image/*" onChange={handleImageChange} className="perfil-input" />
           <div className="perfil-actions">
-            <Button type="submit">Salvar</Button>
+            <Button type="submit" disabled={saving}>Salvar</Button>
             <Button type="button" className="btn-secondary" onClick={() => setEditando(false)}>Cancelar</Button>
           </div>
         </form>

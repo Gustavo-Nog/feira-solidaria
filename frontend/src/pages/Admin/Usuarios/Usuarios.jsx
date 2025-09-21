@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ModalAdmin from '../../../components/Admin/ModalAdmin/ModalAdmin';
 import InputField from '../../../components/Input/InputField';
 import Button from '../../../components/Button/Button';
-import Tabela from "../../../components/Admin/Tabela/Tabela";
+import Tabela from '../../../components/Admin/Tabela/Tabela';
 
 import usuarioServices from '../../../services/usuarioServices';
 
@@ -14,7 +14,7 @@ function Usuarios() {
 	const [busca, setBusca] = useState('');
 
 	const [isCadastroOpen, setIsCadastroOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 	const [isEditOpen, setIsEditOpen] = useState(false);
 
 	const [loading, setLoading] = useState(false);

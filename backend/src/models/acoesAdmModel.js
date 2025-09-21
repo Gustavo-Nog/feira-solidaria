@@ -4,7 +4,10 @@ const listarAcoesAdm = async () => {
     return prisma.acaoAdministrativa.findMany({
         orderBy: {
             id: "desc"
-        }   
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
+        }
     })
 
 };
@@ -13,15 +16,21 @@ const buscarAcoesAdmPorId = async (id) => {
     return prisma.acaoAdministrativa.findUnique({
         where: {
             id
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
         }
     });
 };
 
-const buscarAcoesPorUsuario = async (idDoUsuario) => {
+const buscarAcoesPorUsuario = async (usuarioId) => {
     return prisma.acaoAdministrativa.findMany({
         where: {
-            usuarioId: idDoUsuario
-        }
+            usuarioId: usuarioId
+        },
+        include: {
+          usuario: { select: { nomeUsuario: true } }
+        }   
     });
 };
 
@@ -71,11 +80,16 @@ const deletarAcaoAdm = async (id) => {
     });
 };
 
+const totalAcoesAdm = async () => {
+    return prisma.acaoAdministrativa.count({});
+};
+
 module.exports = {
     listarAcoesAdm,
     buscarAcoesAdmPorId,
     buscarAcoesPorUsuario,
     criarAcaoAdm,
     atualizarAcaoAdm,
-    deletarAcaoAdm
+    deletarAcaoAdm,
+    totalAcoesAdm
 };

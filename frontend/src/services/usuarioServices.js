@@ -45,10 +45,20 @@ const deletarUsuario = async(id) => {
   }
 };
 
+const totalUsuarios = async () => {
+  try {
+    const response = await api.get('/api/usuarios/total-usuarios'); 
+    return response.data;
+  }  catch (error) { 
+    throw new Error(`Falha ao obter o total de usuários: ${error.message}`);
+  }
+};  
+
 export default {
   listarUsuarios,
   buscarUsuario,
   criarUsuario,
   atualizarUsuario,
-  deletarUsuario
+  deletarUsuario,
+  totalUsuarios
 };

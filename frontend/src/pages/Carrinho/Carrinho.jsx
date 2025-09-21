@@ -3,7 +3,7 @@ import { useCart } from '../../context/ContextCart';
 import { useUser } from '../../context/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import doacaoServices from '../../services/doacaoService';
+import doacaoServices from '../../services/doacaoServices';
 import './Carrinho.css';
 
 function Carrinho() {

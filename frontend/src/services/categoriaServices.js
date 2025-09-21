@@ -45,10 +45,20 @@ const deletarCategoria = async (id) => {
     }
 };
 
+const totalCategorias = async () => {
+  try { 
+    const response = await api.get('/api/categorias/total-categorias');
+    return response.data;
+  } catch (error) {
+    throw new Error(`Falha ao obter o total de categorias: ${error.message}`);
+  }
+};
+
 export default {
     listarCategorias,
     buscarCategoriaPorId,
     criarCategoria,
     atualizarCategoria,
-    deletarCategoria
+    deletarCategoria,
+    totalCategorias
 };
