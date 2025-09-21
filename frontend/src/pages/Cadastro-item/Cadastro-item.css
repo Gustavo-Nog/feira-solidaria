@@ -1,8 +1,7 @@
 
 .formulario-container {
-  max-width: 600px;
   margin: 40px auto;
-  background-color: #E6F3E6; /* Verde claro do modelo */
+  background-color: #E6F3E6;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -17,9 +16,20 @@
 }
 
 .formulario {
+  width: 100%;
+}
+
+.button-row {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.button-row .btn {
+  min-width: 120px;
 }
 
 .campo {
@@ -42,6 +52,8 @@
   background-color: #fff;
   color: #333;
   outline-color: #0a381d;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .campo textarea {
@@ -56,19 +68,34 @@
   border-radius: 16px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 5.s ease;
+  transition: background-color 0.2s ease;
 }
 
 .botao:hover {
   background-color: #1e4d32;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .formulario {
+    grid-template-columns: 1fr; 
+  }
+
   .formulario-container {
     padding: 20px;
   }
 
   .botao {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .button-row .btn {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .button-row {
+    flex-direction: column-reverse; 
+    gap: 10px;
+    align-items: stretch;
   }
 }
