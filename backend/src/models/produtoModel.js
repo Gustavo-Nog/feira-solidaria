@@ -1,19 +1,48 @@
 const prisma = require('../generated/prisma');
 
-const listarProdutos = async () => {
-  return prisma.produto.findMany({
-      orderBy: {
-          nomeProduto: "asc"
-      },
+
+const listarProdutosPaginado = async (pagina = 1, porPagina = 12, pessoaIdExcluir = null, filtros = {}) => {
+  const skip = (pagina - 1) * porPagina;
+
+  const where = {};
+
+  if (pessoaIdExcluir) {
+    where.pessoaId = { not: pessoaIdExcluir };
+  }
+
+  if (filtros.busca) {
+    where.nomeProduto = {
+      contains: filtros.busca,
+      mode: 'insensitive',
+    };
+  }
+
+  if (filtros.categoriaId) {
+    where.categoriaId = parseInt(filtros.categoriaId);
+  }
+
+  if (filtros.qualidade) {
+    where.qualidade = filtros.qualidade;
+  }
+
+  const [produtos, totalProdutos] = await prisma.$transaction([
+    prisma.produto.findMany({
+      where,
+      skip,
+      take: porPagina,
+      orderBy: { dataCadastro: 'desc' },
       include: {
         categoria: true,
-        pessoa: {
-          select: {
-            nome: true
-          }
-        }
-      }
-  });
+        pessoa: { select: { nome: true } },
+      },
+    }),
+    prisma.produto.count({ where }),
+  ]);
+
+  return {
+    produtos,
+    totalPaginas: Math.ceil(totalProdutos / porPagina),
+  };
 };
 
 const buscarProdutoPorId = async (id) => {
@@ -87,7 +116,7 @@ const totalProdutos = async () => {
 };
 
 module.exports = {
-    listarProdutos,
+    listarProdutos: listarProdutosPaginado,
     buscarProdutoPorId,
     criarProduto,
     atualizarProduto,
