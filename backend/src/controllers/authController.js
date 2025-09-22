@@ -39,12 +39,23 @@ const login = async (req, res) => {
     const tokenDeAcesso = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_SECRET_EXPIRES });
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_TOKEN, { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES });
 
+    res.cookie('accessToken', tokenDeAcesso, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 3600000
+    });
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 604800000
+    });
+
     const dadosCompletosDaPessoa = await pessoaModel.buscarPessoaPorId(usuario.pessoa.id);
 
     return res.status(200).json({
       message: 'Login bem sucedido',
-      tokenDeAcesso,
-      refreshToken,
       usuario: dadosCompletosDaPessoa,
     });
 
@@ -54,7 +65,9 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.status(200).json({ message: 'Logout realizado' });
+  res.clearCookie('accessToken');
+  res.clearCookie('refreshToken');
+  res.status(200).json({ message: 'Logout realizado com sucesso' });
 };
 
 const buscarPerfil = async (req, res) => {
@@ -78,6 +91,7 @@ const buscarPerfil = async (req, res) => {
 
 
 const loginGoogle = passport.authenticate('google', { scope: ['profile', 'email'] });
+
 const googleCallback = (req, res, next) => {
   passport.authenticate('google', { session: false }, async (erro, usuarioPassport, info) => {
     if (erro || !usuarioPassport) {
@@ -86,7 +100,6 @@ const googleCallback = (req, res, next) => {
     }
 
     try {
-
       const usuarioCompleto = await prisma.usuario.findUnique({
         where: { id: usuarioPassport.id },
         include: { pessoa: true }

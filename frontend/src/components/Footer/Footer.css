@@ -15,7 +15,7 @@
 }
 
 .copyright-text p {
-  margin: 0; /* Remove a margem padrão do parágrafo */
+  margin: 0;
   font-size: 0.9em;
   font-weight: 500;
 }
@@ -23,22 +23,22 @@
 .social-links {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Espaçamento entre os ícones de rede social */
+  gap: 1.5rem;
 }
 
 .social-icon {
-  color: #ffffff; /* Cor dos ícones (branco) */
-  transition: transform 0.3s ease, color 0.3s ease; /* Efeito de transição suave */
+  color: #ffffff;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .social-icon:hover {
-  transform: scale(1.2); /* Aumenta o tamanho do ícone ao passar o mouse */
-  color: #FEF3B4; /* Muda a cor do ícone para o amarelo do tema no hover */
+  transform: scale(1.2);
+  color: #FEF3B4;
 }
 
 @media (min-width: 768px) {
   .footer-contato {
-    flex-direction: row; /* Alinha os itens na horizontal */
-    justify-content: space-between; /* Coloca o texto na esquerda e os ícones na direita */
+    flex-direction: row;
+    justify-content: space-between;
   }
 }

@@ -26,14 +26,12 @@ function CadastrarItem() {
         <h2>Cadastro de Item - Feira Solidária</h2>
         <form className="formulario" onSubmit={methods.handleSubmit(onSubmit)}>
 
-          {/* Nome do Produto */}
           <InputField
             name="nome"
             label="Nome do Produto:"
             required
           />
 
-          {/* Categoria */}
           <InputField
             as="select"
             name="categoria"
@@ -48,14 +46,12 @@ function CadastrarItem() {
             ]}
           />
 
-          {/* Localização */}
           <InputField
             name="localizacao"
             label="Localização (Bairro ou Cidade):"
             required
           />
 
-          {/* Descrição */}
           <InputField
             as="textarea"
             name="descricao"
@@ -64,7 +60,6 @@ function CadastrarItem() {
             rows={3}
           />
 
-          {/* Qualidade */}
           <InputField
             as="select"
             name="qualidade"
@@ -78,7 +73,6 @@ function CadastrarItem() {
             ]}
           />
           
-          {/* Telefone */}
           <InputField
               name="telefone"
              label="Telefone:"

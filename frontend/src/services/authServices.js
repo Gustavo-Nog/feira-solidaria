@@ -18,14 +18,9 @@ const logout = async () => {
   }
 }
 
-const verificarToken = async (token) => {
+const verificarToken = async () => {
   try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    };
-    const response = await api.get('/api/auth/verificar-token', config);
+    const response = await api.get('/api/auth/verificar-token');
     return response.data;
   } catch (error) {
     throw new Error(`Falha na verificação do token: ${error.message}`);

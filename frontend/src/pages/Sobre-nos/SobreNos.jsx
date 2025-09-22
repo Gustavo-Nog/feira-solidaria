@@ -10,7 +10,7 @@ function SobreNos() {
   return (
     <>
       <div className="sobrenos-container">
-        {/* Primeira seção: texto à esquerda e imagem à direita */}
+        
         <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
             <section className="col-12 col-md-6 p-3 order-1 order-md-1">
@@ -44,7 +44,6 @@ function SobreNos() {
           </div>
         </section>
 
-        {/* Segunda seção: imagem à esquerda e texto à direita */}
         <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
             <section className="col-12 col-md-6 p-3 text-center order-2 order-md-1">
@@ -75,7 +74,6 @@ function SobreNos() {
           </div>
         </section>
 
-        {/* Seções futuras */}
         <section className="container-fluid py-3 px-0">
           <div className="row g-0 align-items-center">
             <section className="col-12 col-md-6 p-3 m-0 order-1 order-md-1 p-4">

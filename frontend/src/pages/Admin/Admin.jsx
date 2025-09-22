@@ -13,18 +13,9 @@ function Admin() {
     totalDoacoes: 0,
   });
 
-  // Simulação de busca de dados do backend
   const fetchDados = async () => {
     setLoading(true);
-    try {
-      // Aqui você faria fetch para sua API
-      // Exemplo:
-      // const produtosRes = await fetch('/api/produtos/count');
-      // const usuariosRes = await fetch('/api/usuarios/ativos');
-      // const logadosRes = await fetch('/api/usuarios/logados');
-      // const doacoesRes = await fetch('/api/doacoes/count');
-
-      // Dados simulados
+    try { // Dados simulados
       setDados({
         totalProdutos: 55,
         usuariosAtivos: 120,
@@ -47,14 +38,13 @@ function Admin() {
       <div className="admin-content">
         <h2>Painel Administrativo</h2>
         <div className="admin-layout">
-          {/* Botão para abrir a modal */}
+          
           <div className="admin-actions">
             <Button onClick={() => setIsModalOpen(true)} className="btn-success">
               Abrir Painel Administrativo
             </Button>
           </div>
 
-          {/* Dashboard com Métricas */}
           <div className="admin-dashboard-section">
             <h3>Métricas do Sistema</h3>
             <div className="dashboard-card">
@@ -77,7 +67,6 @@ function Admin() {
         </div>
       </div>
 
-      {/* Modal do Admin */}
       <AdminModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

@@ -14,7 +14,6 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  /* Padrão para mobile/tablet */
 }
 
 .image-container {
@@ -46,7 +45,6 @@
   border-radius: 0 0 20px 20px;
 }
 
-/* Texto mais proporcional */
 .overlay-text h4,
 .overlay-text p {
   margin: 0;
@@ -83,11 +81,9 @@
   }
 }
 
-/* 🔧 AJUSTE EXCLUSIVO PARA DESKTOP */
 @media (min-width: 992px) {
   .team-card {
     aspect-ratio: 3 / 3.5;
-    /* Reduz altura sem achatar */
     max-height: 360px;
   }
 
