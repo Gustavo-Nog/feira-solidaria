@@ -2,8 +2,18 @@ const produtoModel = require('../models/produtoModel');
 
 const listarProdutosHandler = async (req, res) => {
   try {
-    const produtos = await produtoModel.listarProdutos(); 
-    res.status(200).json(produtos);
+    const { pagina, busca, categoriaId, qualidade } = req.query;
+    const pessoaId = req.usuario?.pessoaId || null;
+
+    const filtros = { busca, categoriaId, qualidade };
+
+    const resultado = await produtoModel.listarProdutos(
+      parseInt(pagina) || 1,
+      12,
+      pessoaId,
+      filtros
+    );
+    res.status(200).json(resultado);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

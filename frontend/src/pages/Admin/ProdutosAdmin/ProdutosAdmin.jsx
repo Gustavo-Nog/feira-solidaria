@@ -53,7 +53,14 @@ function ProdutosAdmin() {
     const fetchProdutos = async () => {
       try {
         const data = await produtoServices.listarProdutos();
-        setProdutos(data);
+
+        if (data && Array.isArray(data.produtos)) {
+          setProdutos(data.produtos);
+        } else {
+          console.error("A resposta da API de produtos não continha uma lista de produtos.", data);
+          setProdutos([]); 
+        }
+
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
       }
