@@ -11,7 +11,12 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+<<<<<<< HEAD
 app.use('uploads', express.static(path.join(__dirname, '..', 'uploads')));
+=======
+
+app.use('/uploads', express.static('uploads'));
+>>>>>>> developer
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');

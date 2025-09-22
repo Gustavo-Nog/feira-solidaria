@@ -252,14 +252,14 @@ function ProdutosAdmin() {
                 <td>
                   {produto.imagemUrl && (
                     <img 
-											src={produto.imagemUrl} 
-											alt={produto.nomeProduto} 
-											style={{ width: 50, height: 50, objectFit: 'cover' }} 
-										/>
+                        src={`${import.meta.env.VITE_API_URL}${produto.imagemUrl}`} 
+                        alt={produto.nomeProduto} 
+                        style={{ width: 50, height: 50, objectFit: 'cover' }} 
+                    />
                   )}
                 </td>
                 <td>{produto.categoria?.nomeCategoria || produto.categoriaId}</td>
-								<td>{produto.pessoa?.nome || produto.pessoaId}</td>
+                <td>{produto.pessoa?.nome || produto.pessoaId}</td> 
                 <td>{produto.quantidade}</td>
                 <td>
                   <Button
@@ -336,7 +336,7 @@ function ProdutosAdmin() {
                 as="select"
                 options={pessoasOptions}
             />
-            <InputField name="quantidade" label="Quantidade" type="number" required />
+            <InputField name="quantidade" label="Quantidade" type="number" min="1" required />
           </ModalAdmin>
 
           <ModalAdmin
@@ -354,8 +354,8 @@ function ProdutosAdmin() {
                 label="Categoria"
                 as="select"
                 options={categoriaOptions}
-						/>
-            <InputField name="quantidade" label="Quantidade" type="number" />
+            />
+            <InputField name="quantidade" label="Quantidade" type="number" min="1" />
           </ModalAdmin>
 
           <ModalAdmin
