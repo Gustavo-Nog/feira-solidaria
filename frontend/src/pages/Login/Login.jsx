@@ -78,10 +78,12 @@ function Login() {
                 </Link>
               </div>
               
-              <GoogleLoginButton />
-              <Button type="submit" loading={loading} size="large">
-                Entrar
-              </Button>
+              <div className="login-buttons">
+                <GoogleLoginButton />
+                <Button type="submit" loading={loading} size="large">
+                  Entrar
+                </Button>
+              </div>
 
               <div className="my-3 d-flex align-items-center">
                 <hr className="flex-grow-1" />

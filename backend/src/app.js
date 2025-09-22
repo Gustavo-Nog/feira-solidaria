@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 
 app.use(cookieParser());
 app.use(cors({
@@ -10,7 +11,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
-
+app.use('uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
@@ -23,7 +24,6 @@ const enderecoRoutes = require('./routes/enderecoRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const telefoneRoutes = require('./routes/telefoneRoutes');
 const mensagemRoutes = require('./routes/mensagemRoutes');
-
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);

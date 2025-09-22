@@ -1,18 +1,17 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import InputField from '../../components/Input/InputField';
 import { useNavigate } from 'react-router-dom';
+
 import Button from '../../components/Button/Button';
 import {qualidadeOptions, statusOptions} from '../Admin/ProdutosAdmin/ProdutosAdmin.jsx';
 
 import produtoService from '../../services/produtoServices';
-import categoriaServices from '../../../services/categoriaServices';
+import categoriaServices from '../../services/categoriaServices';
 
 import './Cadastro-item.css';
 
 function CadastrarItem() {
 	const [produtos, setProdutos] = useState([]);
 	const [categorias, setCategorias] = useState([]);
-
 
   const methods = useForm();
   const navigate = useNavigate();
@@ -68,6 +67,18 @@ function CadastrarItem() {
 
         <form className="formulario" onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="row g-3">
+						<div clasName="col-md-12">
+							<div classname="campo">
+								<InputField
+									name="imagemUrl"
+									label="Foto do Produto"
+									type="file"
+									accept="image/*"
+									onChange={handleImagem}
+								/>
+							</div>
+						</div>
+
             <div className="col-md-6">
               <div className="campo">
                 <InputField 
@@ -89,13 +100,7 @@ function CadastrarItem() {
               </div>
             </div>
 
-            <div className="col-md-6">
-              <div className="campo">
-                <InputField name="localizacao" label="Localização (Bairro ou Cidade):" required />
-              </div>
-            </div>
-
-            <div className="col-md-6">
+						<div className="col-md-6">
               <div className="campo">
                 <InputField
 									name="qualidade"
@@ -103,6 +108,33 @@ function CadastrarItem() {
 									as="select"
 									options={qualidadeOptions}
 								/>
+              </div>
+
+						<div className="col-md-6">
+							<div className="campo">
+								<InputField
+									name="status"
+									label="Status"
+									as="select"
+									options={statusOptions}
+								/>
+							</div>
+						</div>
+
+						<div className="col-md-6">
+							<div className="campo">
+								<InputField 
+									name="quantidade" 
+									label="Quantidade" 
+									type="number" 
+									required 
+								/>
+							</div>
+						</div>
+
+            <div className="col-md-6">
+              <div className="campo">
+                <InputField name="localizacao" label="Localização (Bairro ou Cidade):" required />
               </div>
             </div>
 
@@ -120,7 +152,6 @@ function CadastrarItem() {
               <div className="campo">
                 <InputField 
 								as="textarea" 
-								name="descricao" 
 								label="Descrição:" required rows={3} />
               </div>
             </div>
@@ -143,10 +174,10 @@ function CadastrarItem() {
               </Button>
             </div>
           </div>
-        </form>
-      </div>
-    </FormProvider>
-  );
+      	</form>
+			</div>
+		</FormProvider>
+	);
 }
 
 export default CadastrarItem;

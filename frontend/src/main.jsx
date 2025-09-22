@@ -8,13 +8,11 @@ import { UserProvider } from './context/UserContext.jsx';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
-  //<StrictMode>
   <UserProvider>
     <CartProvider>
       <App />
     </CartProvider>
   </UserProvider>
-  //</StrictMode>,
 );
 
   

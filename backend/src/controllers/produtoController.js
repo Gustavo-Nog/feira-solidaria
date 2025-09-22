@@ -27,7 +27,9 @@ const criarProdutoHandler = async (req, res) => {
   try {
     const dadosProduto = JSON.parse(req.body.dados); 
     if (req.file) {
-      dadosProduto.imagemUrl = `/uploads/${req.file.filename}`;
+      const filePath = `/uploads/${req.file.filename}`;
+      const urlCompleta = `${req.protocol}://${req.get('host')}${filePath}`;
+      dadosProduto.imagemUrl = urlCompleta;
     }
   
     const novoProduto = await produtoModel.criarProduto(dadosProduto);
@@ -46,7 +48,9 @@ const atualizarProdutoHandler = async (req, res) => {
       : req.body;
 
     if (req.file) {
-      dadosParaAtualizar.imagemUrl = `/uploads/${req.file.filename}`;
+      const filePath = `/uploads/${req.file.filename}`;
+      const urlCompleta = `${req.protocol}://${req.get('host')}${filePath}`;
+      dadosParaAtualizar.imagemUrl = urlCompleta;
     }
 
     const produtoAtualizado = await produtoModel.atualizarProduto(
