@@ -11,6 +11,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use('/uploads', express.static('uploads'));
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
@@ -23,7 +24,6 @@ const enderecoRoutes = require('./routes/enderecoRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const telefoneRoutes = require('./routes/telefoneRoutes');
 const mensagemRoutes = require('./routes/mensagemRoutes');
-
 
 app.use('/api/acoesAdm', acoesAdmRoutes);
 app.use('/api/categorias', categoriaRoutes);
