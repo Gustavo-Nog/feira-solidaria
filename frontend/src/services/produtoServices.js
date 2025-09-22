@@ -1,8 +1,13 @@
 import api from "./api";
 
-const listarProdutos = async () => {
+const listarProdutos = async (pagina = 1, filtros = {}) => {
   try {
-    const response = await api.get("/api/produtos");   
+    const params = new URLSearchParams({ pagina });
+    if (filtros.busca) params.append('busca', filtros.busca);
+    if (filtros.categoriaId) params.append('categoriaId', filtros.categoriaId);
+    if (filtros.qualidade) params.append('qualidade', filtros.qualidade);
+
+    const response = await api.get(`/api/produtos?${params.toString()}`);
     return response.data;
   } catch (error) {
     throw new Error(`Falha ao listar produtos: ${error.message}`);
