@@ -1,9 +1,6 @@
 
 .formulario-container {
-<<<<<<< HEAD
-=======
   max-width: 1200px;
->>>>>>> developer
   margin: 40px auto;
   background-color: #E6F3E6;
   padding: 30px;
@@ -25,17 +22,6 @@
 
 .button-row {
   display: flex;
-<<<<<<< HEAD
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 8px;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-.button-row .btn {
-  min-width: 120px;
-=======
   flex-direction: column;
   gap: 20px;
 }
@@ -57,7 +43,6 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
->>>>>>> developer
 }
 
 .coluna-esquerda h3,
@@ -124,35 +109,19 @@
   border-radius: 16px;
   font-size: 1rem;
   cursor: pointer;
-<<<<<<< HEAD
-  transition: background-color 0.2s ease;
-=======
   transition: background-color 0.3s ease;
->>>>>>> developer
 }
 
 .botao:hover {
   background-color: #1e4d32;
 }
 
-<<<<<<< HEAD
-@media (max-width: 768px) {
-  .formulario {
-    grid-template-columns: 1fr; 
-  }
-
-=======
 @media (max-width: 767px) {
->>>>>>> developer
   .formulario-container {
     padding: 20px;
     margin: 20px;
   }
 
-<<<<<<< HEAD
-  .botao {
-    font-size: 0.95rem;
-=======
   .formulario-grid {
     gap: 20px;
   }
@@ -182,7 +151,6 @@
   .botoes-container button {
     font-size: 0.9rem;
     padding: 10px 20px;
->>>>>>> developer
   }
 
   .button-row .btn {
