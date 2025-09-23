@@ -2,7 +2,7 @@
 import gabrielFoto from "../assets/equipe/gabriel.png";
 import gustavoFoto from "../assets/equipe/gustavo.jpg";
 //  import henriqueFoto from "../assets/equipe/henrique.jpg";
-// import hudsonFoto from "../assets/equipe/hudson.jpg";
+import hudsonFoto from "../assets/equipe/hudson.jpg";
 import mariannaFoto from "../assets/equipe/marianna.jpg";
 import thierryFoto from "../assets/equipe/thierry.jpg";
 
@@ -36,9 +36,9 @@ const membrosEquipe = [
   {
     nome: 'Hudson',
     funcao: 'Fullstack',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/hudson-levi-975414376/',
     github: 'https://github.com/Hudson2207',
-    foto: placeholder
+    foto: hudsonFoto
   },
   {
     nome: 'Marianna',
