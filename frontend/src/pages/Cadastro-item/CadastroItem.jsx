@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -60,10 +60,10 @@ function CadastrarItem() {
       const dadosProduto = {
         nomeProduto: data.nomeProduto,
         descricao: data.descricao,
-        qualidade: data.qualidade,
-        status: data.status,
-        categoriaId: parseInt(data.categoriaId),
-        quantidade: parseInt(data.quantidade),
+        categoriaId: Number(data.categoriaId),
+        quantidade: Number(data.quantidade),
+        qualidade: data.qualidade?.toUpperCase(),
+        status: data.status?.toUpperCase(),
         pessoaId: usuario.id
       };
       
