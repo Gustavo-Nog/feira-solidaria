@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import InputField from '../../components/Input/InputField';
 import Button from '../../components/Button/Button';
+import { useUser } from '../../context/UserContext';
 
 import produtoService from '../../services/produtoServices';
 import categoriaService from '../../services/categoriaServices';
-import telefoneService from '../../services/telefoneService';
-import enderecoService from '../../services/enderecoServices';
 import { qualidadeOptions, statusOptions } from '../Admin/ProdutosAdmin/ProdutosAdmin';
 
 import './Cadastro-item.css';
-
-const tipoTelefoneOptions = [
-  { value: 'CELULAR', label: 'Celular' },
-  { value: 'FIXO', label: 'Fixo' },
-  { value: 'COMERCIAL', label: 'Comercial' }
-];
 
 function CadastrarItem() {
   const methods = useForm({
@@ -25,21 +18,14 @@ function CadastrarItem() {
       nomeProduto: '',
       descricao: '',
       qualidade: 'NOVO',
-      status: 'DISPONIVEL',
+      status: 'DISPONIVEL', 
       categoriaId: '',
       quantidade: 1,
-      numeroTelefone: '',
-      tipoTelefone: 'CELULAR',
-      cep: '',
-      uf: '',
-      cidade: '',
-      bairro: '',
-      logradouro: '',
-      numeroResidencia: ''
     }
   });
   
   const navigate = useNavigate();
+  const { usuario } = useUser();
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(false);
   const [imagem, setImagem] = useState(null);
@@ -64,15 +50,21 @@ function CadastrarItem() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
+      if (!usuario || !usuario.id) {
+        alert('Usuário não autenticado ou perfil incompleto. Faça login para cadastrar um produto.');
+        return;
+      }
+
       const formData = new FormData();
       
       const dadosProduto = {
         nomeProduto: data.nomeProduto,
         descricao: data.descricao,
-        qualidade: data.qualidade,
-        status: data.status,
-        categoriaId: parseInt(data.categoriaId),
-        quantidade: parseInt(data.quantidade)
+        categoriaId: Number(data.categoriaId),
+        quantidade: Number(data.quantidade),
+        qualidade: data.qualidade?.toUpperCase(),
+        status: data.status?.toUpperCase(),
+        pessoaId: usuario.id
       };
       
       formData.append('dados', JSON.stringify(dadosProduto));
@@ -81,34 +73,13 @@ function CadastrarItem() {
         formData.append('imagemUrl', imagem);
       }
 
-      const produtoResponse = await produtoService.criarProduto(formData);
-      
-      if (data.numeroTelefone) {
-        const telefoneData = {
-          numero: data.numeroTelefone,
-          tipo: data.tipoTelefone
-        };
-
-      }
-
-      if (data.cep || data.cidade) {
-        const enderecoData = {
-          cep: data.cep,
-          uf: data.uf,
-          cidade: data.cidade,
-          bairro: data.bairro,
-          logradouro: data.logradouro,
-          numeroResidencia: data.numeroResidencia
-        };
-        await enderecoService.criarEndereco(enderecoData);
-      }
-
+      const response = await produtoService.criarProduto(formData);
       alert('Item cadastrado com sucesso!');
-      console.log('Resposta do backend:', produtoResponse);
+      console.log('Resposta do backend:', response);
       navigate('/perfil');
     } catch (error) {
       console.error('Erro ao cadastrar item:', error);
-      alert('Erro ao cadastrar item. Verifique o console.');
+      alert(`Erro ao cadastrar item: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -125,8 +96,9 @@ function CadastrarItem() {
 
   return (
     <FormProvider {...methods}>
-      <div className="formulario-container">
-        <h2>Cadastro de Item - Feira Solidária</h2>
+      <div className="formulario-container container py-4">
+        <h2 className="text-center text-uppercase fw-bold mb-4">Cadastro de Item </h2>
+
         <form className="formulario" onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="formulario-grid">
             <div className="coluna-esquerda">
@@ -144,14 +116,6 @@ function CadastrarItem() {
                 label="Categoria:"
                 required
                 options={categoriaOptions}
-              />
-
-              <InputField
-                as="textarea"
-                name="descricao"
-                label="Descrição:"
-                required
-                rows={3}
               />
 
               <InputField
@@ -185,60 +149,16 @@ function CadastrarItem() {
                 accept="image/*"
                 onChange={handleImagem}
               />
-            </div>
 
-            <div className="coluna-direita">
-              <h3>Informações de Contato</h3>
-              
-              <InputField
-                name="numeroTelefone"
-                label="Telefone:"
-                placeholder="(99) 99999-9999"
-              />
-
-              <InputField
-                as="select"
-                name="tipoTelefone"
-                label="Tipo de Telefone:"
-                options={tipoTelefoneOptions}
-              />
-
-              <h3>Endereço</h3>
-
-              <InputField
-                name="cep"
-                label="CEP:"
-                placeholder="12345-678"
-              />
-
-              <InputField
-                name="uf"
-                label="UF:"
-                placeholder="SP"
-                maxLength="2"
-              />
-
-              <InputField
-                name="cidade"
-                label="Cidade:"
-              />
-
-              <InputField
-                name="bairro"
-                label="Bairro:"
-              />
-
-              <InputField
-                name="logradouro"
-                label="Logradouro:"
-              />
-
-              <InputField
-                name="numeroResidencia"
-                label="Número:"
+			    		<InputField
+                as="textarea"
+                name="descricao"
+                label="Descrição:"
+                required
+                rows={3}
               />
             </div>
-          </div>
+					</div>
 
           <div className="botoes-container">
             <Button

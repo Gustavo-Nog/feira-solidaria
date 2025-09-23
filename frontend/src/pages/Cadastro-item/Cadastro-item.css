@@ -17,6 +17,10 @@
 }
 
 .formulario {
+  width: 100%;
+}
+
+.button-row {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -71,6 +75,8 @@
   background-color: #fff;
   color: #333;
   outline-color: #0a381d;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .campo textarea {
@@ -145,5 +151,16 @@
   .botoes-container button {
     font-size: 0.9rem;
     padding: 10px 20px;
+  }
+
+  .button-row .btn {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .button-row {
+    flex-direction: column-reverse; 
+    gap: 10px;
+    align-items: stretch;
   }
 }

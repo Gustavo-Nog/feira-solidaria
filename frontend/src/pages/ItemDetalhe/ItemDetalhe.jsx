@@ -60,16 +60,25 @@ function ItemDetalhe() {
     ? primeiroTelefone.numero 
     : 'Não informado';
 
+  const imagemBruta = item.imagemUrl; 
+  const baseApi = import.meta.env.VITE_API_URL || '';
+  let urlDaImagem = 'https://placehold.co/600x400';
+
+  if (imagemBruta) {
+    try {
+      new URL(imagemBruta);
+      urlDaImagem = imagemBruta;
+    } catch (error) {
+      urlDaImagem = imagemBruta.startsWith('/') ? `${baseApi}${imagemBruta}` : `${baseApi}/${imagemBruta}`;
+    }
+  }
+
   return (
     <div className="container my-5">
       <div className="card p-4 shadow-sm">
         <div className="row g-5">
           <div className="col-lg-5">
-            <img 
-              src={item.imagemUrl || 'https://placehold.co/600x400'} 
-              alt={item.nomeProduto} 
-              className="img-fluid rounded" 
-            />
+            <img src={urlDaImagem} alt={item.nomeProduto} className="img-fluid rounded" />
           </div>
 
           <div className="col-lg-7 d-flex flex-column">
