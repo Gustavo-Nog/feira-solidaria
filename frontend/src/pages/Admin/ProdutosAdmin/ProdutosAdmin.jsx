@@ -97,12 +97,12 @@ function ProdutosAdmin() {
       methods.reset({
         nomeProduto: produtoSelecionado.nomeProduto,
         descricao: produtoSelecionado.descricao,
-				qualidade: produtoSelecionado.qualidade || "",
+		qualidade: produtoSelecionado.qualidade || "",
         imagemUrl: produtoSelecionado.imagemUrl || "",
         status: produtoSelecionado.status || "",
         categoriaId: produtoSelecionado.categoriaId,
         quantidade: produtoSelecionado.quantidade,
-				pessoaId: produtoSelecionado.pessoaId || ""
+		pessoaId: produtoSelecionado.pessoaId || ""
       });
 			setImagem(produtoSelecionado.imagemUrl || null);
     }
@@ -121,22 +121,25 @@ function ProdutosAdmin() {
     try {
 			const formData = new FormData();
 
-			formData.append('dados', JSON.stringify({
-				nomeProduto: data.nomeProduto,
-				descricao: data.descricao,
-				categoriaId: Number(data.categoriaId),
-				pessoaId: Number(data.pessoaId),
-				quantidade: Number(data.quantidade),
-				qualidade: data.qualidade?.toUpperCase(),
-				status: data.status?.toUpperCase()
-			}));
+      const quantidade = Math.max(1, Number(data.quantidade) || 1);
 
-			if (data.imagemUrl && data.imagemUrl[0]) {
-				formData.append('imagem', data.imagemUrl[0]);
-			};
+      formData.append('dados', JSON.stringify({
+        nomeProduto: data.nomeProduto,
+        descricao: data.descricao,
+        categoriaId: Number(data.categoriaId),
+        pessoaId: Number(data.pessoaId),
+        quantidade,
+        qualidade: data.qualidade?.toUpperCase(),
+        status: data.status?.toUpperCase()
+      }));
 
-      const response = await produtoServices.criarProduto(formData);
-      setProdutos([...produtos, response]);
+      if (data.imagemUrl && data.imagemUrl[0]) {
+        formData.append('imagemUrl', data.imagemUrl[0]);
+      }
+
+      await produtoServices.criarProduto(formData);
+      const lista = await produtoServices.listarProdutos();
+      if (lista && Array.isArray(lista.produtos)) setProdutos(lista.produtos);
       setIsCadastroOpen(false);
     } catch (error) {
       console.error("Erro ao cadastrar produto:", error);
@@ -151,24 +154,26 @@ function ProdutosAdmin() {
 		try {
 			const formData = new FormData();
 
-			formData.append('dados', JSON.stringify({
-				nomeProduto: data.nomeProduto,
-				descricao: data.descricao,
-				categoriaId: Number(data.categoriaId),
-				pessoaId: Number(data.pessoaId),
-				quantidade: Number(data.quantidade),
-				qualidade: data.qualidade?.toUpperCase(),
-				status: data.status?.toUpperCase()
-			}));
+      const quantidade = Math.max(1, Number(data.quantidade) || 1);
 
-			if (data.imagemUrl && data.imagemUrl[0]) {
-				formData.append('imagem', data.imagemUrl[0]);
-			}
+      formData.append('dados', JSON.stringify({
+        nomeProduto: data.nomeProduto,
+        descricao: data.descricao,
+        categoriaId: Number(data.categoriaId),
+        pessoaId: Number(data.pessoaId),
+        quantidade,
+        qualidade: data.qualidade?.toUpperCase(),
+        status: data.status?.toUpperCase()
+      }));
 
-			const response = await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
-			const listaAtualizada = await produtoServices.listarProdutos();
-			setProdutos(listaAtualizada);
-			setIsEditOpen(false);
+      if (data.imagemUrl && data.imagemUrl[0]) {
+        formData.append('imagemUrl', data.imagemUrl[0]);
+      }
+
+      await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
+      const listaAtualizada = await produtoServices.listarProdutos();
+      if (listaAtualizada && Array.isArray(listaAtualizada.produtos)) setProdutos(listaAtualizada.produtos);
+      setIsEditOpen(false);
 		} catch (error) {
 			console.error("Erro ao atualizar produto:", error);
 		} finally {
@@ -181,7 +186,13 @@ function ProdutosAdmin() {
     setLoading(true);
     try {
       await produtoServices.deletarProduto(produtoSelecionado.id);
-      setProdutos(produtos.filter(produto => produto.id !== produtoSelecionado.id));
+			
+			if (Array.isArray(produtos)) {
+        setProdutos(produtos.filter(produto => produto.id !== produtoSelecionado.id));
+      } else {
+        const lista = await produtoServices.listarProdutos();
+        if (lista && Array.isArray(lista.produtos)) setProdutos(lista.produtos);
+      }
       setIsDeleteOpen(false);
     } catch (error) {
       console.error("Erro ao deletar produto:", error);
