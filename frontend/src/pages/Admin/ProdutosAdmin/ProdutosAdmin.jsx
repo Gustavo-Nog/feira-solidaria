@@ -119,7 +119,7 @@ function ProdutosAdmin() {
   const handleCadastro = async (data) => {
     setLoading(true);
     try {
-			const formData = new FormData();
+		  const formData = new FormData();
 
       const quantidade = Math.max(1, Number(data.quantidade) || 1);
 
@@ -152,28 +152,28 @@ function ProdutosAdmin() {
 		if (!produtoSelecionado) return;
 		setLoading(true);
 		try {
-			const formData = new FormData();
+		    const formData = new FormData();
 
-      const quantidade = Math.max(1, Number(data.quantidade) || 1);
+            const quantidade = Math.max(1, Number(data.quantidade) || 1);
 
-      formData.append('dados', JSON.stringify({
-        nomeProduto: data.nomeProduto,
-        descricao: data.descricao,
-        categoriaId: Number(data.categoriaId),
-        pessoaId: Number(data.pessoaId),
-        quantidade,
-        qualidade: data.qualidade?.toUpperCase(),
-        status: data.status?.toUpperCase()
-      }));
+            formData.append('dados', JSON.stringify({
+                nomeProduto: data.nomeProduto,
+                descricao: data.descricao,
+                categoriaId: Number(data.categoriaId),
+                pessoaId: Number(data.pessoaId),
+                quantidade,
+                qualidade: data.qualidade?.toUpperCase(),
+                status: data.status?.toUpperCase()
+            }));
 
-      if (data.imagemUrl && data.imagemUrl[0]) {
-        formData.append('imagemUrl', data.imagemUrl[0]);
-      }
+            if (data.imagemUrl && data.imagemUrl[0]) {
+                formData.append('imagemUrl', data.imagemUrl[0]);
+            }
 
-      await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
-      const listaAtualizada = await produtoServices.listarProdutos();
-      if (listaAtualizada && Array.isArray(listaAtualizada.produtos)) setProdutos(listaAtualizada.produtos);
-      setIsEditOpen(false);
+            await produtoServices.atualizarProduto(produtoSelecionado.id, formData);
+            const listaAtualizada = await produtoServices.listarProdutos();
+            if (listaAtualizada && Array.isArray(listaAtualizada.produtos)) setProdutos(listaAtualizada.produtos);
+            setIsEditOpen(false);
 		} catch (error) {
 			console.error("Erro ao atualizar produto:", error);
 		} finally {
@@ -187,7 +187,7 @@ function ProdutosAdmin() {
     try {
       await produtoServices.deletarProduto(produtoSelecionado.id);
 			
-			if (Array.isArray(produtos)) {
+	if (Array.isArray(produtos)) {
         setProdutos(produtos.filter(produto => produto.id !== produtoSelecionado.id));
       } else {
         const lista = await produtoServices.listarProdutos();
