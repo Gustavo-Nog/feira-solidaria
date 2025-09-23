@@ -35,11 +35,33 @@ const buscarProdutoPorIdHandler = async (req, res) => {
 
 const criarProdutoHandler = async (req, res) => {
   try {
-    const dadosProduto = JSON.parse(req.body.dados); 
-    if (req.file) {
-      dadosProduto.imagemUrl = `/uploads/${req.file.filename}`;
+    if (!req.body || !req.body.dados) {
+      return res.status(400).json({ error: 'Campo `dados` ausente no corpo da requisição.' });
     }
-  
+
+    let dadosProduto;
+    try {
+      dadosProduto = JSON.parse(req.body.dados);
+    } catch (parseError) {
+      return res.status(400).json({ error: 'Formato inválido em `dados`. Deve ser JSON válido.' });
+    }
+
+    if (req.usuario && req.usuario.pessoaId) {
+      dadosProduto.pessoaId = dadosProduto.pessoaId || req.usuario.pessoaId;
+    }
+
+    if (dadosProduto.categoriaId !== undefined) {
+      dadosProduto.categoriaId = Number(dadosProduto.categoriaId);
+    }
+    if (dadosProduto.quantidade !== undefined) {
+      dadosProduto.quantidade = Number(dadosProduto.quantidade) || 1;
+    }
+
+    if (req.file) {
+      const filePath = `/uploads/${req.file.filename}`;
+      dadosProduto.imagemUrl = filePath;
+    }
+
     const novoProduto = await produtoModel.criarProduto(dadosProduto);
     res.status(201).json(novoProduto);
   } catch (error) {
@@ -56,7 +78,8 @@ const atualizarProdutoHandler = async (req, res) => {
       : req.body;
 
     if (req.file) {
-      dadosParaAtualizar.imagemUrl = `/uploads/${req.file.filename}`;
+      const filePath = `/uploads/${req.file.filename}`;
+      dadosParaAtualizar.imagemUrl = filePath;
     }
 
     const produtoAtualizado = await produtoModel.atualizarProduto(

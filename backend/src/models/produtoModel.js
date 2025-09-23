@@ -1,6 +1,4 @@
 const prisma = require('../generated/prisma');
-
-
 const listarProdutosPaginado = async (pagina = 1, porPagina = 12, pessoaIdExcluir = null, filtros = {}) => {
   const skip = (pagina - 1) * porPagina;
 
@@ -67,13 +65,12 @@ const buscarProdutoPorId = async (id) => {
 };
 
 const criarProduto = async (dadosProduto) => {
-  if (!dadosProduto.nomeProduto || !dadosProduto.categoriaId) {
-    throw new Error("Nome do produto e categoria são obrigatórios.");
-  }
-
-  return prisma.produto.create({
-    data: dadosProduto,
-  });
+  if (!dadosProduto || typeof dadosProduto !== 'object') throw new Error('Dados do produto inválidos ou ausentes.');
+  if (!dadosProduto.nomeProduto || dadosProduto.nomeProduto.trim() === '') throw new Error('Nome do produto é obrigatório.');
+  if (!dadosProduto.categoriaId || Number.isNaN(Number(dadosProduto.categoriaId))) throw new Error('Categoria é obrigatória e deve ser um ID numérico.');
+  if (!dadosProduto.pessoaId) throw new Error('Produto deve estar vinculado a uma pessoa (pessoaId ausente).');
+  if (dadosProduto.quantidade !== undefined && Number.isNaN(Number(dadosProduto.quantidade))) throw new Error('Quantidade inválida.');
+  return prisma.produto.create({ data: dadosProduto });
 };
 
 const atualizarProduto = async (id, dadosParaAtualizar) => {

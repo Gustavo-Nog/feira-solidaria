@@ -5,6 +5,7 @@ import Footer from "../components/Footer/Footer";
 function AdminLayout() {
   return (
     <div className="d-flex flex-column min-vh-100">
+
       <div className="d-md-none">
         <NavbarAdmin variant="mobile" />
       </div>
