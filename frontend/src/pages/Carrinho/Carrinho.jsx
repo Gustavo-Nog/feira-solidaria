@@ -60,19 +60,22 @@ function Carrinho() {
         <div className="carrinho-coluna-principal">
           <h2 className="carrinho-titulo">Meu Carrinho</h2>
           <div className="carrinho-lista">
-            {cartItems.map((item) => (
-              <div key={item.id} className="carrinho-item">
-                <div className="carrinho-item-info">
-                  <Link to={`/item/${item.id}`}>
-                    <img src={item.imagemUrl || 'https://placehold.co/80x80'} alt={item.nomeProduto} className="carrinho-item-img" />
-                  </Link>
-                  <div className="carrinho-item-detalhes">
-                    <Link to={`/item/${item.id}`} className="carrinho-item-link">
-                      <h5 className="item-nome">{item.nomeProduto}</h5>
+            {cartItems.map((item) => {
+              const imageUrl = item.imagemUrl ? `${import.meta.env.VITE_API_URL}${item.imagemUrl}`: 'https://placehold.co/80x80';
+              
+              return (
+                <div key={item.id} className="carrinho-item">
+                  <div className="carrinho-item-info">
+                    <Link to={`/item/${item.id}`}>
+                      <img src={imageUrl} alt={item.nomeProduto} className="carrinho-item-img" />
                     </Link>
-                    <small className="item-doador">Doador: {item.pessoa?.nome || 'Anónimo'}</small>
+                    <div className="carrinho-item-detalhes">
+                      <Link to={`/item/${item.id}`} className="carrinho-item-link">
+                        <h5 className="item-nome">{item.nomeProduto}</h5>
+                      </Link>
+                      <small className="item-doador">Doador: {item.pessoa?.nome || 'Anónimo'}</small>
+                    </div>
                   </div>
-                </div>
 
                 <div className="carrinho-item-acoes">
                   <div className="quantity-controls">
@@ -85,7 +88,8 @@ function Carrinho() {
                   </button>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
