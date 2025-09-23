@@ -1,19 +1,29 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { FaUser, FaGear, FaBagShopping, FaBars } from 'react-icons/fa6';
 import { FaTimes } from 'react-icons/fa';
 import { MdDashboard } from "react-icons/md";
 import { ImAccessibility } from "react-icons/im";
-import './NavbarAdmin.css';
 
+import { useUser } from '../../../context/UserContext';
+
+
+import './NavbarAdmin.css';
 
 function NavbarAdmin({ variant = 'desktop' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logout } = useUser();
   const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
   const isActive = (path) => location.pathname === path ? 'active' : '';
+
+  const handleLogout = () => {
+    closeMenu();
+    logout();
+    Navigate('/login');
+  }
 
   const navLinks = [
     { to: "/dashboard", icon: <MdDashboard />, label: "Dashboard" },
@@ -22,6 +32,7 @@ function NavbarAdmin({ variant = 'desktop' }) {
     { to: "/categorias", icon: <FaBagShopping />, label: "Categorias" },
     { to: "/acoes-adm", icon: <ImAccessibility />, label: "Ações Admin" },
     { to: "/configuracoes", icon: <FaGear />, label: "Configurações" },
+    { to: "/login", icon: <FaTimes />, label: "Sair", action: handleLogout },
   ];
 
   return (
