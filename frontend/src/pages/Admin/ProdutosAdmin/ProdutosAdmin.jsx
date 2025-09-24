@@ -42,7 +42,7 @@ function ProdutosAdmin() {
       descricao: produtoSelecionado?.descricao || "",
 			qualidade: produtoSelecionado?.qualidade || "",
       imagemUrl: produtoSelecionado?.imagemUrl || "",
-		 	status: produtoSelecionado?.status || "",
+			status: produtoSelecionado?.status || "",
       categoriaId: produtoSelecionado?.categoriaId || "",
 			pessoaId: produtoSelecionado?.pessoaId || "",
       quantidade: produtoSelecionado?.quantidade || 1
@@ -270,14 +270,14 @@ function ProdutosAdmin() {
                 <td>
                   {produto.imagemUrl && (
                     <img 
-                        src={`${import.meta.env.VITE_API_URL}${produto.imagemUrl}`} 
-                        alt={produto.nomeProduto} 
-                        style={{ width: 50, height: 50, objectFit: 'cover' }} 
-                    />
+											src={produto.imagemUrl} 
+											alt={produto.nomeProduto} 
+											style={{ width: 50, height: 50, objectFit: 'cover' }} 
+										/>
                   )}
                 </td>
                 <td>{produto.categoria?.nomeCategoria || produto.categoriaId}</td>
-                <td>{produto.pessoa?.nome || produto.pessoaId}</td> 
+								<td>{produto.pessoa?.nome || produto.pessoaId}</td>
                 <td>{produto.quantidade}</td>
                 <td>
                   <Button
@@ -354,7 +354,7 @@ function ProdutosAdmin() {
                 as="select"
                 options={pessoasOptions}
             />
-            <InputField name="quantidade" label="Quantidade" type="number" min="1" required />
+            <InputField name="quantidade" label="Quantidade" type="number" min="1"required />
           </ModalAdmin>
 
           <ModalAdmin
@@ -372,8 +372,8 @@ function ProdutosAdmin() {
                 label="Categoria"
                 as="select"
                 options={categoriaOptions}
-            />
-            <InputField name="quantidade" label="Quantidade" type="number" min="1" />
+						/>
+            <InputField name="quantidade" label="Quantidade" min="1" type="number" />
           </ModalAdmin>
 
           <ModalAdmin
