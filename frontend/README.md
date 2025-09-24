@@ -1,12 +1,71 @@
-# React + Vite
+## 🛠️ Tecnologias Utilizadas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi construído com as seguintes tecnologias e ferramentas:
 
-Currently, two official plugins are available:
+- **React:** Biblioteca JavaScript para a construção da interface de usuário.
+- **Vite:** Ferramenta de build moderna e extremamente rápida para o desenvolvimento front-end.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React Router DOM:** Para o gerenciamento de rotas e navegação entre as páginas da aplicação.
+```bash
+npm install react react-dom
+```
+- **React Hook Form:** Biblioteca de alta performance para gerenciamento de estados, validações e submissão de formulários.
+```bash
+npm install react-hook-form
+```
+- **React Slick & Slick Carousel:** Para a criação de carrosséis dinâmicos e responsivos.
+```bash
+npm install react-slick slick-carousel
+```
+- **jwt-decode:** Utilitário para decodificar tokens JWT (JSON Web Tokens) recebidos após a autenticação.
+```bash
+npm install jwt-decode
+```
+- **React Icons:** Biblioteca extensa para a utilização de ícones populares e consistentes em toda a aplicação.
+```bash
+npm install react-icons
+```
+- **React Toastify:** Notificações elegantes e personalizáveis.
+```bash
+npm install react-toastify
+```
+- **CSS3:** Estilização customizada com foco em responsividade e design moderno.
+- **Bootstrap:** Framework CSS para responsividade e layout moderno.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Estrutura de Pastas
+
+O projeto segue uma arquitetura organizada para facilitar a escalabilidade e manutenção:
+
+```bash
+/src
+|-- /assets
+|-- /components
+|   |-- /Button
+|   |-- /EquipeCarrosel
+|   |-- /Footer
+|   |-- /LoginGoogle
+|   |-- /Navbar
+|-- /context
+|-- /layout
+|-- /mocks
+|-- /pages
+|   |-- /Admin
+|   |-- /Cadastro
+|   |-- /Cadastro-item
+|   |-- /Carrinho
+|   |-- /Contato
+|   |-- /Home
+|   |-- /ItemDetalhe
+|   |-- /Login
+|   |-- /NovaSenha
+|   |-- /Produtos
+|   |-- /RedefinirSenha
+|   |-- /Sobre-nos
+|   |-- /Perfil
+|-- /services 
+|-- App.jsx
+|-- main.jsx
+|-- ... (outros arquivos de configuração)
+
+```
