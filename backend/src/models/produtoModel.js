@@ -1,5 +1,5 @@
 const prisma = require('../generated/prisma');
-const listarProdutosPaginado = async (pagina = 1, porPagina = 12, pessoaIdExcluir = null, filtros = {}) => {
+const listarProdutosPaginado = async (pagina = 1, porPagina = 8, pessoaIdExcluir = null, filtros = {}) => {
   const skip = (pagina - 1) * porPagina;
 
   const where = {};

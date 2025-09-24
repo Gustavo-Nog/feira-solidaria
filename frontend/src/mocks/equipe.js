@@ -36,7 +36,7 @@ const membrosEquipe = [
   {
     nome: 'Hudson',
     funcao: 'Fullstack',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/hudson-levi-975414376/',
     github: 'https://github.com/Hudson2207',
     foto: hudsonFoto
   },
