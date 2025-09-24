@@ -47,7 +47,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente.
 
 #### Para produção:
 
-- npm start
+- node src/server.js
 
 - A API estará rodando em: http://localhost:3001.
 
