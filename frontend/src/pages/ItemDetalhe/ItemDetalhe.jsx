@@ -60,13 +60,17 @@ function ItemDetalhe() {
     ? primeiroTelefone.numero 
     : 'Não informado';
 
+  const imageUrl = item.imagemUrl 
+    ? `${import.meta.env.VITE_API_URL}${item.imagemUrl}` 
+    : 'https://placehold.co/600x400';
+
   return (
     <div className="container my-5">
       <div className="card p-4 shadow-sm">
         <div className="row g-5">
           <div className="col-lg-5">
             <img 
-              src={item.imagemUrl || 'https://placehold.co/600x400'} 
+              src={imageUrl} 
               alt={item.nomeProduto} 
               className="img-fluid rounded" 
             />

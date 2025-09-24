@@ -97,9 +97,9 @@ model Produto {
   nomeProduto  String         @map("nome_produto") @db.VarChar(50)
   descricao    String
   qualidade    TipoQualidade?
-  imagemUrl    String         @map("imagem_url")
+  imagemUrl    String?        @map("imagem_url")
   status       TipoStatus?
-  dataCadastro DateTime?      @map("data_cadastro") @db.Date
+  dataCadastro DateTime?      @default(now()) @map("data_cadastro") @db.Date
   quantidade   Int            @default(1)
   categoriaId  Int            @map("categoria")
   pessoaId     Int?           @map("pessoa_id")

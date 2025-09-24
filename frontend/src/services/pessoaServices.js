@@ -72,6 +72,16 @@ const listarDoacoesDaPessoa = async (pessoaId) => {
   }
 };
 
+const adicionarTelefonePessoa = async (pessoaId, payload) => {
+  try {
+    const response = await api.post(`/api/pessoas/${Number(pessoaId)}/telefones`, payload);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Falha ao adicionar telefone à pessoa: ${error.message}`);
+  }
+};
+
+
 export default {
   listarPessoas,
   buscarPessoaPorId,
@@ -81,4 +91,5 @@ export default {
   adicionarEnderecoPessoa,
   removerEnderecoPessoa,
   listarDoacoesDaPessoa,
+  adicionarTelefonePessoa,
 };

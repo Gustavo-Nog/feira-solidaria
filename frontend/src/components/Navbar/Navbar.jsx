@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
-import { useUser } from '../../context/UserContext'; // 1. Importe o useUser!
+import { useUser } from '../../context/UserContext';
 import './Navbar.css';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // 2. Pegue os dados de autenticação do contexto
+
   const { usuario, isAuthenticated, logout } = useUser();
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // 3. Crie uma função de logout para ser usada nos botões
+  
   const handleLogout = () => {
-    closeMenu(); // Fecha o menu mobile, se estiver aberto
-    logout();    // Chama a função de logout do contexto
-    navigate('/login'); // Redireciona para a página de login
+    closeMenu(); 
+    logout();    
+    navigate('/login');
   };
 
   return (
@@ -68,7 +68,6 @@ function Navbar() {
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
-        {/* --- MENU MOBILE ATUALIZADO --- */}
         <div className={isMenuOpen ? "nav-mobile open" : "nav-mobile"}>
           <Link to="/" onClick={closeMenu}>Início</Link>
           <Link to="/produtos" onClick={closeMenu}>Produtos</Link>
