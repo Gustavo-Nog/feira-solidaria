@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import Button from '../../components/Button/Button';
+
 import pessoaServices from '../../services/pessoaServices';
+import produtoServices from '../../services/produtoServices';
 import EnderecoModal from '../../components/EnderecoModal/enderecoModal';
 import TelefoneModal from '../../components/TelefoneModal/telefoneModal';
+
 import './Perfil.css';
 
 const Perfil = () => {
@@ -56,6 +59,21 @@ const Perfil = () => {
   };
   
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+	const handleDeleteItem = async (itemId) => {
+		if (authLoading || loading) return;
+		try {
+			setLoading(true);
+			await produtoServices.deletarProduto(itemId);
+			alert("Item deletado com sucesso!");
+			await carregarPerfil();
+		} catch (error) {
+			console.error("Erro ao deletar item:", error);
+			alert("Não foi possível deletar o item.");
+		} finally {
+			setLoading(false);
+		}
+	};
 
   if (authLoading || loading) {
     return <div className="loading-container"><h2>A carregar...</h2></div>;
@@ -140,7 +158,16 @@ const Perfil = () => {
                         <li key={item.id} className="item-card">
                           <strong>{item.nomeProduto}</strong>
                           <p>{item.categoria?.nomeCategoria || 'Sem categoria'}</p>
-                          <Link to={`/editar-item/${item.id}`}><Button className="btn-warning btn-sm mt-2">Editar</Button></Link>
+                          <div className="d-flex gap-2 mt-2">
+                            <Link to={`/editar-item/${item.id}`}><Button className="btn-warning btn-sm">Editar</Button></Link>
+                            <Button
+                              className="btn-danger btn-sm"
+                              onClick={() => handleDeleteItem(item.id)}
+                            >
+                              Deletar
+                            </Button>
+                          </div>
+                        
                         </li>
                       ))}
                     </ul>
