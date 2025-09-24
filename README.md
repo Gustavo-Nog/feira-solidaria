@@ -2,7 +2,7 @@
 
 ## 📖 Sobre o Projeto
 
-**Feira Solidária** é uma aplicação web front-end desenvolvida como parte do programa **Capacita Brasil**. O projeto tem como missão conectar pequenos produtores e consumidores, facilitando a troca e o acesso a alimentos frescos e de qualidade de forma justa e solidária.
+**Feira Solidária** é uma aplicação fullstack desenvolvida como parte do programa **Capacita Brasil**. O projeto tem como missão conectar pessoas solidarias, facilitando o acesso a produtos, de qualidade de forma justa e solidária.
 
 A plataforma oferece uma interface moderna, intuitiva e totalmente responsiva, permitindo que os usuários naveguem pelos produtos, conheçam os produtores e gerenciem suas contas de forma simples e eficiente.
 
@@ -18,6 +18,10 @@ A plataforma oferece uma interface moderna, intuitiva e totalmente responsiva, p
 ## 🛠️ Tecnologias Utilizadas
 
 Este projeto foi construído com as seguintes tecnologias e ferramentas:
+
+<!-- Badges principais -->
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React"/> <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=flat-square&logo=bootstrap&logoColor=white" alt="Bootstrap"/> <img src="https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white" alt="Node.js"/> <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white" alt="Express"/> <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL"/> <img src="https://img.shields.io/badge/Insomnia-5C6B8A?style=flat-square&logo=insomnia&logoColor=white" alt="Insomnia"/> <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/>
+
 
 - **React:** Biblioteca JavaScript para a construção da interface de usuário.
 - **Vite:** Ferramenta de build moderna e extremamente rápida para o desenvolvimento front-end.
@@ -60,31 +64,9 @@ O projeto segue uma arquitetura organizada para facilitar a escalabilidade e man
 
 ```bash
 /src
-|-- /assets
-|-- /components
-|   |-- /Button
-|   |-- /EquipeCarrosel
-|   |-- /Footer
-|   |-- /LoginGoogle
-|   |-- /Navbar
-|-- /context
-|-- /layout
-|-- /mocks
-|-- /pages
-|   |-- /Cadastro
-|   |-- /Cadastro-item
-|   |-- /Carrinho
-|   |-- /Contato
-|   |-- /Home
-|   |-- /ItemDetalhe
-|   |-- /Login
-|   |-- /NovaSenha
-|   |-- /Produtos
-|   |-- /RedefinirSenha
-|   |-- /Sobre-nos
-|   |-- /Perfil
-|-- App.jsx
-|-- main.jsx
+|-- /backend
+|-- /frontend
+|-- README.md
 |-- ... (outros arquivos de configuração)
 
 ```
@@ -93,29 +75,28 @@ O projeto segue uma arquitetura organizada para facilitar a escalabilidade e man
 
 Para rodar este projeto em sua máquina local, siga os passos abaixo:
 
-1.  **Clone o repositório**
+1. ### **Clone o repositório**
     ```bash
     git clone https://github.com/Gustavo-Nog/feira-solidaria.git
 
     ```
 
-2.  **Navegue até a pasta do projeto**
-    ```bash
-    cd frontend 
-    ```
+2. ### **Comandos rápidos para frontend e backend**
 
-3.  **Instale todas as dependências do projeto**
-    (Este comando instalará React, Vite, e todas as bibliotecas listadas acima)
-    ```bash
-    npm install
-    ```
+Frontend (entrar na pasta e rodar em modo dev):
+```bash
+cd frontend
+npm install
+npm run dev
+# Abra seu navegador e acesse `http://localhost:5173` (ou a porta indicada no seu terminal).
+```
 
-4.  **Execute o servidor de desenvolvimento**
-    ```bash
-    npm run dev
-    ```
-
-5.  Abra seu navegador e acesse `http://localhost:5173` (ou a porta indicada no seu terminal).
+Backend (produção):
+```bash
+cd backend
+npm install
+node src/server.js
+```
 
 ## 👥 Contribuidores
 
@@ -133,4 +114,5 @@ Este projeto foi desenvolvido com dedicação pela seguinte equipe de alunos do 
 
 ---
 
-Agradecemos por visitar nosso projeto!
+Agradecemos por visitar nosso projeto
+# Feira Solidária © 2025
