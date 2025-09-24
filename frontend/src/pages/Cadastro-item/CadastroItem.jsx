@@ -13,6 +13,11 @@ import { qualidadeOptions, statusOptions } from '../Admin/ProdutosAdmin/Produtos
 import './Cadastro-item.css';
 
 function CadastrarItem() {
+	const navigate = useNavigate();
+  const { usuario } = useUser();
+  const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const methods = useForm({
     defaultValues: {
       nomeProduto: '',
@@ -21,15 +26,10 @@ function CadastrarItem() {
       status: 'DISPONIVEL', 
       categoriaId: '',
       quantidade: 1,
+      imagemUrl: null 
     }
   });
   
-  const navigate = useNavigate();
-  const { usuario } = useUser();
-  const [categorias, setCategorias] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [imagem, setImagem] = useState(null);
-
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
@@ -42,16 +42,12 @@ function CadastrarItem() {
     fetchCategorias();
   }, []);
 
-  const handleImagem = (e) => {
-    setImagem(e.target.files[0]);
-    methods.setValue('imagemUrl', e.target.files[0]);
-  };
-
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       if (!usuario || !usuario.id) {
         alert('Usuário não autenticado ou perfil incompleto. Faça login para cadastrar um produto.');
+        setLoading(false);
         return;
       }
 
@@ -69,8 +65,9 @@ function CadastrarItem() {
       
       formData.append('dados', JSON.stringify(dadosProduto));
       
-      if (imagem) {
-        formData.append('imagemUrl', imagem);
+      // Segue o padrão do EditarItem: data.imagemUrl é um FileList
+      if (data.imagemUrl && data.imagemUrl[0]) {
+        formData.append('imagemUrl', data.imagemUrl[0]);
       }
 
       const response = await produtoService.criarProduto(formData);
@@ -147,7 +144,6 @@ function CadastrarItem() {
                 label="Foto do Produto:"
                 type="file"
                 accept="image/*"
-                onChange={handleImagem}
               />
 
 			    		<InputField
