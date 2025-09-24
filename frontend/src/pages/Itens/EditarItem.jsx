@@ -11,7 +11,6 @@ import { useUser } from "../../context/UserContext";
 
 import { qualidadeOptions, statusOptions } from "../Admin/ProdutosAdmin/ProdutosAdmin";
 
-// novo: importar o CSS usado no cadastro para padronizar o fundo e estilo
 import "../Cadastro-item/Cadastro-item.css";
 
 export default function EditarItem() {
@@ -86,14 +85,11 @@ export default function EditarItem() {
 
   return (
     <FormProvider {...methods}>
-      {/* usa o mesmo container do CadastroItem para reaproveitar fundo e padding */}
       <div className="formulario-container container py-4">
         <h2 className="text-center text-uppercase fw-bold mb-4">Editar Produto</h2>
 
-        {/* aplica a mesma classe 'formulario' do CadastroItem */}
         <form onSubmit={methods.handleSubmit(onSubmit)} className="formulario mb-4">
           <div className="row g-3">
-            {/* esquerda */}
             <div className="col-md-6">
               <InputField
                 name="nomeProduto"
@@ -120,7 +116,6 @@ export default function EditarItem() {
               />
             </div>
 
-            {/* direita */}
             <div className="col-md-6">
               <InputField
                 name="status"
@@ -146,7 +141,6 @@ export default function EditarItem() {
               />
             </div>
 
-            {/* descrição ocupando as duas colunas */}
             <div className="col-12">
               <InputField
                 as="textarea"

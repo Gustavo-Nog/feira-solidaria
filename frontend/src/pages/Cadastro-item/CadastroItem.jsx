@@ -95,18 +95,19 @@ function CadastrarItem() {
     <FormProvider {...methods}>
       <div className="formulario-container container py-4">
         <h2 className="text-center text-uppercase fw-bold mb-4">Cadastro de Item </h2>
-
         <form className="formulario" onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="formulario-grid">
-            <div className="coluna-esquerda">
+          <div className="row g-4">
+            <div className="col-12">
               <h3>Informações do Produto</h3>
-              
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="nomeProduto"
                 label="Nome do Produto:"
                 required
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="categoriaId"
@@ -114,7 +115,8 @@ function CadastrarItem() {
                 required
                 options={categoriaOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="qualidade"
@@ -122,7 +124,8 @@ function CadastrarItem() {
                 required
                 options={qualidadeOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="status"
@@ -130,7 +133,8 @@ function CadastrarItem() {
                 required
                 options={statusOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="quantidade"
                 label="Quantidade:"
@@ -138,15 +142,17 @@ function CadastrarItem() {
                 required
                 min="1"
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="imagemUrl"
                 label="Foto do Produto:"
                 type="file"
                 accept="image/*"
               />
-
-			    		<InputField
+            </div>
+            <div className="col-12">
+              <InputField
                 as="textarea"
                 name="descricao"
                 label="Descrição:"
@@ -154,8 +160,7 @@ function CadastrarItem() {
                 rows={3}
               />
             </div>
-					</div>
-
+          </div>
           <div className="botoes-container">
             <Button
               type="button"
@@ -165,7 +170,6 @@ function CadastrarItem() {
             >
               Cancelar
             </Button>
-            
             <Button
               type="submit"
               className="btn-success"
