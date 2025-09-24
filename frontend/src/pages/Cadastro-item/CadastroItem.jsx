@@ -13,6 +13,11 @@ import { qualidadeOptions, statusOptions } from '../Admin/ProdutosAdmin/Produtos
 import './Cadastro-item.css';
 
 function CadastrarItem() {
+	const navigate = useNavigate();
+  const { usuario } = useUser();
+  const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const methods = useForm({
     defaultValues: {
       nomeProduto: '',
@@ -21,15 +26,10 @@ function CadastrarItem() {
       status: 'DISPONIVEL', 
       categoriaId: '',
       quantidade: 1,
+      imagemUrl: null 
     }
   });
   
-  const navigate = useNavigate();
-  const { usuario } = useUser();
-  const [categorias, setCategorias] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [imagem, setImagem] = useState(null);
-
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
@@ -42,16 +42,12 @@ function CadastrarItem() {
     fetchCategorias();
   }, []);
 
-  const handleImagem = (e) => {
-    setImagem(e.target.files[0]);
-    methods.setValue('imagemUrl', e.target.files[0]);
-  };
-
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       if (!usuario || !usuario.id) {
         alert('Usuário não autenticado ou perfil incompleto. Faça login para cadastrar um produto.');
+        setLoading(false);
         return;
       }
 
@@ -69,8 +65,9 @@ function CadastrarItem() {
       
       formData.append('dados', JSON.stringify(dadosProduto));
       
-      if (imagem) {
-        formData.append('imagemUrl', imagem);
+      // Segue o padrão do EditarItem: data.imagemUrl é um FileList
+      if (data.imagemUrl && data.imagemUrl[0]) {
+        formData.append('imagemUrl', data.imagemUrl[0]);
       }
 
       const response = await produtoService.criarProduto(formData);
@@ -98,18 +95,19 @@ function CadastrarItem() {
     <FormProvider {...methods}>
       <div className="formulario-container container py-4">
         <h2 className="text-center text-uppercase fw-bold mb-4">Cadastro de Item </h2>
-
         <form className="formulario" onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="formulario-grid">
-            <div className="coluna-esquerda">
+          <div className="row g-4">
+            <div className="col-12">
               <h3>Informações do Produto</h3>
-              
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="nomeProduto"
                 label="Nome do Produto:"
                 required
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="categoriaId"
@@ -117,7 +115,8 @@ function CadastrarItem() {
                 required
                 options={categoriaOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="qualidade"
@@ -125,7 +124,8 @@ function CadastrarItem() {
                 required
                 options={qualidadeOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 as="select"
                 name="status"
@@ -133,7 +133,8 @@ function CadastrarItem() {
                 required
                 options={statusOptions}
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="quantidade"
                 label="Quantidade:"
@@ -141,16 +142,17 @@ function CadastrarItem() {
                 required
                 min="1"
               />
-
+            </div>
+            <div className="col-12 col-md-6">
               <InputField
                 name="imagemUrl"
                 label="Foto do Produto:"
                 type="file"
                 accept="image/*"
-                onChange={handleImagem}
               />
-
-			    		<InputField
+            </div>
+            <div className="col-12">
+              <InputField
                 as="textarea"
                 name="descricao"
                 label="Descrição:"
@@ -158,8 +160,7 @@ function CadastrarItem() {
                 rows={3}
               />
             </div>
-					</div>
-
+          </div>
           <div className="botoes-container">
             <Button
               type="button"
@@ -169,7 +170,6 @@ function CadastrarItem() {
             >
               Cancelar
             </Button>
-            
             <Button
               type="submit"
               className="btn-success"

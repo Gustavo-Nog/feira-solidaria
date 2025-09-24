@@ -1,8 +1,8 @@
 {/* coloquem uma imagem de vocês com o nome do aquivo correspondente */ }
 import gabrielFoto from "../assets/equipe/gabriel.png";
 import gustavoFoto from "../assets/equipe/gustavo.jpg";
-//  import henriqueFoto from "../assets/equipe/henrique.jpg";
-// import hudsonFoto from "../assets/equipe/hudson.jpg";
+import henriqueFoto from "../assets/equipe/henrique.jpg";
+import hudsonFoto from "../assets/equipe/hudson.png";
 import mariannaFoto from "../assets/equipe/marianna.jpg";
 import thierryFoto from "../assets/equipe/thierry.jpg";
 
@@ -31,14 +31,14 @@ const membrosEquipe = [
     funcao: 'Fullstack',
     linkedin: 'https://www.linkedin.com/in/henrique-adriel-241264262/',
     github: 'https://github.com/HenriqueAdriel',
-    foto: placeholder
+    foto: henriqueFoto
   },
   {
     nome: 'Hudson',
     funcao: 'Fullstack',
     linkedin: '',
     github: 'https://github.com/Hudson2207',
-    foto: placeholder
+    foto: hudsonFoto
   },
   {
     nome: 'Marianna',
