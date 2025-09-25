@@ -1,19 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import produtoServices from '../../services/produtoServices';
 
 import './Home.css';
 import imagemcentral from '../../assets/alimentos/ImagemCentral.png';
-import cesta1 from '../../assets/alimentos/Cesta1.png';
-import cesta2 from '../../assets/alimentos/Cesta2.png';
-import cesta3 from '../../assets/alimentos/Cesta3.png';
 
-const produtosExemplo = [
-  { id: 1, imagem: cesta1, nota: 'Nota 5 ⭐⭐⭐⭐⭐' },
-  { id: 2, imagem: cesta2, nota: 'Nota 5 ⭐⭐⭐⭐⭐' },
-  { id: 3, imagem: cesta3, nota: 'Nota 4 ⭐⭐⭐⭐' },
-];
+function ProductCard({ produto }) {
+
+  const imageUrl = produto.imagemUrl 
+    ? `${import.meta.env.VITE_API_URL}${produto.imagemUrl}` 
+    : 'https://placehold.co/400x300/E6F3E6/2A6441?text=Produto';
+
+  return (
+    <Link to={`/item/${produto.id}`} className="product-card-link">
+      <div className="product-card">
+        <div className="product-image-container">
+          <img src={imageUrl} alt={produto.nomeProduto} className="product-card-image" />
+        </div>
+        <div className="product-card-info">
+          <h4 className="product-card-title">{produto.nomeProduto}</h4>
+          <p className="product-card-owner">Doado por: {produto.pessoa?.nome || 'Doador'}</p>
+          <strong className="product-card-rating">Nota 5 ⭐⭐⭐⭐⭐</strong>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 function Home() {
+  const [produtos, setProdutos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const carregarProdutos = async () => {
+      try {
+        const dados = await produtoServices.listarProdutos(1);
+
+        setProdutos(dados.produtos.slice(0, 4)); 
+
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarProdutos();
+  }, []);
+
   return (
     <div className="home-container">
       <section className="hero-section">
@@ -29,18 +63,18 @@ function Home() {
       </section>
 
       <section className="products-section">
-        <h2>Conheça nossas cestas</h2>
-        <div className="products-grid">
-          {produtosExemplo.map(produto => (
-            <Link key={produto.id} to={`/item/${produto.id}`} className="product-card-link">
-              <div className="product-card">
-                <img src={produto.imagem} alt={`Cesta de produtos ${produto.id}`} className="product-card-image" />
-                <strong>{produto.nota}</strong>
-              </div>
-            </Link>
-          ))}
+        <h2>Produtos em Destaque</h2>
+        
+        {loading ? (
+          <p className="loading-text">A carregar produtos...</p>
+        ) : (
+          <div className="products-grid">
+            {produtos.map(produto => (
+              <ProductCard key={produto.id} produto={produto} />
+            ))}
+          </div>
+        )}
 
-        </div>
       </section>
     </div>
   );

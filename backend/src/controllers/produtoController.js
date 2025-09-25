@@ -9,7 +9,7 @@ const listarProdutosHandler = async (req, res) => {
 
     const resultado = await produtoModel.listarProdutos(
       parseInt(pagina) || 1,
-      12,
+      8,
       pessoaId,
       filtros
     );
