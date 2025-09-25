@@ -1,5 +1,5 @@
 import Button from '../../Button/Button'; 
-import './Modaladmin.css';
+import './ModalAdmin.css';
 
 function ModalAdmin({ isOpen, onClose, title, children, onConfirm, confirmText = "Salvar", confirmClass = "btn-success" }) {
   if (!isOpen) return null;
