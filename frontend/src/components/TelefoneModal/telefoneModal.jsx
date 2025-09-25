@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import pessoaServices from '../../services/pessoaServices';
 import Button from '../Button/Button';
-import '../EnderecoModal/EnderecoModal.css';
+import '../EnderecoModal/enderecoModal.css';
 
 function TelefoneModal({ isOpen, onClose, pessoaId, onSuccess }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
