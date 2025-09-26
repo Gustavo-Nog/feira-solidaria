@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
 import pessoaServices from "../../services/pessoaServices";
 import Button from '../Button/Button';
 import './EnderecoModal.css';
+import axios from 'axios';
 
 function EnderecoModal({ isOpen, onClose, pessoaId, onSuccess }) {
   const { register, handleSubmit, formState: { errors }, setValue, setFocus } = useForm();
