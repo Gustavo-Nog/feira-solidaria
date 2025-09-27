@@ -9,11 +9,18 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, '..', '/uploads')));
 
 let FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
-if (FRONTEND_URL.endsWith('/')) {
-  FRONTEND_URL = FRONTEND_URL.slice(0, -1);
-}
+
+const allowedOrigins = FRONTEND_URL.split(',').map(u => u.trim());
+
+// middleware CORS com validação dinâmica do origin
 app.use(cors({
-  origin: FRONTEND_URL,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Origin not allowed by CORS'));
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
