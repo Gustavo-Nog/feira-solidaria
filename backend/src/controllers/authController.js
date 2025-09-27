@@ -92,11 +92,13 @@ const buscarPerfil = async (req, res) => {
 
 const loginGoogle = passport.authenticate('google', { scope: ['profile', 'email'] });
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
 const googleCallback = (req, res, next) => {
   passport.authenticate('google', { session: false }, async (erro, usuarioPassport, info) => {
     if (erro || !usuarioPassport) {
       console.error(erro || info);
-      return res.redirect('http://localhost:5173/login?error=google');
+      return res.redirect(`${FRONTEND_URL}/login?error=google`);
     }
 
     try {
@@ -106,7 +108,7 @@ const googleCallback = (req, res, next) => {
       });
 
       if (!usuarioCompleto) {
-        return res.redirect('http://localhost:5173/login?error=usuario_nao_encontrado');
+        return res.redirect(`${FRONTEND_URL}/login?error=usuario_nao_encontrado`);
       }
 
       const payload = {
@@ -129,12 +131,12 @@ const googleCallback = (req, res, next) => {
         sameSite: 'lax',
         maxAge: 604800000
       });
-      
-      return res.redirect('http://localhost:5173/');
+
+      return res.redirect(`${FRONTEND_URL}/`);
 
     } catch (dbError) {
       console.error("Erro ao re-buscar utilizador no callback do Google:", dbError);
-      return res.redirect('http://localhost:5173/login?error=bd');
+      return res.redirect(`${FRONTEND_URL}/login?error=bd`);
     }
 
   })(req, res, next);
