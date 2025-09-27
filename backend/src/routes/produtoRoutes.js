@@ -7,8 +7,10 @@ const produtoController = require('../controllers/produtoController');
 const optionalAuthMiddleware = require('../middleware/optionalAuthMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 
+const uploadsDir = path.join(__dirname, '..', '..', 'uploads');
+
 const armazenamento = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, '..', '..', 'uploads')),
+  destination: (req, file, cb) => cb(null, uploadsDir),
   filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
 

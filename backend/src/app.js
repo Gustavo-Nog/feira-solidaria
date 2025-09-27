@@ -3,24 +3,23 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
+const fs = required('fs');
+
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, '..', '/uploads')));
 
 let FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
-
-const allowedOrigins = FRONTEND_URL.split(',').map(u => u.trim());
-
-// middleware CORS com validação dinâmica do origin
+if (FRONTEND_URL.endsWith('/')) {
+  FRONTEND_URL = FRONTEND_URL.slice(0, -1);
+}
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Origin not allowed by CORS'));
-  },
+  origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
