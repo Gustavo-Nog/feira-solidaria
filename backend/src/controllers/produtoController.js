@@ -35,31 +35,43 @@ const buscarProdutoPorIdHandler = async (req, res) => {
 
 const criarProdutoHandler = async (req, res) => {
   try {
-    if (!req.body || !req.body.dados) {
+    // logs para debug
+    console.log('Criar produto - headers.origin:', req.headers.origin);
+    console.log('Criar produto - req.body:', req.body);
+    console.log('Criar produto - req.file:', req.file);
+
+    if (!req.body || (!req.body.dados && Object.keys(req.body).length === 0)) {
       return res.status(400).json({ error: 'Campo `dados` ausente no corpo da requisição.' });
     }
 
     let dadosProduto;
-    try {
-      dadosProduto = JSON.parse(req.body.dados);
-    } catch (parseError) {
-      return res.status(400).json({ error: 'Formato inválido em `dados`. Deve ser JSON válido.' });
+    if (req.body.dados) {
+      try {
+        dadosProduto = JSON.parse(req.body.dados);
+      } catch (parseError) {
+        return res.status(400).json({ error: 'Campo `dados` não é um JSON válido.' });
+      }
+    } else {
+      // fallback: aceita campos separados no multipart/form-data sem campo "dados"
+      dadosProduto = { ...req.body };
+      // converter campos numéricos que chegam como string
+      if (dadosProduto.categoriaId !== undefined) {
+        dadosProduto.categoriaId = parseInt(dadosProduto.categoriaId, 10);
+        if (Number.isNaN(dadosProduto.categoriaId)) delete dadosProduto.categoriaId;
+      }
+      if (dadosProduto.quantidade !== undefined) {
+        dadosProduto.quantidade = parseInt(dadosProduto.quantidade, 10);
+        if (Number.isNaN(dadosProduto.quantidade)) delete dadosProduto.quantidade;
+      }
     }
 
     if (req.usuario && req.usuario.pessoaId) {
-      dadosProduto.pessoaId = dadosProduto.pessoaId || req.usuario.pessoaId;
-    }
-
-    if (dadosProduto.categoriaId !== undefined) {
-      dadosProduto.categoriaId = Number(dadosProduto.categoriaId);
-    }
-    if (dadosProduto.quantidade !== undefined) {
-      dadosProduto.quantidade = Number(dadosProduto.quantidade) || 1;
+      dadosProduto.pessoaId = req.usuario.pessoaId;
     }
 
     if (req.file) {
-      const filePath = `/uploads/${req.file.filename}`;
-      dadosProduto.imagemUrl = filePath;
+      // ajuste conforme seu multer: filename ou path
+      dadosProduto.imagem = req.file.filename || req.file.path;
     }
 
     const novoProduto = await produtoModel.criarProduto(dadosProduto);
