@@ -5,14 +5,18 @@ const cors = require('cors');
 const path = require('path');
 
 app.use(cookieParser());
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, '..', '/uploads')));
+
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+if (FRONTEND_URL.endsWith('/')) {
+  FRONTEND_URL = FRONTEND_URL.slice(0, -1);
+}
 app.use(cors({
   origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
-app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, '..', '/uploads')));
 
 const pessoaRoutes = require('./routes/pessoaRoutes');
 const acoesAdmRoutes = require('./routes/acoesAdmRoutes');
