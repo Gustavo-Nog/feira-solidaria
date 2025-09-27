@@ -52,8 +52,11 @@ const login = async (req, res) => {
       maxAge: 604800000
     });
 
-    const dadosCompletosDaPessoa = await pessoaModel.buscarPessoaPorId(usuario.pessoa.id);
-
+    let dadosCompletosDaPessoa = null;
+    if (usuario.pessoa && usuario.pessoa.id) {
+      dadosCompletosDaPessoa = await pessoaModel.buscarPessoaPorId(usuario.pessoa.id);
+    }
+    
     return res.status(200).json({
       message: 'Login bem sucedido',
       usuario: dadosCompletosDaPessoa,
