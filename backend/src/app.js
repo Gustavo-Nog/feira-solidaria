@@ -8,7 +8,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, '..', '/uploads')));
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+let FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 if (FRONTEND_URL.endsWith('/')) {
   FRONTEND_URL = FRONTEND_URL.slice(0, -1);
 }
