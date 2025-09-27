@@ -8,8 +8,8 @@ const optionalAuthMiddleware = require('../middleware/optionalAuthMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 
 const armazenamento = multer.diskStorage({
-  destination: (req, arquivo, cb) => cb(null, 'uploads/'),
-  filename: (req, arquivo, cb) => cb(null, Date.now() + path.extname(arquivo.originalname))
+  destination: (req, file, cb) => cb(null, path.join(__dirname, '..', '..', 'uploads')),
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
 
 const upload = multer({ storage: armazenamento });
